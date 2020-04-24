@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AGNAPPCORDERSModelStoreContainer" CdmEntityContainer="AGNAPPCORDERSEntities">
+    <EntitySetMapping Name="A_Qytete">
+      <EntityTypeMapping TypeName="AGNAPPCORDERSModel.A_Qytete">
+        <MappingFragment StoreEntitySet="A_Qytete">
+          <ScalarProperty Name="QID" ColumnName="QID" />
+          <ScalarProperty Name="PID" ColumnName="PID" />
+          <ScalarProperty Name="SID" ColumnName="SID" />
+          <ScalarProperty Name="QCD" ColumnName="QCD" />
+          <ScalarProperty Name="QNM" ColumnName="QNM" />
+          <ScalarProperty Name="RPSTG" ColumnName="RPSTG" />
+          <ScalarProperty Name="RPSTP" ColumnName="RPSTP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

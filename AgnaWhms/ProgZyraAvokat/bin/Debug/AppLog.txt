@@ -1,0 +1,10 @@
+04/04/2020 6:58:11 PM,Funksioni rregjistrimKallezim_Click, Parameter autoSizeColumnMode is not valid for this operation. It cannot be NotSet, None or Fill but needs to indicate a sizing criteria.
+04/04/2020 6:59:02 PM,Funksioni rregjistrimKallezim_Click, Parameter autoSizeColumnMode is not valid for this operation. It cannot be NotSet, None or Fill but needs to indicate a sizing criteria.
+23/04/2020 3:44:16 PM,Funksioni rregjistrimKallezim_Click, Object reference not set to an instance of an object.
+23/04/2020 3:45:56 PM,Funksioni rregjistrimKallezim_Click, Object reference not set to an instance of an object.
+23/04/2020 8:31:18 PM,Funksioni rregjistrimKallezim_Click, Object reference not set to an instance of an object.
+23/04/2020 8:39:27 PM,Funksioni rregjistrimKallezim_Click, Input string was not in a correct format.
+23/04/2020 8:48:18 PM,Funksioni rregjistrimKallezim_Click, Input string was not in a correct format.
+23/04/2020 8:55:47 PM,Funksioni rregjistrimKallezim_Click, Input string was not in a correct format.
+23/04/2020 8:57:37 PM,Funksioni rregjistrimKallezim_Click, Input string was not in a correct format.
+23/04/2020 9:04:59 PM,Funksioni rregjistrimKallezim_Click, Input string was not in a correct format.

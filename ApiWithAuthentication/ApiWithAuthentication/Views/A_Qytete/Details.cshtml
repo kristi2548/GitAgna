@@ -1,0 +1,66 @@
+﻿@model ApiWithAuthentication.Models.A_Qytete
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>A_Qytete</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QCD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QCD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QNM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QNM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RPSTG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RPSTG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RPSTP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RPSTP)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

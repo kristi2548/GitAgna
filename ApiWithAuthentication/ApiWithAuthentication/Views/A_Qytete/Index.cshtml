@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ApiWithAuthentication.Models.A_Qytete>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QCD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QNM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RPSTG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RPSTP)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QCD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QNM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RPSTG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RPSTP)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.QID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.QID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.QID })
+        </td>
+    </tr>
+}
+
+</table>

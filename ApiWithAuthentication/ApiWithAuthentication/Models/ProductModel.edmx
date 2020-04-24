@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AGNAPPCORDERSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="A_Qytete">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QID" Type="int" Nullable="false" />
+          <Property Name="PID" Type="int" />
+          <Property Name="SID" Type="int" />
+          <Property Name="QCD" Type="nvarchar" MaxLength="10" />
+          <Property Name="QNM" Type="varchar" MaxLength="50" />
+          <Property Name="RPSTG" Type="binary" MaxLength="32" />
+          <Property Name="RPSTP" Type="binary" MaxLength="32" />
+        </EntityType>
+        <EntityContainer Name="AGNAPPCORDERSModelStoreContainer">
+          <EntitySet Name="A_Qytete" EntityType="Self.A_Qytete" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AGNAPPCORDERSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="A_Qytete">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QID" Type="Int32" Nullable="false" />
+          <Property Name="PID" Type="Int32" />
+          <Property Name="SID" Type="Int32" />
+          <Property Name="QCD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="QNM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RPSTG" Type="Binary" MaxLength="32" FixedLength="true" />
+          <Property Name="RPSTP" Type="Binary" MaxLength="32" FixedLength="true" />
+        </EntityType>
+        <EntityContainer Name="AGNAPPCORDERSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="A_Qytete" EntityType="Self.A_Qytete" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AGNAPPCORDERSModelStoreContainer" CdmEntityContainer="AGNAPPCORDERSEntities">
+          <EntitySetMapping Name="A_Qytete">
+            <EntityTypeMapping TypeName="AGNAPPCORDERSModel.A_Qytete">
+              <MappingFragment StoreEntitySet="A_Qytete">
+                <ScalarProperty Name="QID" ColumnName="QID" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="QCD" ColumnName="QCD" />
+                <ScalarProperty Name="QNM" ColumnName="QNM" />
+                <ScalarProperty Name="RPSTG" ColumnName="RPSTG" />
+                <ScalarProperty Name="RPSTP" ColumnName="RPSTP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
