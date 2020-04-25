@@ -38,13 +38,13 @@ namespace ProgZyraAvokat
                
                 if (authenticate(uid,pass))
                 {
-                        if (Global.levizjeMagazina == null)
+                        if (Global.listeFatura == null)
                         {
                             Global.loginForm = this;
                             Global.loginForm.Hide();
-                            Global.levizjeMagazina = new AgnaWhms.LevizjeMagazina();
+                            Global.listeFatura = new AgnaWhms.ListeFatura();
                         }
-                        Global.levizjeMagazina.Show();
+                        Global.listeFatura.Show();
                 }
                 else
                 {

@@ -111,6 +111,12 @@
     <Compile Include="LevizjeMagazine.Designer.cs">
       <DependentUpon>LevizjeMagazine.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListeFatura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListeFatura.Designer.cs">
+      <DependentUpon>ListeFatura.cs</DependentUpon>
+    </Compile>
     <Compile Include="notification.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LevizjeMagazine.resx">
       <DependentUpon>LevizjeMagazine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListeFatura.resx">
+      <DependentUpon>ListeFatura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="notification.resx">
       <DependentUpon>notification.cs</DependentUpon>
