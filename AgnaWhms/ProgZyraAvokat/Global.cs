@@ -61,6 +61,7 @@ namespace ProgZyraAvokat
         public static Login loginForm;
         public static ListeKallezime listeCeshtje;
         public static LevizjeMagazina levizjeMagazina;
+        public static ListeFatura listeFatura;
         public static NotifyMe notifyMe;
         public static TrupVeprimiShkresa trupVeprimiShkresa;
         //public static Raporte raporte;
@@ -113,7 +114,7 @@ namespace ProgZyraAvokat
         public static int orderDetailUnitPack;
         public static int orderDetailPackNrX;
         public static int orderDetailQuantity;
-        public static int orderDetailPrice;
+        public static Double orderDetailPrice;
         public static string orderDetailNotes;
         public static int orderDetailsMovStatusId;
 
@@ -290,7 +291,7 @@ namespace ProgZyraAvokat
                     new ParameterObject(){ parameterName = "@ProductNav", parameterValue = Global.orderDetailProdNav.ToString()  },
                     new ParameterObject(){ parameterName = "@LotNr", parameterValue = Global.orderDetailLotNr.ToString()},
                     new ParameterObject(){ parameterName = "@BarcodeX", parameterValue = Global.orderDetailBarcode  },
-                    new ParameterObject(){ parameterName = "@PackX", parameterValue = Global.orderDetailPackX.ToString()  },
+                    new ParameterObject(){ parameterName = "@PackX", parameterValue = "1"  },
                     new ParameterObject(){ parameterName = "@UnitsPackX", parameterValue = Global.orderDetailUnitPack.ToString() },
                     new ParameterObject(){ parameterName = "@PackNrX", parameterValue = Global.orderDetailPackNrX.ToString() },
                     new ParameterObject(){ parameterName = "@QtyX", parameterValue = Global.orderDetailQuantity.ToString()  },
@@ -650,6 +651,10 @@ namespace ProgZyraAvokat
                         {
                             sqlComm.Parameters.Add(parameterList[i].parameterName, SqlDbType.BigInt).Value = Convert.ToInt64(parameterList[i].parameterValue);// 500;
                         }
+                        //else if ((parameterList[i].parameterName == "@ProductPrice"))
+                        //{
+                        //    sqlComm.Parameters.Add(parameterList[i].parameterName, SqlDbType.Decimal).Value = Convert.ToDecimal(parameterList[i].parameterValue);// 500;
+                        //}
                         else
                         {
                             sqlComm.Parameters.AddWithValue(parameterList[i].parameterName, parameterList[i].parameterValue);

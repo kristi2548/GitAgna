@@ -18,8 +18,45 @@ namespace AgnaWhms
             try
             {
                 InitializeComponent();
+
+                levizjeMagazinaInit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading LevizjeMagazina " + ex.Message);
+            }
+            
+            //boshatisTrupVeprimi();
+        }
+        public void levizjeMagazinaInit()
+        {
+            try
+            {
+                fillCombo();
+
+                ApplicationLookAndFeel.UseTheme(this, 12);
+                dtpDate.Format = DateTimePickerFormat.Custom;
+                dtpDate.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
+
+                dtpAlert.Format = DateTimePickerFormat.Custom;
+                dtpAlert.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
+                if (Global.idVeprimi == 0)
+                {
+                    boshatis();
+                    boshatisTrupVeprimi();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("levizjeMagazinaInit err " + ex.Message);
+            }
+        }
+        public bool fillCombo()
+        {
+            try
+            {
                 Global.fillCombo(ref cmbPorosiPrind, Global.localConn,
-                "SELECT OrderID, ConsumerName + '-' + (convert (varchar, wOrders.OrderDTS, 103)) AS Klienti_Data FROM wOrders", "Klienti_Data", "OrderID");
+               "SELECT OrderID, ConsumerName + '-' + (convert (varchar, wOrders.OrderDTS, 103)) AS Klienti_Data FROM wOrders", "Klienti_Data", "OrderID");
                 Global.fillCombo(ref cmbCatMov, Global.localConn,
                "SELECT [MovCatID],[MovCatCode] + '-' + [MovCatName] as LLojLevizje FROM [wMovCategs]", "LLojLevizje", "MovCatID");
                 Global.fillCombo(ref cmbStatus, Global.localConn,
@@ -40,25 +77,14 @@ namespace AgnaWhms
                 Global.fillCombo(ref cmbStatusTrupfature, Global.localConn,
               "SELECT [MovStatusID],[MovStatusName] + '-' + MovStatusNotes as Status FROM [dbo].[wMovStatuses]", "Status", "MovStatusID");
 
-                ApplicationLookAndFeel.UseTheme(this, 12);
-                dtpDate.Format = DateTimePickerFormat.Custom;
-                dtpDate.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
-
-                dtpAlert.Format = DateTimePickerFormat.Custom;
-                dtpAlert.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
-                if (Global.idVeprimi == 0)
-                {
-                    boshatis();
-                    boshatisTrupVeprimi();
-                }
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading LevizjeMagazina " + ex.Message);
+                MessageBox.Show("Err fillCombo " + ex.Message);
+                return false; 
             }
-            
-            //boshatisTrupVeprimi();
-        }
+        } 
         #region Menus
         public void fushaValidate()
         {
@@ -132,29 +158,34 @@ namespace AgnaWhms
             try
             {
                 Global.fillGridWithRef(ref dgTrupVeprimi ,Global.localConn,
-                "SELECT [MovDetID] " +
-                  " ,[MovHeadID] " +
-                  " ,[ProductID] " +
-                  " ,[MovStatusID] " +
-                  " ,[LotID] " +
-                  " ,[ProductNav] " +
-                  " ,[LotNr] " +
-                  " ,[BarcodeX] " +
-                  " ,[PackX] " +
-                  " ,[UnitsPackX] " +
-                  " ,[PackNrX] " +
-                  " ,[QtyX] " +
-                  " ,[ProductPrice] " +
-                  " ,[MovDetNotes] " +
-                  " FROM [dbo].[wMovDetails] where MovHeadID = '" + Global.idVeprimi + "'",
+                "SELECT wProducts.ProductName,wMovStatuses.MovStatusName,a.[MovDetID] " +
+                  " ,a.[ProductNav] " +
+                  " ,a.[QtyX] as Sasi" +
+                  " ,a.[ProductPrice] as Cmim " +
+                  " ,a.[MovHeadID] " +
+                  " ,a.[ProductID] " +
+                  " ,a.[MovStatusID] " +
+                  " ,a.[LotID] " +
+                  " ,a.[LotNr] " +
+                  " ,a.[BarcodeX] " +
+                  " ,a.[PackX] " +
+                  " ,a.[UnitsPackX] " +
+                  " ,a.[PackNrX] " +
+                  " ,a.[MovDetNotes] " +
+                  " FROM [dbo].[wMovDetails]  as a inner join dbo.wProducts ON a.ProductID = wProducts.ProductID  " +
+                  " inner join dbo.wMovStatuses ON a.MovStatusID = dbo.wMovStatuses.MovStatusID " +
+                  " where MovHeadID = '" + Global.idVeprimi + "'",
                 "", "Text");
 
                 Color formBackColorAll = ColorTranslator.FromHtml("#424242");
                 Color lblForeColor12 = ColorTranslator.FromHtml("#F2F2F2");
 
-                //dgTrupVeprimi.Columns["TID"].Visible = false;
-                //dgTrupVeprimi.Columns["KID"].Visible = false;
-                //dgTrupVeprimi.Columns["LLOJI_AKT_PROCEDURIAL"].Visible = false;
+                dgTrupVeprimi.Columns["MovHeadID"].Visible = false;
+                dgTrupVeprimi.Columns["MovDetID"].Visible = false;
+                dgTrupVeprimi.Columns["ProductID"].Visible = false;
+                dgTrupVeprimi.Columns["MovStatusID"].Visible = false;
+                dgTrupVeprimi.Columns["MovDetNotes"].Visible = false;
+                dgTrupVeprimi.Columns["PackX"].Visible = false;
 
                 dgTrupVeprimi.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgTrupVeprimi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -164,7 +195,7 @@ namespace AgnaWhms
                 dgTrupVeprimi.AlternatingRowsDefaultCellStyle.BackColor = formBackColorAll;
                 dgTrupVeprimi.CellBorderStyle = DataGridViewCellBorderStyle.None;
                 dgTrupVeprimi.RowsDefaultCellStyle.BackColor = formBackColorAll;
-                dgTrupVeprimi.Font = new Font("Century Gothic", 8);
+                dgTrupVeprimi.Font = new Font("Century Gothic", 10);
                 dgTrupVeprimi.ReadOnly = true;
             }
             catch (Exception ex)
@@ -459,7 +490,13 @@ namespace AgnaWhms
 
         private void btnHome_Click_1(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
+            if (Global.listeFatura == null )
+            {
+                Global.listeFatura = new ListeFatura(); 
+            }
+            Global.levizjeMagazina.Hide();
+            Global.listeFatura.Show();
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -469,32 +506,43 @@ namespace AgnaWhms
 
         private void cmbProdukti_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string prodId = cmbProdukti.SelectedValue.ToString();
-            try
+            if ((int)cmbProdukti.SelectedValue > -1)
             {
-                if (prodId != "" && prodId != "0" && prodId !=  "System.Data.DataRowView")
+                string prodId = cmbProdukti.SelectedValue.ToString();
+                try
                 {
-                    DataTable dtblProdukt = Global.returnTableForGrid(Global.localConn,
-                   " SELECT [ProductID],[ProdNavID] ,[DepartmentID] ,[WarehouseID],[ProdSubCatID],[ProductNav],[UnitsPack],[ProductBarcode],[ProductNotes] " +
-                   " ,[PacksNr],[ProductName],[ProductWebNameAL],[ProductWebNameEN],[ProductPrice],[ProductSTOCK],[ProductActive],[ProductTS] " +
-                   " FROM [dbo].[wProducts] where ProductID = " + prodId,
-                   "", "Text", null, "Text");
 
-                    if (dtblProdukt != null && dtblProdukt.Rows.Count > 0)
+                    if (prodId != "" && prodId != "0" && prodId != "System.Data.DataRowView")
                     {
-                        txtProductNav.Text = dtblProdukt.Rows[0][5].ToString();
-                        txtUnitPack.Text = dtblProdukt.Rows[0][6].ToString();
-                        txtBarkodx.Text = dtblProdukt.Rows[0][7].ToString();
-                        txtPackNr.Text = dtblProdukt.Rows[0][9].ToString();
-                        txtCmim.Text = Convert.ToDouble(dtblProdukt.Rows[0][13].ToString()).ToString() ;
-                        //cmbArea.SelectedValue = Convert.ToDateTime(dtblProdukt.Rows[0][2].ToString());// DateTime.Today.AddDays(-1);
+                        DataTable dtblProdukt = Global.returnTableForGrid(Global.localConn,
+                       " SELECT [ProductID],[ProdNavID] ,[DepartmentID] ,[WarehouseID],[ProdSubCatID],[ProductNav],[UnitsPack],[ProductBarcode],[ProductNotes] " +
+                       " ,[PacksNr],[ProductName],[ProductWebNameAL],[ProductWebNameEN],[ProductPrice],[ProductSTOCK],[ProductActive],[ProductTS] " +
+                       " FROM [dbo].[wProducts] where ProductID = " + prodId,
+                       "", "Text", null, "Text");
+
+                        if (dtblProdukt != null && dtblProdukt.Rows.Count > 0)
+                        {
+                            txtProductNav.Text = dtblProdukt.Rows[0][5].ToString();
+
+
+                            txtBarkodx.Text = dtblProdukt.Rows[0][7].ToString();
+
+                            txtUnitPack.Text = dtblProdukt.Rows[0][6].ToString();
+                            if (txtUnitPack.Text == "") { txtUnitPack.Text = "0"; }
+                            txtPackX.Text = dtblProdukt.Rows[0][9].ToString();
+                            if (txtPackX.Text == "") { txtPackX.Text = "0"; }
+                            txtPackNr.Text = dtblProdukt.Rows[0][9].ToString();
+                            if (txtPackNr.Text == "") { txtPackX.Text = "0"; }
+                            txtCmim.Text = Convert.ToDouble(dtblProdukt.Rows[0][13].ToString()).ToString();
+                            //cmbArea.SelectedValue = Convert.ToDateTime(dtblProdukt.Rows[0][2].ToString());// DateTime.Today.AddDays(-1);
+                        }
+                        txtSasi.Focus();
                     }
                 }
-               
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Err cmbPorosiPrind_SelectedIndexChanged_1 " + ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Err cmbPorosiPrind_SelectedIndexChanged_1 " + ex.Message);
+                }
             }
         }
 
@@ -504,7 +552,7 @@ namespace AgnaWhms
             {
                 if (!Global.IsNumeric(txtSasi.Text) || Convert.ToInt32(txtSasi.Text) == 0)
                 {
-                    MessageBox.Show("Sasia duhet te jete vlere numerike !");
+                    MessageBox.Show("Sasia duhet te jete vlere numerike me e madhe se 0 !");
                     txtSasi.Text = "0";
                     return;
                 }
@@ -514,12 +562,7 @@ namespace AgnaWhms
                     txtUnitPack.Text = "0";
                     return;
                 }
-                if (!Global.IsNumeric(txtPackNr.Text) || Convert.ToInt32(txtPackNr.Text) == 0)
-                {
-                    MessageBox.Show("PackNr duhet te jete vlere numerike !");
-                    txtPackNr.Text = "0";
-                    return;
-                }
+              
                 Global.idTrupVeprimi = 0;
                 Global.orderDetailProdId = Convert.ToInt32(cmbProdukti.SelectedValue.ToString());
                 Global.orderDetailsMovStatusId = Convert.ToInt32(cmbStatusTrupfature.SelectedValue.ToString());
@@ -538,10 +581,10 @@ namespace AgnaWhms
                 Global.orderDetailPackX = true;
                 Global.orderDetailUnitPack =Convert.ToInt32(txtUnitPack.Text) ;
 
-                Global.orderDetailPackNrX = Convert.ToInt32(txtPackNr.Text);
+                Global.orderDetailPackNrX = Convert.ToInt32(txtPackX.Text);
 
                 Global.orderDetailQuantity = Convert.ToInt32(txtSasi.Text);
-                Global.orderDetailPrice = Convert.ToInt32(txtCmim.Text);
+                Global.orderDetailPrice = Convert.ToDouble(txtCmim.Text);
                 Global.orderDetailNotes = (txtShenimeProd.Text);
 
                 if (Global.idVeprimi == 0)
@@ -585,7 +628,7 @@ namespace AgnaWhms
             txtBarkodx.Text = "";
             Global.orderDetailPackX = true;
             txtUnitPack.Text = "0";
-            txtPackNr.Text = "0";
+            txtPackX.Text = "0";
             txtSasi.Text = "0";
             txtCmim.Text = "0";
             txtShenimeProd.Text = "";
