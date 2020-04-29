@@ -615,5 +615,68 @@ namespace AgnaWhms
             Global.levizjeMagazina.levizjeMagazinaInit();
             Global.levizjeMagazina.Show();
         }
+
+        private void dgListeVeprime_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == dgListeVeprime.Columns["Fshi"].Index)
+                {
+                    //if (dgListeVeprime.SelectedCells.Count > 0)
+                    //{
+                    //    int selectedrowindex = dgListeVeprime.SelectedCells[0].RowIndex;
+                    //    DataGridViewRow selectedRow = dgListeVeprime.Rows[selectedrowindex];
+                    //    Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["Kid"].Value.ToString());
+                    //    //Global.veprimKallezim.fillVeprimById(Global.idVeprimi.ToString());
+                    //    Global.callSqlCommand(Global.localConn, "update veprim set aktiv = 0 where kid = '" + Global.idVeprimi + "'", "Text", "Execute", null);
+                    //}
+                    //MessageBox.Show("Ceshtja u fshi", "Fshi Ceshtje");
+                    //callGridUpdate(txtCeshtjeKerko.Text);
+                    //callGridAlert("");
+                }
+                else if (e.ColumnIndex == dgListeVeprime.Columns["Edit"].Index)
+                {
+                    if (dgListeVeprime.SelectedCells.Count > 0)
+                    {
+
+                        int selectedrowindex = dgListeVeprime.SelectedCells[0].RowIndex;
+                        DataGridViewRow selectedRow = dgListeVeprime.Rows[selectedrowindex];
+                        Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["MovHeadID"].Value.ToString());
+                        if (Global.levizjeMagazina == null)
+                        {
+                            Global.listeFatura.Hide();
+                            Global.levizjeMagazina = new AgnaWhms.LevizjeMagazina();
+                        }
+                        Global.levizjeMagazina.fillKokeVeprimById(Global.idVeprimi.ToString());
+                        Global.levizjeMagazina.Show();
+                    }
+                }
+                else if (e.ColumnIndex == dgListeVeprime.Columns["Lexo"].Index)
+                {
+                    //if (dgListeVeprime.SelectedCells.Count > 0)
+                    //{
+                    //    int selectedrowindex = dgListeVeprime.SelectedCells[0].RowIndex;
+                    //    DataGridViewRow selectedRow = dgListeVeprime.Rows[selectedrowindex];
+                    //    Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["Kid"].Value.ToString());
+                    //    showAllInfo();
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hap kallezim err " + ex.Message);
+            }
+        }
+
+        private void btnRaporte_Click_1(object sender, EventArgs e)
+        {
+            if (Global.formeStoku == null)
+            {
+                Global.listeFatura.Hide();
+                Global.formeStoku = new AgnaWhms.FormeStoku ();
+            }
+            Global.formeStoku.initStok();
+            Global.formeStoku.Show();
+        }
     }
 }

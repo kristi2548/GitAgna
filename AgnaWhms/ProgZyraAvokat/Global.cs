@@ -63,6 +63,7 @@ namespace ProgZyraAvokat
         public static LevizjeMagazina levizjeMagazina;
         public static ListeFatura listeFatura;
         public static NotifyMe notifyMe;
+        public static FormeStoku formeStoku;
         public static TrupVeprimiShkresa trupVeprimiShkresa;
         //public static Raporte raporte;
         public static TrupVeprimiAkte trupVeprimiAkte;
@@ -152,6 +153,8 @@ namespace ProgZyraAvokat
         public static int kallezimePageNr = 1;
 
         public static string localConn;
+        public static string localConnB2B;
+        public static string localConnStockTr;
 
         #region callSp
         public static bool CheckDate(String date)
@@ -165,6 +168,14 @@ namespace ProgZyraAvokat
             {
                 return false;
             }
+        }
+        //[MethodImpl(MethodImplOptions.NoInlining)]
+        public static string GetCurrentMethod()
+        {
+            var st = new StackTrace();
+            var sf = st.GetFrame(1);
+
+            return sf.GetMethod().Name;
         }
         public static void timer1_Tick(object sender, EventArgs e)
         {
@@ -338,8 +349,40 @@ namespace ProgZyraAvokat
             }
             catch (Exception ex)
             {
-                Log.LogData("Gabim shtoKokeVeprimi ", ex.Message);
-                MessageBox.Show("Gabim shtoKokeVeprimi " + ex.Message);
+                Log.LogData("Gabim shto_KokaMagSakte ", ex.Message);
+                MessageBox.Show("Gabim shto_KokaMagSakte " + ex.Message);
+                return false;
+            }
+        }
+        public static bool shto_LevizjeNgaPorosi(string dateVeprimi)
+        {
+            try
+            {
+                Global.hapVeprimi = "levizjeNgaPorosi";
+                List<ParameterObject> listParam = new List<ParameterObject>()
+                {
+                    new ParameterObject(){ parameterName = "@ORDER_ID", parameterValue = Global.idVeprimi.ToString() },
+                    new ParameterObject(){ parameterName = "@MovCatID", parameterValue = Global.orderMovCatId.ToString() },
+                    new ParameterObject(){ parameterName = "@MovStatusID", parameterValue = Global.orderMovStatusId.ToString() },
+                    new ParameterObject(){ parameterName = "@UserID", parameterValue =  Global.orderUserId.ToString() },//DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") 
+                    new ParameterObject(){ parameterName = "@WarehouseID", parameterValue =  Global.orderWhmsId.ToString()},
+                    new ParameterObject(){ parameterName = "@OrderID", parameterValue = Global.orderPorosiId.ToString()  },
+                    new ParameterObject(){ parameterName = "@AreaID", parameterValue = Global.orderAreaId.ToString()},
+                    new ParameterObject(){ parameterName = "@OrderNr", parameterValue = Global.orderPorosiNr  },
+                    new ParameterObject(){ parameterName = "@MovHeadNr", parameterValue = Global.orderNr.ToString()  },
+                    new ParameterObject(){ parameterName = "@MovHeadTime", parameterValue = Global.orderTime.ToString() },
+                    new ParameterObject(){ parameterName = "@MovHeadNotes", parameterValue = Global.orderNotes },
+                    new ParameterObject(){ parameterName = "@prBID", parameterValue = ""}
+                };
+
+                Global.callSqlCommand(Global.localConn, "sp_Shto_Levizje_Nga_Porosi", "SP", "Execute", listParam);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogData("Gabim shto_LevizjeNgaPorosi ", ex.Message);
+                MessageBox.Show("Gabim shto_LevizjeNgaPorosi " + ex.Message);
                 return false;
             }
         }
@@ -676,9 +719,9 @@ namespace ProgZyraAvokat
                         MessageBox.Show("Vlere kthimi gabim ");
                         return null;
                     }
-                    else if (sqlCmdText == "sp_Shto_wMovHeads" || sqlCmdText == "sp_Shto_wMovDetails")
+                    else if (sqlCmdText == "sp_Shto_wMovHeads" || sqlCmdText == "sp_Shto_wMovDetails" || sqlCmdText == "sp_Shto_Levizje_Nga_Porosi")
                     {
-                        if (Global.hapVeprimi.ToUpper() == "LEVIZJE")
+                        if (Global.hapVeprimi.ToUpper() == "LEVIZJE" || Global.hapVeprimi.ToUpper() == "LEVIZJENGAPOROSI")
                         {
                             Global.idVeprimi = Convert.ToInt32(outputIdParam.Value.ToString());
                         }
@@ -960,13 +1003,19 @@ namespace ProgZyraAvokat
         {
             try
             {
+                BindingSource myBindinSource = new BindingSource();
                 DataTable myDtTbl = null;
-                dgView.DataSource = bindingSource1;
-                myDtTbl = Global.returnTableForGrid(Global.localConn, selectCommand, "Text", "Execute", null, "Text");
+                //dgView.DataSource = bindingSource1;
+                dgView.DataSource = myBindinSource;
+                myDtTbl = Global.returnTableForGrid(myConnectionString, selectCommand, "Text", "Execute", null, "Text");
                 dgView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
                 if (myDtTbl.Rows.Count > 0)
                 {
-                    bindingSource1.DataSource = myDtTbl;
+                    myBindinSource.DataSource = myDtTbl;
+                }
+                else
+                {
+                    return null;
                 }
 
                 Color grid2BackColor = ColorTranslator.FromHtml("#FFFFFF"); //ColorTranslator.FromHtml("#F8B490"); //Color.White;;
