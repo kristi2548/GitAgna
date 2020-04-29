@@ -468,7 +468,9 @@ namespace AgnaWhms
             string porosiId = cmbPorosiPrind.SelectedValue.ToString();
             try
             {
-                DataTable dtblPorosiPrind = Global.returnTableForGrid(Global.localConn,
+                if (porosiId != "" && porosiId != "0" && porosiId != "System.Data.DataRowView")
+                {
+                    DataTable dtblPorosiPrind = Global.returnTableForGrid(Global.localConn,
                     " SELECT        dbo.wOrders.OrderID, dbo.wOrders.OrderNr, dbo.wAreas.AreaID " +
                     " FROM            dbo.wOrders INNER JOIN  " +
                     "      dbo.wConsumers ON dbo.wOrders.ConsumerID = dbo.wConsumers.ConsumerID INNER JOIN " +
@@ -476,10 +478,11 @@ namespace AgnaWhms
                     "      dbo.wAreas ON dbo.wAddresses.AreaID = dbo.wAreas.AreaID where wOrders.OrderID = " + porosiId,
                     "", "Text", null, "Text");
 
-                if (dtblPorosiPrind != null && dtblPorosiPrind.Rows.Count > 0)
-                {
-                    txtNrPorosie.Text = dtblPorosiPrind.Rows[0][1].ToString();
-                    cmbArea.SelectedValue = Convert.ToDateTime(dtblPorosiPrind.Rows[0][2].ToString());// DateTime.Today.AddDays(-1);
+                    if (dtblPorosiPrind != null && dtblPorosiPrind.Rows.Count > 0)
+                    {
+                        txtNrPorosie.Text = dtblPorosiPrind.Rows[0][1].ToString();
+                        cmbArea.SelectedValue = Convert.ToDateTime(dtblPorosiPrind.Rows[0][2].ToString());// DateTime.Today.AddDays(-1);
+                    }
                 }
             }
             catch (Exception ex)
@@ -506,8 +509,8 @@ namespace AgnaWhms
 
         private void cmbProdukti_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((int)cmbProdukti.SelectedValue > -1)
-            {
+            //if ((int)cmbProdukti.SelectedValue > -1)
+            //{
                 string prodId = cmbProdukti.SelectedValue.ToString();
                 try
                 {
@@ -543,7 +546,7 @@ namespace AgnaWhms
                 {
                     MessageBox.Show("Err cmbPorosiPrind_SelectedIndexChanged_1 " + ex.Message);
                 }
-            }
+            //}
         }
 
         private void btnShtoProdukt_Click(object sender, EventArgs e)
