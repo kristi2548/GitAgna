@@ -79,6 +79,7 @@
             this.pbUser.Size = new System.Drawing.Size(17, 25);
             this.pbUser.TabIndex = 25;
             this.pbUser.TabStop = false;
+            this.pbUser.Visible = false;
             // 
             // btnLogin
             // 
@@ -120,6 +121,7 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(149, 24);
             this.txtUserName.TabIndex = 20;
+            this.txtUserName.Visible = false;
             // 
             // txtPassword
             // 
@@ -143,6 +145,7 @@
             this.lblUserName.Size = new System.Drawing.Size(99, 20);
             this.lblUserName.TabIndex = 21;
             this.lblUserName.Text = "Perdoruesi";
+            this.lblUserName.Visible = false;
             // 
             // lblPassword
             // 

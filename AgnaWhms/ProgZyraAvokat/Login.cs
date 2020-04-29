@@ -28,7 +28,9 @@ namespace ProgZyraAvokat
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            //Global.localConn = ConfigurationManager.ConnectionStrings["appConn"].ToString();
+            Global.localConn = ConfigurationManager.ConnectionStrings["appConn"].ToString();
+            Global.localConnB2B = ConfigurationManager.ConnectionStrings["appConnExternal"].ToString();
+            Global.localConnStockTr = ConfigurationManager.ConnectionStrings["appConnStockTr"].ToString();
             SqlConnection con = new SqlConnection(Global.localConn);
             DataTable tblUser = new DataTable();
             try
@@ -64,7 +66,7 @@ namespace ProgZyraAvokat
         {
             DataTable dtblPorosiPrind = Global.returnTableForGrid(Global.localConn,
                     " select * from [dbo].[wUsers] " +
-                    " where upper([username]) = upper('" + username + "') and upper([UserPIN]) = upper('" + password + "')  " ,
+                    " where upper([UserPIN]) = upper('" + password + "')  " ,
                     "", "Text", null, "Text");
 
             if (dtblPorosiPrind != null && dtblPorosiPrind.Rows.Count > 0)

@@ -8,3 +8,9 @@
 23/04/2020 8:55:47 PM,Funksioni rregjistrimKallezim_Click, Input string was not in a correct format.
 23/04/2020 8:57:37 PM,Funksioni rregjistrimKallezim_Click, Input string was not in a correct format.
 23/04/2020 9:04:59 PM,Funksioni rregjistrimKallezim_Click, Input string was not in a correct format.
+27/04/2020 4:11:21 PM,Funksioni Gabim shtoKokeVeprimi , Object reference not set to an instance of an object.
+27/04/2020 4:13:12 PM,Funksioni Gabim shtoKokeVeprimi , Object reference not set to an instance of an object.
+27/04/2020 4:19:41 PM,Funksioni Gabim shtoKokeVeprimi , Object reference not set to an instance of an object.
+27/04/2020 4:21:23 PM,Funksioni Gabim shto_LevizjeNgaPorosi , Object reference not set to an instance of an object.
+27/04/2020 4:21:33 PM,Funksioni Gabim shto_LevizjeNgaPorosi , Object reference not set to an instance of an object.
+27/04/2020 4:24:53 PM,Funksioni Gabim shto_LevizjeNgaPorosi , Object reference not set to an instance of an object.

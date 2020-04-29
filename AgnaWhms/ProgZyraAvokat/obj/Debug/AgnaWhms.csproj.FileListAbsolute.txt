@@ -51,3 +51,6 @@ E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\ProgZyraAvokat.TrupVeprimiAk
 E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\ProgZyraAvokat.VeprimThirrjeProkurori.resources
 E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.csproj.GenerateResource.Cache
 E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.ListeFatura.resources
+D:\githubdardhari\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.ListeFatura.resources
+D:\githubdardhari\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.MainMenu.resources
+D:\githubdardhari\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.FormeStoku.resources
