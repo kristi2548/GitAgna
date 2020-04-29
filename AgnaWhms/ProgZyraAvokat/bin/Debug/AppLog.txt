@@ -14,3 +14,4 @@
 27/04/2020 4:21:23 PM,Funksioni Gabim shto_LevizjeNgaPorosi , Object reference not set to an instance of an object.
 27/04/2020 4:21:33 PM,Funksioni Gabim shto_LevizjeNgaPorosi , Object reference not set to an instance of an object.
 27/04/2020 4:24:53 PM,Funksioni Gabim shto_LevizjeNgaPorosi , Object reference not set to an instance of an object.
+29/04/2020 1:10:09 PM,Funksioni rregjistrimKallezim_Click, Object reference not set to an instance of an object.

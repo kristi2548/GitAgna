@@ -29,7 +29,7 @@ namespace ProgZyraAvokat
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             Global.localConn = ConfigurationManager.ConnectionStrings["appConn"].ToString();
-            Global.localConnB2B = ConfigurationManager.ConnectionStrings["appConnExternal"].ToString();
+            Global.localConnB2B = ConfigurationManager.ConnectionStrings["appConnB2B"].ToString();
             Global.localConnStockTr = ConfigurationManager.ConnectionStrings["appConnStockTr"].ToString();
             SqlConnection con = new SqlConnection(Global.localConn);
             DataTable tblUser = new DataTable();

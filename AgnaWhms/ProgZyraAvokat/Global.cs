@@ -64,6 +64,7 @@ namespace ProgZyraAvokat
         public static ListeFatura listeFatura;
         public static NotifyMe notifyMe;
         public static FormeStoku formeStoku;
+        public static Furnizim furnizim;
         public static TrupVeprimiShkresa trupVeprimiShkresa;
         //public static Raporte raporte;
         public static TrupVeprimiAkte trupVeprimiAkte;
@@ -934,6 +935,37 @@ namespace ProgZyraAvokat
             }
         }
         #endregion
+
+        public static List<String> AcceptableDateFormats = new List<String>(180);
+        public  static Boolean IsDate(Object value, DateTimeFormatInfo formatInfo)
+        {
+            if (AcceptableDateFormats.Count == 0)
+            {
+                foreach (var dateFormat in new[] { "d", "dd" })
+                {
+                    foreach (var monthFormat in new[] { "M", "MM", "MMM" })
+                    {
+                        foreach (var yearFormat in new[] { "yy", "yyyy" })
+                        {
+                            foreach (var separator in new[] { "-", "/", formatInfo.DateSeparator })
+                            {
+                                String shortDateFormat;
+                                shortDateFormat = dateFormat + separator + monthFormat + separator + yearFormat;
+                                AcceptableDateFormats.Add(shortDateFormat);
+                                AcceptableDateFormats.Add(shortDateFormat + " " + "HH:mm");
+                                AcceptableDateFormats.Add(shortDateFormat + " " + "HH:mm:ss");
+                                AcceptableDateFormats.Add(shortDateFormat + " " + "HH" + formatInfo.TimeSeparator + "mm");
+                                AcceptableDateFormats.Add(shortDateFormat + " " + "HH" + formatInfo.TimeSeparator + "mm" + formatInfo.TimeSeparator + "ss");
+                            }
+                        }
+                    }
+                }
+                AcceptableDateFormats = AcceptableDateFormats.Distinct().ToList();
+            }
+
+            DateTime unused;
+            return DateTime.TryParseExact(value.ToString(), AcceptableDateFormats.ToArray(), formatInfo, DateTimeStyles.AllowWhiteSpaces, out unused);
+        }
 
         public static void fillCombo(ref ComboBox cmbKlienti, string myConnectionString, string selectCommand, string displayMember, string ValueMember)
         {

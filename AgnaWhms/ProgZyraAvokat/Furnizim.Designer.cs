@@ -1,6 +1,6 @@
 ﻿namespace AgnaWhms
 {
-    partial class LevizjeMagazina
+    partial class Furnizim
     {
         /// <summary>
         /// Required designer variable.
@@ -96,6 +96,20 @@
             this.lblFabul = new System.Windows.Forms.Label();
             this.lblNr = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.cmbLodMidis = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.cmbProduktiMidis = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtNrPaketMidis = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtCopPaketeMidis = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtTotCope = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.btnHyrje = new System.Windows.Forms.Button();
+            this.txtDateMidis = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHyrjeNav)).BeginInit();
             this.panel2.SuspendLayout();
@@ -316,6 +330,7 @@
             this.dgHyrjeNav.Name = "dgHyrjeNav";
             this.dgHyrjeNav.Size = new System.Drawing.Size(787, 138);
             this.dgHyrjeNav.TabIndex = 80;
+            this.dgHyrjeNav.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgHyrjeNav_CellContentClick);
             // 
             // label15
             // 
@@ -636,7 +651,6 @@
             this.cmbProdukti.Size = new System.Drawing.Size(151, 21);
             this.cmbProdukti.TabIndex = 9;
             this.cmbProdukti.SelectedIndexChanged += new System.EventHandler(this.cmbProdukti_SelectedIndexChanged);
-            this.cmbProdukti.SelectionChangeCommitted += new System.EventHandler(this.cmbProdukti_SelectionChangeCommitted);
             // 
             // label4
             // 
@@ -760,7 +774,7 @@
             this.btnHome.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHome.ForeColor = System.Drawing.Color.White;
-            this.btnHome.Location = new System.Drawing.Point(703, 278);
+            this.btnHome.Location = new System.Drawing.Point(708, 320);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(55, 35);
             this.btnHome.TabIndex = 73;
@@ -774,13 +788,12 @@
             this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(634, 278);
+            this.btnSave.Location = new System.Drawing.Point(638, 320);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(63, 35);
             this.btnSave.TabIndex = 72;
             this.btnSave.Text = "RUAJ";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // dtpDate
             // 
@@ -838,13 +851,160 @@
             this.label7.TabIndex = 66;
             this.label7.Text = "Date ";
             // 
-            // LevizjeMagazina
+            // cmbLodMidis
+            // 
+            this.cmbLodMidis.FormattingEnabled = true;
+            this.cmbLodMidis.Location = new System.Drawing.Point(190, 252);
+            this.cmbLodMidis.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbLodMidis.Name = "cmbLodMidis";
+            this.cmbLodMidis.Size = new System.Drawing.Size(81, 21);
+            this.cmbLodMidis.TabIndex = 2040;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(164, 255);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(22, 13);
+            this.label17.TabIndex = 2039;
+            this.label17.Text = "Lot";
+            // 
+            // cmbProduktiMidis
+            // 
+            this.cmbProduktiMidis.FormattingEnabled = true;
+            this.cmbProduktiMidis.Location = new System.Drawing.Point(82, 252);
+            this.cmbProduktiMidis.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbProduktiMidis.Name = "cmbProduktiMidis";
+            this.cmbProduktiMidis.Size = new System.Drawing.Size(76, 21);
+            this.cmbProduktiMidis.TabIndex = 2038;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(11, 255);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(46, 13);
+            this.label18.TabIndex = 2037;
+            this.label18.Text = "Produkti";
+            // 
+            // label19
+            // 
+            this.label19.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label19.Location = new System.Drawing.Point(9, 275);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(754, 2);
+            this.label19.TabIndex = 2026;
+            // 
+            // txtNrPaketMidis
+            // 
+            this.txtNrPaketMidis.Location = new System.Drawing.Point(327, 252);
+            this.txtNrPaketMidis.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNrPaketMidis.Name = "txtNrPaketMidis";
+            this.txtNrPaketMidis.Size = new System.Drawing.Size(60, 20);
+            this.txtNrPaketMidis.TabIndex = 2038;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(273, 255);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(52, 13);
+            this.label20.TabIndex = 2037;
+            this.label20.Text = "NrPakete";
+            // 
+            // txtCopPaketeMidis
+            // 
+            this.txtCopPaketeMidis.Location = new System.Drawing.Point(454, 253);
+            this.txtCopPaketeMidis.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCopPaketeMidis.Name = "txtCopPaketeMidis";
+            this.txtCopPaketeMidis.Size = new System.Drawing.Size(51, 20);
+            this.txtCopPaketeMidis.TabIndex = 2042;
+            this.txtCopPaketeMidis.TextChanged += new System.EventHandler(this.txtCopPaketeMidis_TextChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(391, 256);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(59, 13);
+            this.label21.TabIndex = 2041;
+            this.label21.Text = "Cop/Paket";
+            this.label21.Click += new System.EventHandler(this.label21_Click);
+            // 
+            // txtTotCope
+            // 
+            this.txtTotCope.Location = new System.Drawing.Point(575, 254);
+            this.txtTotCope.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTotCope.Name = "txtTotCope";
+            this.txtTotCope.Size = new System.Drawing.Size(51, 20);
+            this.txtTotCope.TabIndex = 2044;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(512, 257);
+            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(51, 13);
+            this.label22.TabIndex = 2043;
+            this.label22.Text = "Tot.Cope";
+            // 
+            // btnHyrje
+            // 
+            this.btnHyrje.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnHyrje.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.btnHyrje.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHyrje.ForeColor = System.Drawing.Color.White;
+            this.btnHyrje.Location = new System.Drawing.Point(752, 242);
+            this.btnHyrje.Name = "btnHyrje";
+            this.btnHyrje.Size = new System.Drawing.Size(63, 35);
+            this.btnHyrje.TabIndex = 2045;
+            this.btnHyrje.Text = "HYRJE";
+            this.btnHyrje.UseVisualStyleBackColor = false;
+            // 
+            // txtDateMidis
+            // 
+            this.txtDateMidis.Location = new System.Drawing.Point(667, 253);
+            this.txtDateMidis.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDateMidis.Name = "txtDateMidis";
+            this.txtDateMidis.Size = new System.Drawing.Size(80, 20);
+            this.txtDateMidis.TabIndex = 2047;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(633, 257);
+            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(30, 13);
+            this.label23.TabIndex = 2046;
+            this.label23.Text = "Date";
+            // 
+            // Furnizim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 791);
+            this.Controls.Add(this.txtDateMidis);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.btnHyrje);
+            this.Controls.Add(this.txtTotCope);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.txtCopPaketeMidis);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.txtNrPaketMidis);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.cmbLodMidis);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.cmbWarehouse);
+            this.Controls.Add(this.cmbProduktiMidis);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.cmbStatus);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.cmbCatMov);
@@ -861,7 +1021,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "LevizjeMagazina";
+            this.Name = "Furnizim";
             this.Text = "LevizjeMagazine";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -943,5 +1103,19 @@
         private System.Windows.Forms.Label lblFabul;
         private System.Windows.Forms.Label lblNr;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbLodMidis;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox cmbProduktiMidis;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtNrPaketMidis;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox txtCopPaketeMidis;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtTotCope;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnHyrje;
+        private System.Windows.Forms.TextBox txtDateMidis;
+        private System.Windows.Forms.Label label23;
     }
 }
