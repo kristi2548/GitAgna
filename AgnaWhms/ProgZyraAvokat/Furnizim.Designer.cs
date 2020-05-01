@@ -57,7 +57,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtCmim = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.txtSasi = new System.Windows.Forms.TextBox();
+            this.txtSasiPack = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtPackNr = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -67,7 +67,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.cmbStatusTrupfature = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkTrupHyrjeAktiv = new System.Windows.Forms.CheckBox();
             this.txtPackX = new System.Windows.Forms.TextBox();
             this.lblMarresi = new System.Windows.Forms.Label();
             this.txtBarkodx = new System.Windows.Forms.TextBox();
@@ -96,20 +96,11 @@
             this.lblFabul = new System.Windows.Forms.Label();
             this.lblNr = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.cmbLodMidis = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.cmbProduktiMidis = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.txtNrPaketMidis = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txtCopPaketeMidis = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txtTotCope = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.btnHyrje = new System.Windows.Forms.Button();
-            this.txtDateMidis = new System.Windows.Forms.TextBox();
+            this.txtSasiCope = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHyrjeNav)).BeginInit();
             this.panel2.SuspendLayout();
@@ -253,12 +244,12 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(76, 12);
+            this.label6.Location = new System.Drawing.Point(91, 37);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(89, 13);
+            this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Levizje Magazine";
+            this.label6.Text = "Liste Hyrje Nav";
             // 
             // lblNrPorosi
             // 
@@ -319,7 +310,7 @@
             this.panel1.Location = new System.Drawing.Point(9, 9);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(793, 229);
+            this.panel1.Size = new System.Drawing.Size(793, 257);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
             // 
@@ -328,8 +319,9 @@
             this.dgHyrjeNav.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgHyrjeNav.Location = new System.Drawing.Point(3, 82);
             this.dgHyrjeNav.Name = "dgHyrjeNav";
-            this.dgHyrjeNav.Size = new System.Drawing.Size(787, 138);
+            this.dgHyrjeNav.Size = new System.Drawing.Size(787, 172);
             this.dgHyrjeNav.TabIndex = 80;
+            this.dgHyrjeNav.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgHyrjeNav_CellClick);
             this.dgHyrjeNav.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgHyrjeNav_CellContentClick);
             // 
             // label15
@@ -411,11 +403,15 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtSasiCope);
+            this.panel2.Controls.Add(this.label23);
+            this.panel2.Controls.Add(this.btnHyrje);
             this.panel2.Controls.Add(this.label16);
+            this.panel2.Controls.Add(this.btnHome);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.txtCmim);
             this.panel2.Controls.Add(this.label13);
-            this.panel2.Controls.Add(this.txtSasi);
+            this.panel2.Controls.Add(this.txtSasiPack);
             this.panel2.Controls.Add(this.label14);
             this.panel2.Controls.Add(this.txtPackNr);
             this.panel2.Controls.Add(this.label12);
@@ -423,23 +419,24 @@
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.cmbLot);
             this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.chkTrupHyrjeAktiv);
             this.panel2.Controls.Add(this.cmbStatusTrupfature);
             this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.txtPackX);
+            this.panel2.Controls.Add(this.dtpDate);
+            this.panel2.Controls.Add(this.txtShenimeProd);
+            this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.lblMarresi);
             this.panel2.Controls.Add(this.txtBarkodx);
-            this.panel2.Controls.Add(this.btnShtoProdukt);
             this.panel2.Controls.Add(this.txtLotNr);
-            this.panel2.Controls.Add(this.txtShenimeProd);
+            this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.txtProductNav);
             this.panel2.Controls.Add(this.cmbProdukti);
-            this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.lblLenda);
             this.panel2.Controls.Add(this.lblDerguesi);
             this.panel2.Controls.Add(this.label9);
-            this.panel2.Location = new System.Drawing.Point(9, 360);
+            this.panel2.Location = new System.Drawing.Point(12, 340);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(793, 151);
@@ -473,13 +470,13 @@
             this.label13.TabIndex = 2035;
             this.label13.Text = "Cmim";
             // 
-            // txtSasi
+            // txtSasiPack
             // 
-            this.txtSasi.Location = new System.Drawing.Point(72, 91);
-            this.txtSasi.Margin = new System.Windows.Forms.Padding(2);
-            this.txtSasi.Name = "txtSasi";
-            this.txtSasi.Size = new System.Drawing.Size(151, 20);
-            this.txtSasi.TabIndex = 2033;
+            this.txtSasiPack.Location = new System.Drawing.Point(72, 91);
+            this.txtSasiPack.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSasiPack.Name = "txtSasiPack";
+            this.txtSasiPack.Size = new System.Drawing.Size(151, 20);
+            this.txtSasiPack.TabIndex = 2033;
             // 
             // label14
             // 
@@ -487,27 +484,29 @@
             this.label14.Location = new System.Drawing.Point(14, 91);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(27, 13);
+            this.label14.Size = new System.Drawing.Size(61, 13);
             this.label14.TabIndex = 2034;
-            this.label14.Text = "Sasi";
+            this.label14.Text = "Sasi Paket.";
             // 
             // txtPackNr
             // 
-            this.txtPackNr.Location = new System.Drawing.Point(485, 69);
+            this.txtPackNr.Location = new System.Drawing.Point(737, 26);
             this.txtPackNr.Margin = new System.Windows.Forms.Padding(2);
             this.txtPackNr.Name = "txtPackNr";
-            this.txtPackNr.Size = new System.Drawing.Size(143, 20);
+            this.txtPackNr.Size = new System.Drawing.Size(12, 20);
             this.txtPackNr.TabIndex = 2032;
+            this.txtPackNr.Visible = false;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(442, 72);
+            this.label12.Location = new System.Drawing.Point(734, 9);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(48, 13);
             this.label12.TabIndex = 2031;
             this.label12.Text = "PackNrx";
+            this.label12.Visible = false;
             // 
             // txtUnitPack
             // 
@@ -523,23 +522,23 @@
             this.label8.Location = new System.Drawing.Point(230, 72);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 13);
+            this.label8.Size = new System.Drawing.Size(59, 13);
             this.label8.TabIndex = 2029;
-            this.label8.Text = "UnitPack";
+            this.label8.Text = "Cop/Paket";
             // 
             // cmbLot
             // 
             this.cmbLot.FormattingEnabled = true;
-            this.cmbLot.Location = new System.Drawing.Point(485, 23);
+            this.cmbLot.Location = new System.Drawing.Point(72, 47);
             this.cmbLot.Margin = new System.Windows.Forms.Padding(2);
             this.cmbLot.Name = "cmbLot";
-            this.cmbLot.Size = new System.Drawing.Size(143, 21);
+            this.cmbLot.Size = new System.Drawing.Size(150, 21);
             this.cmbLot.TabIndex = 2028;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(442, 27);
+            this.label11.Location = new System.Drawing.Point(13, 47);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(22, 13);
@@ -549,7 +548,7 @@
             // cmbStatusTrupfature
             // 
             this.cmbStatusTrupfature.FormattingEnabled = true;
-            this.cmbStatusTrupfature.Location = new System.Drawing.Point(72, 47);
+            this.cmbStatusTrupfature.Location = new System.Drawing.Point(498, 69);
             this.cmbStatusTrupfature.Margin = new System.Windows.Forms.Padding(2);
             this.cmbStatusTrupfature.Name = "cmbStatusTrupfature";
             this.cmbStatusTrupfature.Size = new System.Drawing.Size(151, 21);
@@ -558,23 +557,23 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(14, 50);
+            this.label10.Location = new System.Drawing.Point(441, 72);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(37, 13);
             this.label10.TabIndex = 2025;
             this.label10.Text = "Status";
             // 
-            // checkBox1
+            // chkTrupHyrjeAktiv
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(688, 72);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(50, 17);
-            this.checkBox1.TabIndex = 74;
-            this.checkBox1.Text = "Aktiv";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Visible = false;
+            this.chkTrupHyrjeAktiv.AutoSize = true;
+            this.chkTrupHyrjeAktiv.Location = new System.Drawing.Point(666, 23);
+            this.chkTrupHyrjeAktiv.Name = "chkTrupHyrjeAktiv";
+            this.chkTrupHyrjeAktiv.Size = new System.Drawing.Size(50, 17);
+            this.chkTrupHyrjeAktiv.TabIndex = 74;
+            this.chkTrupHyrjeAktiv.Text = "Aktiv";
+            this.chkTrupHyrjeAktiv.UseVisualStyleBackColor = true;
+            this.chkTrupHyrjeAktiv.Visible = false;
             // 
             // txtPackX
             // 
@@ -596,7 +595,7 @@
             // 
             // txtBarkodx
             // 
-            this.txtBarkodx.Location = new System.Drawing.Point(287, 50);
+            this.txtBarkodx.Location = new System.Drawing.Point(498, 24);
             this.txtBarkodx.Margin = new System.Windows.Forms.Padding(2);
             this.txtBarkodx.Name = "txtBarkodx";
             this.txtBarkodx.Size = new System.Drawing.Size(151, 20);
@@ -608,9 +607,9 @@
             this.btnShtoProdukt.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
             this.btnShtoProdukt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShtoProdukt.ForeColor = System.Drawing.Color.White;
-            this.btnShtoProdukt.Location = new System.Drawing.Point(635, 109);
+            this.btnShtoProdukt.Location = new System.Drawing.Point(809, 352);
             this.btnShtoProdukt.Name = "btnShtoProdukt";
-            this.btnShtoProdukt.Size = new System.Drawing.Size(63, 36);
+            this.btnShtoProdukt.Size = new System.Drawing.Size(17, 36);
             this.btnShtoProdukt.TabIndex = 18;
             this.btnShtoProdukt.Text = "SHTO PRODUKT";
             this.btnShtoProdukt.UseVisualStyleBackColor = false;
@@ -618,25 +617,25 @@
             // 
             // txtLotNr
             // 
-            this.txtLotNr.Location = new System.Drawing.Point(670, 24);
+            this.txtLotNr.Location = new System.Drawing.Point(287, 47);
             this.txtLotNr.Margin = new System.Windows.Forms.Padding(2);
             this.txtLotNr.Name = "txtLotNr";
-            this.txtLotNr.Size = new System.Drawing.Size(97, 20);
+            this.txtLotNr.Size = new System.Drawing.Size(120, 20);
             this.txtLotNr.TabIndex = 14;
             // 
             // txtShenimeProd
             // 
-            this.txtShenimeProd.Location = new System.Drawing.Point(72, 114);
+            this.txtShenimeProd.Location = new System.Drawing.Point(498, 47);
             this.txtShenimeProd.Margin = new System.Windows.Forms.Padding(2);
             this.txtShenimeProd.MaxLength = 500;
             this.txtShenimeProd.Multiline = true;
             this.txtShenimeProd.Name = "txtShenimeProd";
-            this.txtShenimeProd.Size = new System.Drawing.Size(556, 31);
+            this.txtShenimeProd.Size = new System.Drawing.Size(153, 20);
             this.txtShenimeProd.TabIndex = 17;
             // 
             // txtProductNav
             // 
-            this.txtProductNav.Location = new System.Drawing.Point(287, 24);
+            this.txtProductNav.Location = new System.Drawing.Point(287, 25);
             this.txtProductNav.Margin = new System.Windows.Forms.Padding(2);
             this.txtProductNav.Name = "txtProductNav";
             this.txtProductNav.Size = new System.Drawing.Size(151, 20);
@@ -644,6 +643,7 @@
             // 
             // cmbProdukti
             // 
+            this.cmbProdukti.Enabled = false;
             this.cmbProdukti.FormattingEnabled = true;
             this.cmbProdukti.Location = new System.Drawing.Point(72, 24);
             this.cmbProdukti.Margin = new System.Windows.Forms.Padding(2);
@@ -651,11 +651,12 @@
             this.cmbProdukti.Size = new System.Drawing.Size(151, 21);
             this.cmbProdukti.TabIndex = 9;
             this.cmbProdukti.SelectedIndexChanged += new System.EventHandler(this.cmbProdukti_SelectedIndexChanged);
+            this.cmbProdukti.SelectionChangeCommitted += new System.EventHandler(this.cmbProdukti_SelectionChangeCommitted);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 116);
+            this.label4.Location = new System.Drawing.Point(440, 50);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
@@ -665,7 +666,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(230, 28);
+            this.label5.Location = new System.Drawing.Point(230, 29);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 13);
@@ -676,7 +677,7 @@
             // lblLenda
             // 
             this.lblLenda.AutoSize = true;
-            this.lblLenda.Location = new System.Drawing.Point(632, 27);
+            this.lblLenda.Location = new System.Drawing.Point(230, 50);
             this.lblLenda.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLenda.Name = "lblLenda";
             this.lblLenda.Size = new System.Drawing.Size(33, 13);
@@ -686,7 +687,7 @@
             // lblDerguesi
             // 
             this.lblDerguesi.AutoSize = true;
-            this.lblDerguesi.Location = new System.Drawing.Point(230, 50);
+            this.lblDerguesi.Location = new System.Drawing.Point(442, 29);
             this.lblDerguesi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDerguesi.Name = "lblDerguesi";
             this.lblDerguesi.Size = new System.Drawing.Size(41, 13);
@@ -706,24 +707,26 @@
             // dgTrupVeprimi
             // 
             this.dgTrupVeprimi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTrupVeprimi.Location = new System.Drawing.Point(9, 526);
+            this.dgTrupVeprimi.Location = new System.Drawing.Point(9, 496);
             this.dgTrupVeprimi.Name = "dgTrupVeprimi";
-            this.dgTrupVeprimi.Size = new System.Drawing.Size(798, 253);
+            this.dgTrupVeprimi.Size = new System.Drawing.Size(798, 283);
             this.dgTrupVeprimi.TabIndex = 65;
+            this.dgTrupVeprimi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTrupVeprimi_CellContentClick);
             // 
             // cmbWarehouse
             // 
+            this.cmbWarehouse.Enabled = false;
             this.cmbWarehouse.FormattingEnabled = true;
-            this.cmbWarehouse.Location = new System.Drawing.Point(480, 286);
+            this.cmbWarehouse.Location = new System.Drawing.Point(507, 283);
             this.cmbWarehouse.Margin = new System.Windows.Forms.Padding(2);
             this.cmbWarehouse.Name = "cmbWarehouse";
-            this.cmbWarehouse.Size = new System.Drawing.Size(126, 21);
+            this.cmbWarehouse.Size = new System.Drawing.Size(154, 21);
             this.cmbWarehouse.TabIndex = 79;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(421, 289);
+            this.label1.Location = new System.Drawing.Point(448, 286);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
@@ -732,17 +735,18 @@
             // 
             // cmbStatus
             // 
+            this.cmbStatus.Enabled = false;
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(271, 286);
+            this.cmbStatus.Location = new System.Drawing.Point(300, 283);
             this.cmbStatus.Margin = new System.Windows.Forms.Padding(2);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(143, 21);
+            this.cmbStatus.Size = new System.Drawing.Size(150, 21);
             this.cmbStatus.TabIndex = 77;
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(231, 289);
+            this.lblStatus.Location = new System.Drawing.Point(242, 286);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(37, 13);
@@ -751,17 +755,18 @@
             // 
             // cmbCatMov
             // 
+            this.cmbCatMov.Enabled = false;
             this.cmbCatMov.FormattingEnabled = true;
-            this.cmbCatMov.Location = new System.Drawing.Point(81, 286);
+            this.cmbCatMov.Location = new System.Drawing.Point(84, 283);
             this.cmbCatMov.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCatMov.Name = "cmbCatMov";
-            this.cmbCatMov.Size = new System.Drawing.Size(143, 21);
+            this.cmbCatMov.Size = new System.Drawing.Size(150, 21);
             this.cmbCatMov.TabIndex = 75;
             // 
             // lblKategoriLevizje
             // 
             this.lblKategoriLevizje.AutoSize = true;
-            this.lblKategoriLevizje.Location = new System.Drawing.Point(7, 289);
+            this.lblKategoriLevizje.Location = new System.Drawing.Point(9, 286);
             this.lblKategoriLevizje.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblKategoriLevizje.Name = "lblKategoriLevizje";
             this.lblKategoriLevizje.Size = new System.Drawing.Size(70, 13);
@@ -774,9 +779,9 @@
             this.btnHome.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHome.ForeColor = System.Drawing.Color.White;
-            this.btnHome.Location = new System.Drawing.Point(708, 320);
+            this.btnHome.Location = new System.Drawing.Point(722, 110);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(55, 35);
+            this.btnHome.Size = new System.Drawing.Size(63, 29);
             this.btnHome.TabIndex = 73;
             this.btnHome.Text = "HOME";
             this.btnHome.UseVisualStyleBackColor = false;
@@ -788,43 +793,45 @@
             this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(638, 320);
+            this.btnSave.Location = new System.Drawing.Point(810, 316);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(63, 35);
+            this.btnSave.Size = new System.Drawing.Size(16, 35);
             this.btnSave.TabIndex = 72;
             this.btnSave.Text = "RUAJ";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // dtpDate
             // 
-            this.dtpDate.Location = new System.Drawing.Point(271, 309);
+            this.dtpDate.Location = new System.Drawing.Point(653, 85);
             this.dtpDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(151, 20);
+            this.dtpDate.Size = new System.Drawing.Size(129, 20);
             this.dtpDate.TabIndex = 70;
             // 
             // txtShenime
             // 
-            this.txtShenime.Location = new System.Drawing.Point(81, 330);
+            this.txtShenime.Location = new System.Drawing.Point(300, 309);
             this.txtShenime.Margin = new System.Windows.Forms.Padding(2);
             this.txtShenime.MaxLength = 5000;
             this.txtShenime.Multiline = true;
             this.txtShenime.Name = "txtShenime";
-            this.txtShenime.Size = new System.Drawing.Size(525, 25);
+            this.txtShenime.Size = new System.Drawing.Size(363, 20);
             this.txtShenime.TabIndex = 71;
             // 
             // txtNrLevizje
             // 
-            this.txtNrLevizje.Location = new System.Drawing.Point(81, 309);
+            this.txtNrLevizje.Enabled = false;
+            this.txtNrLevizje.Location = new System.Drawing.Point(84, 309);
             this.txtNrLevizje.Margin = new System.Windows.Forms.Padding(2);
             this.txtNrLevizje.Name = "txtNrLevizje";
-            this.txtNrLevizje.Size = new System.Drawing.Size(143, 20);
+            this.txtNrLevizje.Size = new System.Drawing.Size(150, 20);
             this.txtNrLevizje.TabIndex = 69;
             // 
             // lblFabul
             // 
             this.lblFabul.AutoSize = true;
-            this.lblFabul.Location = new System.Drawing.Point(19, 333);
+            this.lblFabul.Location = new System.Drawing.Point(242, 311);
             this.lblFabul.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFabul.Name = "lblFabul";
             this.lblFabul.Size = new System.Drawing.Size(48, 13);
@@ -834,7 +841,7 @@
             // lblNr
             // 
             this.lblNr.AutoSize = true;
-            this.lblNr.Location = new System.Drawing.Point(10, 308);
+            this.lblNr.Location = new System.Drawing.Point(9, 312);
             this.lblNr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNr.Name = "lblNr";
             this.lblNr.Size = new System.Drawing.Size(55, 13);
@@ -844,114 +851,20 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(229, 309);
+            this.label7.Location = new System.Drawing.Point(605, 91);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(33, 13);
             this.label7.TabIndex = 66;
             this.label7.Text = "Date ";
             // 
-            // cmbLodMidis
-            // 
-            this.cmbLodMidis.FormattingEnabled = true;
-            this.cmbLodMidis.Location = new System.Drawing.Point(190, 252);
-            this.cmbLodMidis.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbLodMidis.Name = "cmbLodMidis";
-            this.cmbLodMidis.Size = new System.Drawing.Size(81, 21);
-            this.cmbLodMidis.TabIndex = 2040;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(164, 255);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(22, 13);
-            this.label17.TabIndex = 2039;
-            this.label17.Text = "Lot";
-            // 
-            // cmbProduktiMidis
-            // 
-            this.cmbProduktiMidis.FormattingEnabled = true;
-            this.cmbProduktiMidis.Location = new System.Drawing.Point(82, 252);
-            this.cmbProduktiMidis.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbProduktiMidis.Name = "cmbProduktiMidis";
-            this.cmbProduktiMidis.Size = new System.Drawing.Size(76, 21);
-            this.cmbProduktiMidis.TabIndex = 2038;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(11, 255);
-            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(46, 13);
-            this.label18.TabIndex = 2037;
-            this.label18.Text = "Produkti";
-            // 
             // label19
             // 
             this.label19.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label19.Location = new System.Drawing.Point(9, 275);
+            this.label19.Location = new System.Drawing.Point(12, 331);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(754, 2);
+            this.label19.Size = new System.Drawing.Size(785, 2);
             this.label19.TabIndex = 2026;
-            // 
-            // txtNrPaketMidis
-            // 
-            this.txtNrPaketMidis.Location = new System.Drawing.Point(327, 252);
-            this.txtNrPaketMidis.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNrPaketMidis.Name = "txtNrPaketMidis";
-            this.txtNrPaketMidis.Size = new System.Drawing.Size(60, 20);
-            this.txtNrPaketMidis.TabIndex = 2038;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(273, 255);
-            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(52, 13);
-            this.label20.TabIndex = 2037;
-            this.label20.Text = "NrPakete";
-            // 
-            // txtCopPaketeMidis
-            // 
-            this.txtCopPaketeMidis.Location = new System.Drawing.Point(454, 253);
-            this.txtCopPaketeMidis.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCopPaketeMidis.Name = "txtCopPaketeMidis";
-            this.txtCopPaketeMidis.Size = new System.Drawing.Size(51, 20);
-            this.txtCopPaketeMidis.TabIndex = 2042;
-            this.txtCopPaketeMidis.TextChanged += new System.EventHandler(this.txtCopPaketeMidis_TextChanged);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(391, 256);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(59, 13);
-            this.label21.TabIndex = 2041;
-            this.label21.Text = "Cop/Paket";
-            this.label21.Click += new System.EventHandler(this.label21_Click);
-            // 
-            // txtTotCope
-            // 
-            this.txtTotCope.Location = new System.Drawing.Point(575, 254);
-            this.txtTotCope.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTotCope.Name = "txtTotCope";
-            this.txtTotCope.Size = new System.Drawing.Size(51, 20);
-            this.txtTotCope.TabIndex = 2044;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(512, 257);
-            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(51, 13);
-            this.label22.TabIndex = 2043;
-            this.label22.Text = "Tot.Cope";
             // 
             // btnHyrje
             // 
@@ -959,67 +872,64 @@
             this.btnHyrje.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.btnHyrje.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHyrje.ForeColor = System.Drawing.Color.White;
-            this.btnHyrje.Location = new System.Drawing.Point(752, 242);
+            this.btnHyrje.Location = new System.Drawing.Point(653, 110);
             this.btnHyrje.Name = "btnHyrje";
-            this.btnHyrje.Size = new System.Drawing.Size(63, 35);
+            this.btnHyrje.Size = new System.Drawing.Size(63, 29);
             this.btnHyrje.TabIndex = 2045;
             this.btnHyrje.Text = "HYRJE";
             this.btnHyrje.UseVisualStyleBackColor = false;
+            this.btnHyrje.Click += new System.EventHandler(this.btnHyrje_Click);
             // 
-            // txtDateMidis
+            // txtSasiCope
             // 
-            this.txtDateMidis.Location = new System.Drawing.Point(667, 253);
-            this.txtDateMidis.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDateMidis.Name = "txtDateMidis";
-            this.txtDateMidis.Size = new System.Drawing.Size(80, 20);
-            this.txtDateMidis.TabIndex = 2047;
+            this.txtSasiCope.Location = new System.Drawing.Point(498, 91);
+            this.txtSasiCope.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSasiCope.Name = "txtSasiCope";
+            this.txtSasiCope.Size = new System.Drawing.Size(96, 20);
+            this.txtSasiCope.TabIndex = 2046;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(633, 257);
+            this.label23.Location = new System.Drawing.Point(442, 94);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(30, 13);
-            this.label23.TabIndex = 2046;
-            this.label23.Text = "Date";
+            this.label23.Size = new System.Drawing.Size(55, 13);
+            this.label23.TabIndex = 2047;
+            this.label23.Text = "Sasi Cope";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(88, 268);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(83, 13);
+            this.label17.TabIndex = 2027;
+            this.label17.Text = "Koke Hyrje Mag";
             // 
             // Furnizim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 791);
-            this.Controls.Add(this.txtDateMidis);
-            this.Controls.Add(this.label23);
-            this.Controls.Add(this.btnHyrje);
-            this.Controls.Add(this.txtTotCope);
-            this.Controls.Add(this.label22);
-            this.Controls.Add(this.txtCopPaketeMidis);
-            this.Controls.Add(this.label21);
-            this.Controls.Add(this.txtNrPaketMidis);
-            this.Controls.Add(this.label20);
-            this.Controls.Add(this.label19);
-            this.Controls.Add(this.cmbLodMidis);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.cmbWarehouse);
-            this.Controls.Add(this.cmbProduktiMidis);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.cmbStatus);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.cmbCatMov);
-            this.Controls.Add(this.lblKategoriLevizje);
-            this.Controls.Add(this.btnHome);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.txtShenime);
-            this.Controls.Add(this.txtNrLevizje);
             this.Controls.Add(this.lblFabul);
-            this.Controls.Add(this.lblNr);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.dgTrupVeprimi);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.cmbWarehouse);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtNrLevizje);
+            this.Controls.Add(this.cmbCatMov);
+            this.Controls.Add(this.lblNr);
+            this.Controls.Add(this.lblKategoriLevizje);
+            this.Controls.Add(this.btnShtoProdukt);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Furnizim";
             this.Text = "LevizjeMagazine";
@@ -1060,7 +970,7 @@
         private System.Windows.Forms.ComboBox cmbStatusTrupfature;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkTrupHyrjeAktiv;
         private System.Windows.Forms.TextBox txtPackX;
         private System.Windows.Forms.Button btnHiqProdukt;
         private System.Windows.Forms.Label lblMarresi;
@@ -1078,7 +988,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtCmim;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtSasi;
+        private System.Windows.Forms.TextBox txtSasiPack;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtPackNr;
         private System.Windows.Forms.Label label12;
@@ -1103,19 +1013,10 @@
         private System.Windows.Forms.Label lblFabul;
         private System.Windows.Forms.Label lblNr;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cmbLodMidis;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox cmbProduktiMidis;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox txtNrPaketMidis;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox txtCopPaketeMidis;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox txtTotCope;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button btnHyrje;
-        private System.Windows.Forms.TextBox txtDateMidis;
+        private System.Windows.Forms.TextBox txtSasiCope;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label17;
     }
 }

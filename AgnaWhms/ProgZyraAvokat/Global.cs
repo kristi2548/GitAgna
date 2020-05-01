@@ -130,6 +130,7 @@ namespace ProgZyraAvokat
         public static string NENI;
         public static int PRIND_KID;
         public static int AKTIV;
+        public static int AKTIV_TRUPI_HYRJE;
         public static string KOMENTE;
         public static string DATE_ALERTI;
         public static string STATUS_CESHTJE;
@@ -309,6 +310,7 @@ namespace ProgZyraAvokat
                     new ParameterObject(){ parameterName = "@QtyX", parameterValue = Global.orderDetailQuantity.ToString()  },
                     new ParameterObject(){ parameterName = "@ProductPrice", parameterValue = Global.orderDetailPrice.ToString() },
                     new ParameterObject(){ parameterName = "@MovDetNotes", parameterValue = Global.orderDetailNotes.ToString() },
+                    new ParameterObject(){ parameterName = "@Aktiv", parameterValue = Global.AKTIV_TRUPI_HYRJE.ToString() },
                     new ParameterObject(){ parameterName = "@prBID", parameterValue = ""},
                 };
 
@@ -934,6 +936,35 @@ namespace ProgZyraAvokat
                 return "";
             }
         }
+        public static string returnValForQuery(string query,string conn)
+        {
+            try
+            {
+                using (SqlConnection connect = new SqlConnection(conn))
+                {
+                    connect.Open();
+                    SqlCommand cmd = new SqlCommand(query, connect);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            String retVal;
+                            retVal = reader[0].ToString();// reader.GetString(0);
+                            return retVal;
+                        }
+                        else
+                        {
+                            return "0";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return "-100";
+        }
         #endregion
 
         public static List<String> AcceptableDateFormats = new List<String>(180);
@@ -1075,7 +1106,7 @@ namespace ProgZyraAvokat
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("fillGrid Error " + ex.Message);
+                MessageBox.Show("fillGridWithRef Error " + ex.Message);
                 return null;
             }
         }

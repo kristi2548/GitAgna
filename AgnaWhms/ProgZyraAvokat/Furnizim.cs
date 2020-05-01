@@ -13,6 +13,7 @@ namespace AgnaWhms
 {
     public partial class Furnizim : Form
     {
+        public Int32 nrProduktePerHyrje = 0;
         public Furnizim()
         {
             try
@@ -61,12 +62,13 @@ namespace AgnaWhms
 
                 Global.fillCombo(ref cmbCatMov, Global.localConn,
                "SELECT [MovCatID],[MovCatCode] + '-' + [MovCatName] as LLojLevizje FROM [wMovCategs]", "LLojLevizje", "MovCatID");
-
+                cmbCatMov.SelectedValue = 1;
                 Global.fillCombo(ref cmbStatus, Global.localConn,
                "SELECT [MovStatusID],[MovStatusName] + '-' + MovStatusNotes as Status FROM [dbo].[wMovStatuses]", "Status", "MovStatusID");
-
+                cmbStatus.SelectedValue = 2;
                 Global.fillCombo(ref cmbWarehouse, Global.localConn,
                 "SELECT [WarehouseID],[WarehouseCode] + '-' + [WarehouseName] as Magazina FROM [warehouses]", "Magazina", "WarehouseID");
+                cmbWarehouse.SelectedValue = 9;
 
                 Global.fillCombo(ref cmbArea, Global.localConn,
                 "SELECT [AreaID],[AreaCode] + '-' + [AreaName] as Zona FROM [dbo].[wAreas]", "Zona", "AreaID");
@@ -79,8 +81,8 @@ namespace AgnaWhms
                "SELECT [LotID],[ProductNav] + '-' + [ExpDate] as ProdInfo FROM [nProdLots]", "ProdInfo", "LotID");
                 //cmbArea.SelectedIndex = 0;
                 Global.fillCombo(ref cmbStatusTrupfature, Global.localConn,
-              "SELECT [MovStatusID],[MovStatusName] + '-' + MovStatusNotes as Status FROM [dbo].[wMovStatuses]", "Status", "MovStatusID");
-
+                "SELECT [MovStatusID],[MovStatusName] + '-' + MovStatusNotes as Status FROM [dbo].[wMovStatuses]", "Status", "MovStatusID");
+                cmbStatusTrupfature.SelectedValue = 2;
                 return true;
             }
             catch (Exception ex)
@@ -129,8 +131,8 @@ namespace AgnaWhms
                     Global.orderNr = "0";
                     //Global.orderPorosiNr = "0";
                 }
-                Global.orderMovStatusId = Convert.ToInt32(cmbStatus.SelectedValue.ToString());
-                Global.orderMovCatId = Convert.ToInt32(cmbCatMov.SelectedValue.ToString());
+                Global.orderMovStatusId = Convert.ToInt32(cmbStatus.SelectedValue.ToString());// 2;//Hyrje = Po, Vendosje ne Raft = Jo Convert.ToInt32(cmbStatus.SelectedValue.ToString());
+                Global.orderMovCatId = Convert.ToInt32(cmbCatMov.SelectedValue.ToString());// 1;//Hyrje Convert.ToInt32(cmbCatMov.SelectedValue.ToString());
                 Global.orderWhmsId = Convert.ToInt32(cmbWarehouse.SelectedValue.ToString());
                 Global.orderNotes = txtShenime.Text;
                 Global.orderTime = dtpDate.Text;
@@ -146,7 +148,7 @@ namespace AgnaWhms
                     {
                         if (Global.shto_KokaMagSakte(dateFillimNderto))
                         {
-                            MessageBox.Show("Koka e veprimit  u rregjistrua me sukses");
+                            //MessageBox.Show("Koka e veprimit  u rregjistrua me sukses");
                         }
                         else
                         {
@@ -157,7 +159,7 @@ namespace AgnaWhms
                     {
                         if (Global.shto_LevizjeNgaPorosi(dateFillimNderto))
                         {
-                            MessageBox.Show("Koka e veprimit  u rregjistrua me sukses");
+                            //MessageBox.Show("Koka e veprimit  u rregjistrua me sukses");
                         }
                         else
                         {
@@ -171,7 +173,7 @@ namespace AgnaWhms
                     {
                         if (Global.shto_KokaMagSakte(dateFillimNderto))
                         {
-                            MessageBox.Show("Koka e veprimit  u rregjistrua me sukses");
+                            //MessageBox.Show("Koka e veprimit  u rregjistrua me sukses");
                         }
                         else
                         {
@@ -182,7 +184,7 @@ namespace AgnaWhms
                     {
                         if (Global.shto_LevizjeNgaPorosi(dateFillimNderto))
                         {
-                            MessageBox.Show("Koka e veprimit  u rregjistrua me sukses");
+                            //MessageBox.Show("Koka e veprimit  u rregjistrua me sukses");
                         }
                         else
                         {
@@ -220,8 +222,11 @@ namespace AgnaWhms
                   " ,a.[MovDetNotes] " +
                   " FROM [dbo].[wMovDetails]  as a inner join dbo.wProducts ON a.ProductID = wProducts.ProductID  " +
                   " inner join dbo.wMovStatuses ON a.MovStatusID = dbo.wMovStatuses.MovStatusID " +
-                  " where MovHeadID = '" + Global.idVeprimi + "'",
+                  " where a.Aktiv = 1 and MovHeadID = '" + Global.idVeprimi + "'",
                 "", "Text");
+
+                Global.addButtonToGridWithRef(ref dgTrupVeprimi, "Fshi", 15);
+                Global.addButtonToGridWithRef(ref dgTrupVeprimi, "Edito", 16);
 
                 Color formBackColorAll = ColorTranslator.FromHtml("#424242");
                 Color lblForeColor12 = ColorTranslator.FromHtml("#F2F2F2");
@@ -246,7 +251,7 @@ namespace AgnaWhms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("callGridUpdate " + ex.Message);
+                MessageBox.Show("callGridTrupVeprime " + ex.Message);
             }
         }
         private void btnShkresa_Click(object sender, EventArgs e)
@@ -324,13 +329,15 @@ namespace AgnaWhms
         {
             txtShenime.Text = "";
             txtIKallezuari.Text = "";
-            txtNrPorosie.Text = "";
             txtNrLevizje.Text = "";
             //cmbPorosiPrind.SelectedIndex = 0;
             dtpDate.Value = DateTime.Today;// DateTime.Today.AddDays(-1);
             dtpAlert.Value = DateTime.Today;// DateTime.Today.AddDays(-1);
             chkAktiv.Checked = true;
+            txtNrLevizje.Text = Global.returnValForQuery("select (isnull(max([MovHeadID]),0) + 1) as NrPorosi from [wMovHeads]", Global.localConn);
             txtAlert.Text = "";
+            txtPackNr.Text = "1";
+
             //txtNrLevizje.Focus();
             //callGridTrupVeprime();
         }
@@ -394,6 +401,7 @@ namespace AgnaWhms
                       " ,[MovStatusName] " +
                       " ,[ProductNav] " +
                       " ,[ProductName] " +
+                       " ,[OrderDetail_MovStatusName] " +
                       " ,[OrderDetail_MovStatusID] " +
                       " ,[OrderDetail_MovStatusName] " +
                       " ,[MovHeadTime] " +
@@ -504,11 +512,252 @@ namespace AgnaWhms
 
         private void cmbProdukti_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void btnShtoProdukt_Click(object sender, EventArgs e)
+        {
+           
+        }
+        public bool shtoProdukte()
+        {
+            try
+            {
+                if (cmbProdukti.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Nuk keni zgjedhur produkt nga lista siper !");
+                    cmbProdukti.Focus();
+                }
+                if (!Global.IsNumeric(txtSasiPack.Text) || Convert.ToInt32(txtSasiPack.Text) == 0)
+                {
+                    MessageBox.Show("Sasia duhet te jete vlere numerike me e madhe se 0 !");
+                    txtSasiPack.Text = "0";
+                    return false;
+                }
+                if (!Global.IsNumeric(txtUnitPack.Text) || Convert.ToInt32(txtUnitPack.Text) == 0)
+                {
+                    MessageBox.Show("UnitPack duhet te jete vlere numerike !");
+                    txtUnitPack.Text = "0";
+                    return false;
+                }
+
+                Global.idTrupVeprimi = 0;
+                Global.orderDetailProdId = Convert.ToInt32(cmbProdukti.SelectedValue.ToString());
+                Global.orderDetailsMovStatusId = Convert.ToInt32(cmbStatus.SelectedValue.ToString());
+                if (cmbLot.SelectedIndex > -1)
+                {
+                    Global.orderDetailLotId = Convert.ToInt32(cmbLot.SelectedValue.ToString());
+                }
+                else
+                {
+                    Global.orderDetailLotId = 0;
+                }
+
+                Global.orderDetailProdNav = (txtProductNav.Text);
+                Global.orderDetailLotNr = (txtLotNr.Text);
+                Global.orderDetailBarcode = (txtBarkodx.Text);
+                Global.orderDetailPackX = true;
+                Global.orderDetailUnitPack = Convert.ToInt32(txtUnitPack.Text);
+
+                Global.orderDetailPackNrX = Convert.ToInt32(txtPackX.Text);
+
+                Global.orderDetailQuantity = Convert.ToInt32(txtSasiPack.Text);
+                Global.orderDetailPrice = Convert.ToDouble(txtCmim.Text);
+                Global.orderDetailNotes = (txtShenimeProd.Text);
+                if (chkAktiv.Checked) { Global.AKTIV_TRUPI_HYRJE = 1; } else { Global.AKTIV_TRUPI_HYRJE = 0; }
+
+                if (Global.idVeprimi == 0)
+                {
+                    if (Global.shto_TrupiMagSakte(""))
+                    {
+                        //MessageBox.Show("Produkti u shtua me sukses");
+                        nrProduktePerHyrje = nrProduktePerHyrje + 1;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Produkti NUK u rregjistrua me sukses");
+                    }
+                }
+                else
+                {
+                    if (Global.shto_TrupiMagSakte(""))
+                    {
+                        nrProduktePerHyrje = nrProduktePerHyrje + 1;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Produkti  NUK u rregjistrua me sukses");
+                    }
+                }
+                callGridTrupVeprime();
+                boshatisTrupVeprimi();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("shtoProdukte  NUK u rregjistrua me sukses");
+                Log.LogData("shtoProdukte", ex.Message);
+                return false ;
+            }
+        }
+        public bool boshatisTrupVeprimi()
+        {
+            //cmbProdukti.SelectedValue = -1;
+            //cmbStatusTrupfature.SelectedValue = -1;
+            //cmbLot.SelectedValue = -1;
+            txtProductNav.Text = "";
+            txtLotNr.Text = "";
+            txtBarkodx.Text = "";
+            Global.orderDetailPackX = true;
+            txtUnitPack.Text = "0";
+            txtPackX.Text = "0";
+            txtSasiPack.Text = "0";
+            txtCmim.Text = "0";
+            txtShenimeProd.Text = "";
+            cmbProdukti.SelectedIndex = -1;
+            chkTrupHyrjeAktiv.Checked = true;
+            dgTrupVeprimi.AllowUserToAddRows = false;
+            dgHyrjeNav.AllowUserToAddRows = false;
+            return true;
+        }
+
+        private void cmbPorosiPrind_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string porosiId = cmbPorosiPrind.SelectedValue.ToString();
+
+                if (porosiId != null && porosiId != "System.Data.DataRowView" && cmbPorosiPrind.SelectedIndex != -1)
+                {
+                    try
+                    {
+                        DataTable dtblPorosiPrind = Global.fillGridWithRef(ref dgHyrjeNav, Global.localConn,
+                       " SELECT [MovHeadID],[OrderID],[ConsumerID],[MovDetID],[AreaID],[ProductID],[LotID],[MovStatusID],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
+                       " [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[ProductNav],[ProductName],[QtyX],[ProductPrice],[OrderDetail_MovStatusID], " +
+                       "  [OrderDetail_MovStatusName],[UnitsPackX] as UnitsPack, [PackX],BarcodeX as Barcode," +
+                       " [MovHeadTime],[MovHeadNr],[AreaCode],[AreaName]  FROM [dbo].[order_for_grid_full] where MovHeadID = " + porosiId,
+                       "", "Text");
+
+                        Global.addButtonToGridWithRef(ref dgHyrjeNav, "Zberthe ne Mag", 25);
+
+                        dgHyrjeNav.Columns["MovHeadID"].Visible = false;
+                        dgHyrjeNav.Columns["OrderID"].Visible = false;
+                        dgHyrjeNav.Columns["ConsumerID"].Visible = false;
+                        dgHyrjeNav.Columns["MovDetID"].Visible = false;
+
+                        dgHyrjeNav.Columns["AreaID"].Visible = false;
+                        dgHyrjeNav.Columns["ProductID"].Visible = false;
+                        dgHyrjeNav.Columns["LotID"].Visible = false;
+                        dgHyrjeNav.Columns["MovStatusID"].Visible = false;
+                        dgHyrjeNav.Columns["WarehouseID"].Visible = false;
+                        dgHyrjeNav.Columns["UserID"].Visible = false;
+                        dgHyrjeNav.Columns["MovCatID"].Visible = false;
+                        dgHyrjeNav.Columns["MovCatCode"].Visible = false;
+                        dgHyrjeNav.Columns["RoleID"].Visible = false;
+                        dgHyrjeNav.Columns["WarehouseCode"].Visible = false;
+                        dgHyrjeNav.Columns["OrderDetail_MovStatusID"].Visible = false;
+                        dgHyrjeNav.Columns["OrderDetail_MovStatusName"].Visible = false;
+                        dgHyrjeNav.Columns["RoleID"].Visible = false;
+                        dgHyrjeNav.Columns["MovHeadTime"].Visible = false;
+                        dgHyrjeNav.Columns["MovHeadNr"].Visible = false;
+                        dgHyrjeNav.Columns["AreaCode"].Visible = false;
+                        dgHyrjeNav.Columns["AreaName"].Visible = false;
+                  
+                }
+                catch (Exception ex)
+                    {
+                        MessageBox.Show("Err cmbPorosiPrind_SelectedIndexChanged_1 " + ex.Message);
+                    }
+                }
+          
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            if (Global.listeFatura == null)
+            {
+                Global.listeFatura = new ListeFatura();
+            }
+            Global.listeFatura.callGridUpdate("");
+            Global.furnizim.Hide();
+            Global.listeFatura.Show();
+        }
+
+        private void dgHyrjeNav_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //DataTable dtblPorosiPrind = Global.fillGridWithRef(ref dgHyrjeNav, Global.localConn,
+                //     " SELECT [MovHeadID],[OrderID],[ConsumerID],[MovDetID],[AreaID],[ProductID],[LotID],[MovStatusID],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
+                //     " [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[ProductNav],[ProductName],[QtyX],[ProductPrice]" +
+                //     " ,[OrderDetail_MovStatusID],[OrderDetail_MovStatusName],[UnitsPackX] as UnitsPack, [PackX]  " +
+                //     " [MovHeadTime],[MovHeadNr],[AreaCode],[AreaName]  FROM [dbo].[order_for_grid_full] where MovHeadID = " + porosiId,
+                //     "", "Text");
+                //if (e.ColumnIndex == dgHyrjeNav.Columns["Zberthe ne Mag"].Index)
+                //{
+                    if (dgHyrjeNav.SelectedCells.Count > 0)
+                    {
+                        int selectedrowindex = dgHyrjeNav.SelectedCells[0].RowIndex;
+                        DataGridViewRow selectedRow = dgHyrjeNav.Rows[selectedrowindex];
+                        //Global.idTrupVeprimi = Convert.ToInt32(selectedRow.Cells["MovDetID"].Value.ToString());
+                        cmbProdukti.SelectedValue = selectedRow.Cells["ProductID"].Value.ToString();
+                        if (selectedRow.Cells["UnitsPack"].Value != null)
+                        {
+                            txtUnitPack.Text = selectedRow.Cells["UnitsPack"].Value.ToString();
+                        }
+                        
+                        txtSasiPack.Text = selectedRow.Cells["QtyX"].Value.ToString();
+                        if (Global.IsNumeric(txtUnitPack.Text) && Global.IsNumeric(txtSasiPack.Text))
+                        {
+                            txtSasiCope.Text = (Convert.ToInt32(txtSasiPack.Text) * Convert.ToInt32(txtUnitPack.Text)).ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Kontrolloni Hyrje per kete produkt");
+                            txtSasiCope.Text = "0";
+                        }
+                        txtProductNav.Text = selectedRow.Cells["ProductNav"].Value.ToString();
+                        txtBarkodx.Text = selectedRow.Cells["Barcode"].Value.ToString();
+                        txtCmim.Text = selectedRow.Cells["ProductPrice"].Value.ToString();
+                    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("dgHyrjeNav_CellContentClick err " + ex.Message);
+            }
+        }
+
+        private void label21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCopPaketeMidis_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnHyrje_Click(object sender, EventArgs e)
+        {
+            bool rregjistroKoke = true; 
+            if (nrProduktePerHyrje == 0)
+            {
+                rregjistroKoke = rregjistroLevizje("KOKE_VEPRIMI");
+            }
+            if (rregjistroKoke) { shtoProdukte(); } 
+        }
+
+        private void cmbProdukti_SelectionChangeCommitted(object sender, EventArgs e)
+        {
             //if ((int)cmbProdukti.SelectedValue > -1)
             //{
             if (string.IsNullOrEmpty(cmbProdukti.Text))
             {
-                MessageBox.Show("No Item is Selected");
+                //MessageBox.Show("No Item is Selected");
             }
             else
             {
@@ -540,228 +789,61 @@ namespace AgnaWhms
                             txtCmim.Text = Convert.ToDouble(dtblProdukt.Rows[0][13].ToString()).ToString();
                             //cmbArea.SelectedValue = Convert.ToDateTime(dtblProdukt.Rows[0][2].ToString());// DateTime.Today.AddDays(-1);
                         }
-                        txtSasi.Focus();
+                        txtSasiPack.Focus();
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Err cmbPorosiPrind_SelectedIndexChanged_1 " + ex.Message);
                 }
-            //}
+                //}
                 // MessageBox.Show("Item Selected is:" + cmbProdukti.Text);
             }
         }
 
-        private void btnShtoProdukt_Click(object sender, EventArgs e)
+        private void dgHyrjeNav_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
+            if (dgHyrjeNav.SelectedCells.Count > 0)
             {
-                if (!Global.IsNumeric(txtSasi.Text) || Convert.ToInt32(txtSasi.Text) == 0)
+                int selectedrowindex = dgHyrjeNav.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dgHyrjeNav.Rows[selectedrowindex];
+                //Global.idTrupVeprimi = Convert.ToInt32(selectedRow.Cells["MovDetID"].Value.ToString());
+                cmbProdukti.SelectedValue = selectedRow.Cells["ProductID"].Value.ToString();
+                if (selectedRow.Cells["UnitsPack"].Value != null)
                 {
-                    MessageBox.Show("Sasia duhet te jete vlere numerike me e madhe se 0 !");
-                    txtSasi.Text = "0";
-                    return;
+                    txtUnitPack.Text = selectedRow.Cells["UnitsPack"].Value.ToString();
                 }
-                if (!Global.IsNumeric(txtUnitPack.Text) || Convert.ToInt32(txtUnitPack.Text) == 0)
+
+                txtSasiPack.Text = selectedRow.Cells["QtyX"].Value.ToString();
+                if (Global.IsNumeric(txtUnitPack.Text) && Global.IsNumeric(txtSasiPack.Text))
                 {
-                    MessageBox.Show("UnitPack duhet te jete vlere numerike !");
-                    txtUnitPack.Text = "0";
-                    return;
-                }
-              
-                Global.idTrupVeprimi = 0;
-                Global.orderDetailProdId = Convert.ToInt32(cmbProdukti.SelectedValue.ToString());
-                Global.orderDetailsMovStatusId = Convert.ToInt32(cmbStatusTrupfature.SelectedValue.ToString());
-                if (cmbLot.SelectedIndex > -1)
-                {
-                    Global.orderDetailLotId = Convert.ToInt32(cmbLot.SelectedValue.ToString());
+                    txtSasiCope.Text = (Convert.ToInt32(txtSasiPack.Text) * Convert.ToInt32(txtUnitPack.Text)).ToString();
                 }
                 else
                 {
-                    Global.orderDetailLotId = 0;
+                    MessageBox.Show("Kontrolloni Hyrje per kete produkt");
+                    txtSasiCope.Text = "0";
                 }
-                    
-                Global.orderDetailProdNav = (txtProductNav.Text);
-                Global.orderDetailLotNr = (txtLotNr.Text);
-                Global.orderDetailBarcode = (txtBarkodx.Text);
-                Global.orderDetailPackX = true;
-                Global.orderDetailUnitPack =Convert.ToInt32(txtUnitPack.Text) ;
+                txtProductNav.Text = selectedRow.Cells["ProductNav"].Value.ToString();
+                txtBarkodx.Text = selectedRow.Cells["Barcode"].Value.ToString();
+                txtCmim.Text = selectedRow.Cells["ProductPrice"].Value.ToString();
+            }
+        }
 
-                Global.orderDetailPackNrX = Convert.ToInt32(txtPackX.Text);
-
-                Global.orderDetailQuantity = Convert.ToInt32(txtSasi.Text);
-                Global.orderDetailPrice = Convert.ToDouble(txtCmim.Text);
-                Global.orderDetailNotes = (txtShenimeProd.Text);
-
-                if (Global.idVeprimi == 0)
+        private void dgTrupVeprimi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selProdId = 0;
+            if (e.ColumnIndex == dgTrupVeprimi.Columns["Fshi"].Index)
+            {
+                if (dgTrupVeprimi.SelectedCells.Count > 0)
                 {
-                    if (Global.shto_TrupiMagSakte(""))
-                    {
-                        MessageBox.Show("Koka e veprimit  u rregjistrua me sukses");
+                    int selectedrowindex = dgTrupVeprimi.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = dgTrupVeprimi.Rows[selectedrowindex];
+                    selProdId = Convert.ToInt32(selectedRow.Cells["MovDetID"].Value.ToString());
+                        Global.callSqlCommand(Global.localConn, "Update wMovDetails set aktiv = 0 where MovDetID = '" + selProdId + "'","Text", "Text", null) ;
                     }
-                    else
-                    {
-                        MessageBox.Show("Koka e veprimit  NUK u rregjistrua me sukses");
-                    }
-                }
-                else
-                {
-                    if (Global.shto_TrupiMagSakte(""))
-                    {
-                        MessageBox.Show("Trupi i veprimit  u rregjistrua me sukses");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Trupi i veprimit  NUK u rregjistrua me sukses");
-                    }
-                }
                 callGridTrupVeprime();
-                boshatisTrupVeprimi();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Trupi e veprimit  NUK u rregjistrua me sukses");
-                Log.LogData("rregjistrimKallezim_Click", ex.Message);
-            }
-        }
-        public bool boshatisTrupVeprimi()
-        {
-            //cmbProdukti.SelectedValue = -1;
-            //cmbStatusTrupfature.SelectedValue = -1;
-            //cmbLot.SelectedValue = -1;
-            txtProductNav.Text = "";
-            txtLotNr.Text = "";
-            txtBarkodx.Text = "";
-            Global.orderDetailPackX = true;
-            txtUnitPack.Text = "0";
-            txtPackX.Text = "0";
-            txtSasi.Text = "0";
-            txtCmim.Text = "0";
-            txtShenimeProd.Text = "";
-
-            return true;
-        }
-
-        private void cmbPorosiPrind_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            string porosiId = cmbPorosiPrind.SelectedValue.ToString();
-
-                if (porosiId != null && porosiId != "System.Data.DataRowView" && cmbPorosiPrind.SelectedIndex != -1)
-                {
-                    try
-                    {
-                        DataTable dtblPorosiPrind = Global.fillGridWithRef(ref dgHyrjeNav, Global.localConn,
-                   " SELECT [MovHeadID],[OrderID],[ConsumerID],[MovDetID],[AreaID],[ProductID],[LotID],[MovStatusID],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
-                   " [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[ProductNav],[ProductName],[QtyX],[ProductPrice],[OrderDetail_MovStatusID],[OrderDetail_MovStatusName], [PackX] " +
-                   " ,[UnitsPackX] " +
-                   " [MovHeadTime],[MovHeadNr],[AreaCode],[AreaName]  FROM [dbo].[order_for_grid_full] where MovHeadID = " + porosiId,
-                   "", "Text");
-
-                        Global.addButtonToGridWithRef(ref dgHyrjeNav, "Zberthe ne Mag", 25);
-
-                    dgHyrjeNav.Columns["MovHeadID"].Visible = false;
-                    dgHyrjeNav.Columns["OrderID"].Visible = false;
-                    dgHyrjeNav.Columns["ConsumerID"].Visible = false;
-                    dgHyrjeNav.Columns["MovDetID"].Visible = false;
-
-                    dgHyrjeNav.Columns["AreaID"].Visible = false;
-                    dgHyrjeNav.Columns["ProductID"].Visible = false;
-                    dgHyrjeNav.Columns["LotID"].Visible = false;
-                    dgHyrjeNav.Columns["MovStatusID"].Visible = false;
-                    dgHyrjeNav.Columns["WarehouseID"].Visible = false;
-                    dgHyrjeNav.Columns["UserID"].Visible = false;
-                    dgHyrjeNav.Columns["MovCatID"].Visible = false;
-                    dgHyrjeNav.Columns["MovCatCode"].Visible = false;
-                    dgHyrjeNav.Columns["RoleID"].Visible = false;
-                    dgHyrjeNav.Columns["WarehouseCode"].Visible = false;
-                    dgHyrjeNav.Columns["OrderDetail_MovStatusID"].Visible = false;
-                    dgHyrjeNav.Columns["OrderDetail_MovStatusName"].Visible = false;
-                    dgHyrjeNav.Columns["RoleID"].Visible = false;
-                    dgHyrjeNav.Columns["MovHeadTime"].Visible = false;
-                    dgHyrjeNav.Columns["MovHeadNr"].Visible = false;
-                    dgHyrjeNav.Columns["AreaCode"].Visible = false;
-                    dgHyrjeNav.Columns["AreaName"].Visible = false;
-                  
-                }
-                catch (Exception ex)
-                    {
-                        MessageBox.Show("Err cmbPorosiPrind_SelectedIndexChanged_1 " + ex.Message);
-                    }
-                }
-          
-        }
-
-        private void btnHome_Click(object sender, EventArgs e)
-        {
-            if (Global.listeFatura == null)
-            {
-                Global.listeFatura = new ListeFatura();
-            }
-            Global.listeFatura.callGridUpdate("");
-            Global.furnizim.Hide();
-            Global.listeFatura.Show();
-        }
-
-        private void dgHyrjeNav_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.ColumnIndex == dgHyrjeNav.Columns["Fshi"].Index)
-                {
-                    //if (dgHyrjeNav.SelectedCells.Count > 0)
-                    //{
-                    //    int selectedrowindex = dgHyrjeNav.SelectedCells[0].RowIndex;
-                    //    DataGridViewRow selectedRow = dgHyrjeNav.Rows[selectedrowindex];
-                    //    Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["Kid"].Value.ToString());
-                    //    //Global.veprimKallezim.fillVeprimById(Global.idVeprimi.ToString());
-                    //    Global.callSqlCommand(Global.localConn, "update veprim set aktiv = 0 where kid = '" + Global.idVeprimi + "'", "Text", "Execute", null);
-                    //}
-                    //MessageBox.Show("Ceshtja u fshi", "Fshi Ceshtje");
-                    //callGridUpdate(txtCeshtjeKerko.Text);
-                    //callGridAlert("");
-                }
-                else if (e.ColumnIndex == dgHyrjeNav.Columns["Zberthe ne Mag"].Index)
-                {
-                    if (dgHyrjeNav.SelectedCells.Count > 0)
-                    {
-
-                        int selectedrowindex = dgHyrjeNav.SelectedCells[0].RowIndex;
-                        DataGridViewRow selectedRow = dgHyrjeNav.Rows[selectedrowindex];
-                        Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["MovDetID"].Value.ToString());
-                        if (Global.levizjeMagazina == null)
-                        {
-                            Global.listeFatura.Hide();
-                            Global.levizjeMagazina = new AgnaWhms.LevizjeMagazina();
-                        }
-                        Global.levizjeMagazina.fillKokeVeprimById(Global.idVeprimi.ToString());
-                        Global.levizjeMagazina.Show();
-                    }
-                }
-                else if (e.ColumnIndex == dgHyrjeNav.Columns["Lexo"].Index)
-                {
-                    //if (dgHyrjeNav.SelectedCells.Count > 0)
-                    //{
-                    //    int selectedrowindex = dgHyrjeNav.SelectedCells[0].RowIndex;
-                    //    DataGridViewRow selectedRow = dgHyrjeNav.Rows[selectedrowindex];
-                    //    Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["Kid"].Value.ToString());
-                    //    showAllInfo();
-                    //}
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("dgHyrjeNav_CellContentClick err " + ex.Message);
-            }
         }
-
-        private void label21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCopPaketeMidis_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-    }
 }
