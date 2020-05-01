@@ -72,6 +72,8 @@ namespace AgnaWhms
             btnCeshtjeREE.Font = new Font("Century Gothic", buttonFontSize);
             btnRaporte.Font = new Font("Century Gothic", buttonFontSize);
             btnDil.Font = new Font("Century Gothic", buttonFontSize);
+            btnShtoFurnizim.Font = new Font("Century Gothic", buttonFontSize);
+
             btnListeCeshtje.BackColor = ColorTranslator.FromHtml("#4655A5");
             btnListeCeshtje.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
 
@@ -677,6 +679,17 @@ namespace AgnaWhms
             }
             Global.formeStoku.initStok();
             Global.formeStoku.Show();
+        }
+
+        private void btnShtoFurnizim_Click(object sender, EventArgs e)
+        {
+            if (Global.furnizim == null)
+            {
+                Global.listeFatura.Hide();
+                Global.furnizim = new AgnaWhms.Furnizim();
+            }
+            Global.furnizim.levizjeMagazinaInit();
+            Global.furnizim.Show();
         }
     }
 }

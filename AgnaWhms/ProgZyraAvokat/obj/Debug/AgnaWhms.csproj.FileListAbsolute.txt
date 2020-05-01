@@ -54,3 +54,6 @@ E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.ListeFatura.resourc
 D:\githubdardhari\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.ListeFatura.resources
 D:\githubdardhari\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.MainMenu.resources
 D:\githubdardhari\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.FormeStoku.resources
+E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.FormeStoku.resources
+E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.MainMenu.resources
+E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.Furnizim.resources

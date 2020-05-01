@@ -22,7 +22,7 @@ namespace AgnaWhms
         public void initStok()
         {
             Global.localConn = ConfigurationManager.ConnectionStrings["appConn"].ToString();
-            Global.localConnB2B = ConfigurationManager.ConnectionStrings["appConnExternal"].ToString();
+            Global.localConnB2B = ConfigurationManager.ConnectionStrings["appConnB2B"].ToString();
             fillCombo();
             callGridsUpdates();
             ProgZyraAvokat.ApplicationLookAndFeel.UseTheme(this, 12);
@@ -30,8 +30,11 @@ namespace AgnaWhms
         public void callGridsUpdates()
         {
             callGridB2B("");
+            callGridB2B_Total("");
             callGridB2C("");
+            callGridB2C_Total("");
             callGridStockECommerce("");
+            callGridStockECommerce_Total("");
             callGridStockTirana("");
         }
         public bool fillCombo()
@@ -80,7 +83,7 @@ namespace AgnaWhms
                 " A_CatItems ON B_Items.GID = A_CatItems.GGID LEFT OUTER JOIN " +
                 " ArtikujNjesi ON C_Movs.IID = ArtikujNjesi.IID inner join " +
                 " A_Units on B_Items.NID = A_Units.NID " +
-                " WHERE (B_Head.VID = 15) AND (B_Head.VLF = 1) and " +
+                " WHERE (B_Head.VID = 15) AND (B_Head.VLF = 1) and fbid = 0 and " +
                 " (KOEFICENTI = 1 or NJESIA = 'COPE') " +
                 " and gcd + cd = '" + productNav + "' " +
                 " group by B_Head.BID, B_Head.VID, C_Movs.MID, bdtrg, A_CatItems.GCD + B_Items.CD, A_Departamente.DID, " +
@@ -103,6 +106,7 @@ namespace AgnaWhms
                         dgPorosiB2b.Columns["IID"].Visible = false;
                         dgPorosiB2b.Columns["VLF"].Visible = false;
                         dgPorosiB2b.Columns["Departamenti"].Visible = false;
+                        dgPorosiB2b.Columns["Value"].Visible = false;
 
                         dgPorosiB2b.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                         dgPorosiB2b.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -121,6 +125,62 @@ namespace AgnaWhms
             catch (Exception ex)
             {
                 MessageBox.Show("callGridB2B " + ex.Message);
+            }
+        }
+        public void callGridB2B_Total(string productNav)
+        {
+            try
+            {
+                DataTable result = new DataTable();
+                string sqlQuery = "";
+                if (cmbProdukti.SelectedIndex > -1 && cmbProdukti.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    productNav = cmbProdukti.SelectedValue.ToString();
+                    sqlQuery = "Select Sum(QtyCope) as qtyCope,Sum(Qty_SalesUnit) as Qty_SalesUnit from (" +
+                    " SELECT  " +
+                    " B_Head.BID, B_Head.VID, C_Movs.MID, bdtrg as Data, A_CatItems.GCD + B_Items.CD AS ProductNav, A_Departamente.DID, " +
+                    " A_Departamente.DNM AS Departamenti, B_Items.IID, " +
+                    " B_Items.NM AS ProductName,  " +
+                    " round(Sum(CASE WHEN NJESIA = 'COPE' THEN " +
+                    " (CASE WHEN c_movs.iid = 38742 OR c_movs.iid = 38743 OR c_movs.iid = 38744 THEN " +
+                    " (C_Movs.MNR / ArtikujNjesi.KOEFICENTI) * 2 ELSE C_Movs.MNR / ArtikujNjesi.KOEFICENTI END) ELSE 0 END), 0) AS QtyCope ," +
+                    "  C_Movs.MPR AS Price, C_Movs.MNR * C_Movs.MPR AS Value, " +
+                    " B_Head.VLF, " +
+                    " sum(CASE WHEN KOEFICENTI = 1 THEN " +
+                    " (CASE WHEN c_movs.iid = 38742 OR c_movs.iid = 38743 OR c_movs.iid = 38744 THEN " +
+                    " (C_Movs.MNR / ArtikujNjesi.KOEFICENTI) * 2 ELSE C_Movs.MNR / ArtikujNjesi.KOEFICENTI END) ELSE 0 END) AS Qty_SalesUnit " +
+                    " FROM B_Head INNER JOIN " +
+                    " C_Movs ON B_Head.BID = C_Movs.BID INNER JOIN " +
+                    " B_Items ON C_Movs.IID = B_Items.IIID INNER JOIN " +
+                    " A_Departamente ON B_Items.DID = A_Departamente.DID INNER JOIN " +
+                    " A_CatItems ON B_Items.GID = A_CatItems.GGID LEFT OUTER JOIN " +
+                    " ArtikujNjesi ON C_Movs.IID = ArtikujNjesi.IID inner join " +
+                    " A_Units on B_Items.NID = A_Units.NID " +
+                    " WHERE (B_Head.VID = 15) AND (B_Head.VLF = 1) and fbid = 0 and " +
+                    " (KOEFICENTI = 1 or NJESIA = 'COPE') " +
+                    " and gcd + cd = '" + productNav + "' " +
+                    " group by B_Head.BID, B_Head.VID, C_Movs.MID, bdtrg, A_CatItems.GCD + B_Items.CD, A_Departamente.DID, " +
+                    " A_Departamente.DNM, B_Items.IID, " +
+                    " B_Items.NM, C_Movs.MNR, C_Movs.MPR, C_Movs.MNR * C_Movs.MPR, " +
+                    " B_Head.VLF " +
+                    " ) as totVal";
+
+                    //result = Global.returnTableForGrid( Global.localConnB2B, sqlQuery, "", "Text");
+                    result = Global.returnTableForGrid(Global.localConnB2B, sqlQuery, "Text", "Execute", null, "Text");
+
+                    if (result != null)
+                    {
+                        btnB2B_Pieces.Text = "Stok Cope : " + result.Rows[0][0].ToString();
+                        btnB2B_Pieces.Visible = true;
+                        btnB2B_Unit.Text = "Stok Unit : " + result.Rows[0][1].ToString();
+                        btnB2B_Unit.Visible = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("callGridB2B_Total " + ex.Message);
             }
         }
         public void callGridB2C(string productNav)
@@ -174,6 +234,9 @@ namespace AgnaWhms
                         dgPorosiB2c.Columns["ConsumerAddress"].Visible = false;
                         dgPorosiB2c.Columns["ConsumerEM"].Visible = false;
 
+                        dgPorosiB2c.Columns["OrdDetNotes"].Visible = false;
+                        dgPorosiB2c.Columns["AreaCode"].Visible = false;
+
                         dgPorosiB2c.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                         dgPorosiB2c.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                         dgPorosiB2c.RowTemplate.Height = 30;
@@ -191,6 +254,51 @@ namespace AgnaWhms
             catch (Exception ex)
             {
                 MessageBox.Show("callGridB2C " + ex.Message);
+            }
+        }
+        public void callGridB2C_Total(string productNav)
+        {
+            try
+            {
+                DataTable result = new DataTable();
+                if (cmbProdukti.SelectedIndex > -1 && cmbProdukti.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    productNav = cmbProdukti.SelectedValue.ToString();
+                    string sqlQuery = " SELECT Sum(QtyCope) as QtyCope,CAST(Sum(Qty_SalesUnit) AS INT) as Qty_SalesUnit from ( " +
+                    " SELECT OrderDTS,[OrderID] " +
+                    "   ,[OrdECID],[ConsumerID],[ConsumerMobNr],[ConsumerName] " +
+                    "   ,[ConsumerAddress],[OrderNr],[OrderSubmit],[OrderNetTotal],[OrderShipping] " +
+                    "   ,[OrderExtra],[OrderPaidAm],[VAT_Nr],[PaymentInfo],[OrderNotes] " +
+                    "   ,[ConsumerEM],[ConsumerTel],[OrderDetID],[ProductNAV],[ProductID],ProductName " +
+                    "   ,[OrderQty] as QtyCope,[OrderPrice] as Price,[UnitsPack],OrderQty / UnitsPack as Qty_SalesUnit, [OrdDetNotes],[DepartmentID],[AreaID],[AreaName],[AreaCode] " +
+                    "    FROM [online_orders_full] " +
+                    "    where ProductNAV  = '" + productNav + "' ) as totB2c ";
+                    //    result = Global.fillGridWithRef(ref dgPorosiB2c, Global.localConn,
+                    //" SELECT Sum(QtyCope) as QtyCope,Sum(Qty_SalesUnit) as Qty_SalesUnit from ( " +
+                    //" SELECT OrderDTS,[OrderID] " +
+                    //"   ,[OrdECID],[ConsumerID],[ConsumerMobNr],[ConsumerName] " +
+                    //"   ,[ConsumerAddress],[OrderNr],[OrderSubmit],[OrderNetTotal],[OrderShipping] " +
+                    //"   ,[OrderExtra],[OrderPaidAm],[VAT_Nr],[PaymentInfo],[OrderNotes] " +
+                    //"   ,[ConsumerEM],[ConsumerTel],[OrderDetID],[ProductNAV],[ProductID],ProductName " +
+                    //"   ,[OrderQty] as QtyCope,[OrderPrice] as Price,[UnitsPack],OrderQty / UnitsPack as Qty_SalesUnit, [OrdDetNotes],[DepartmentID],[AreaID],[AreaName],[AreaCode] " +
+                    //"    FROM [online_orders_full] " +
+                    //"     where ProductNAV  = '" + productNav + "' ) as totB2c ",
+                    //"", "Text");
+
+                    result = Global.returnTableForGrid(Global.localConn, sqlQuery, "Text", "Execute", null, "Text");
+                    if (result != null)
+                    {
+                        btnB2c_Pieces.Text = "Stok Cope : " + result.Rows[0][0].ToString();
+                        btnB2c_Pieces.Visible = true;
+                        btnB2c_Unit.Text = "Stok Unit : " + String.Format("{0:0.##}", result.Rows[0][1].ToString());
+                        btnB2c_Unit.Visible = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("callGridB2C_Total " + ex.Message);
             }
         }
         public void callGridStockECommerce(string productNav)
@@ -254,6 +362,45 @@ namespace AgnaWhms
                 MessageBox.Show("callGridStockECommerce " + ex.Message);
             }
         }
+        public void callGridStockECommerce_Total(string productNav)
+        {
+            try
+            {
+                DataTable result = new DataTable();
+                if (cmbProdukti.SelectedIndex > -1 && cmbProdukti.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    productNav = cmbProdukti.SelectedValue.ToString();
+                        string sqlQuery = "select Sum(QtyCope) as QtyCope,Sum(Qty_SalesUnit) as Qty_SalesUnit from ( " +
+                    " SELECT distinct [MovHeadID],[MovDetID] ,MovHeadTime,[ProductID],[LotID],[MovStatusID],[ProductNav],[ProductName],[QtyX] as QtyCope,[ProductPrice], " +
+                    " QtyX / UnitsPackX as Qty_SalesUnit, [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
+                    " [UnitsPackX],[MovDetNotes],[Aktiv],MovHeadNr, [OrderID],[ConsumerID]  " +
+                    " FROM [ORDER_WHMS] where ProductNav  = '" + productNav + "' ) as totECommerce ";
+                //    result = Global.fillGridWithRef(ref dgStokuECommerce, Global.localConn,
+                //"select Sum(QtyCope) as QtyCope,Sum(Qty_SalesUnit) as Qty_SalesUnit from ( " + 
+                //" SELECT distinct [MovHeadID],[MovDetID] ,MovHeadTime,[ProductID],[LotID],[MovStatusID],[ProductNav],[ProductName],[QtyX] as QtyCope,[ProductPrice], " +
+                //" QtyX / UnitsPackX as Qty_SalesUnit, [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
+                //" [UnitsPackX],[MovDetNotes],[Aktiv],MovHeadNr, [OrderID],[ConsumerID]  " +
+                //" FROM [ORDER_WHMS] where ProductNav  = '" + productNav + "' ) as totECommerce ",
+                //"", "Text");
+
+                    result = Global.returnTableForGrid(Global.localConn, sqlQuery, "Text", "Execute", null, "Text");
+
+                    if (result != null)
+                    {
+                        btnStockEComm_Pieces.Text = "Stok Cope : " + result.Rows[0][0].ToString();
+                        btnStockEComm_Pieces.Visible = true;
+                        btnStockEComm_Unit.Text = "Stok Unit : " + result.Rows[0][1].ToString();
+                        btnStockEComm_Unit.Visible = true;
+                        btnStockECommWeb_Pieces.Text = "Stok Cope Web: " + result.Rows[0][0].ToString();
+                        btnStockECommWeb_Pieces.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("callGridStockECommerce_Total " + ex.Message);
+            }
+        }
         public void callGridStockTirana(string productNav)
         {
             try
@@ -299,6 +446,11 @@ namespace AgnaWhms
                         dgStokuTirana.RowsDefaultCellStyle.BackColor = formBackColorAll;
                         dgStokuTirana.Font = new Font("Century Gothic", 10);
                         dgStokuTirana.ReadOnly = true;
+
+                        btnTrStock_Pieces.Text = "Stok Cope : " + result.Rows[0][4].ToString();
+                        btnTrStock_Pieces.Visible = true;
+                        btnTrStock_Unit.Text = "Stok Unit : " + result.Rows[0][7].ToString();
+                        btnTrStock_Unit.Visible = true;
                     }
                     
                     
