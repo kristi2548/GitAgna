@@ -691,5 +691,16 @@ namespace AgnaWhms
             Global.furnizim.levizjeMagazinaInit();
             Global.furnizim.Show();
         }
+
+        private void btnVendosRaft_Click(object sender, EventArgs e)
+        {
+            if (Global.rafte == null)
+            {
+                Global.listeFatura.Hide();
+                Global.rafte = new AgnaWhms.Rafte ();
+            }
+            Global.rafte.levizjeMagazinaInit();
+            Global.rafte.Show();
+        }
     }
 }

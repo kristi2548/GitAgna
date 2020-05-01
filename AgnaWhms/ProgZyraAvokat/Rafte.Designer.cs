@@ -1,6 +1,6 @@
 ﻿namespace AgnaWhms
 {
-    partial class Furnizim
+    partial class Rafte
     {
         /// <summary>
         /// Required designer variable.
@@ -53,6 +53,7 @@
             this.btnAnulloShkresa = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dtpLotNr = new System.Windows.Forms.DateTimePicker();
             this.txtSasiCope = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.btnHyrje = new System.Windows.Forms.Button();
@@ -99,7 +100,18 @@
             this.lblNr = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.dtpLotNr = new System.Windows.Forms.DateTimePicker();
+            this.cmbX = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cmbY = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cmbZ = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtCellQty = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.cmbCellStatus = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.cmbCellCatMov = new System.Windows.Forms.ComboBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHyrjeNav)).BeginInit();
             this.panel2.SuspendLayout();
@@ -148,7 +160,7 @@
             // 
             this.chkAktiv.AutoSize = true;
             this.chkAktiv.Location = new System.Drawing.Point(1051, 39);
-            this.chkAktiv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkAktiv.Margin = new System.Windows.Forms.Padding(4);
             this.chkAktiv.Name = "chkAktiv";
             this.chkAktiv.Size = new System.Drawing.Size(60, 21);
             this.chkAktiv.TabIndex = 22;
@@ -163,7 +175,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Location = new System.Drawing.Point(1085, 44);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(19, 43);
             this.button2.TabIndex = 22;
@@ -178,7 +190,7 @@
             this.btnAddProcedura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddProcedura.ForeColor = System.Drawing.Color.White;
             this.btnAddProcedura.Location = new System.Drawing.Point(1080, 304);
-            this.btnAddProcedura.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddProcedura.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddProcedura.Name = "btnAddProcedura";
             this.btnAddProcedura.Size = new System.Drawing.Size(31, 43);
             this.btnAddProcedura.TabIndex = 21;
@@ -193,7 +205,7 @@
             this.btnShtoShkresa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShtoShkresa.ForeColor = System.Drawing.Color.White;
             this.btnShtoShkresa.Location = new System.Drawing.Point(1077, 449);
-            this.btnShtoShkresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnShtoShkresa.Margin = new System.Windows.Forms.Padding(4);
             this.btnShtoShkresa.Name = "btnShtoShkresa";
             this.btnShtoShkresa.Size = new System.Drawing.Size(31, 43);
             this.btnShtoShkresa.TabIndex = 20;
@@ -208,7 +220,7 @@
             this.btnMbyll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMbyll.ForeColor = System.Drawing.Color.White;
             this.btnMbyll.Location = new System.Drawing.Point(1085, 542);
-            this.btnMbyll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMbyll.Margin = new System.Windows.Forms.Padding(4);
             this.btnMbyll.Name = "btnMbyll";
             this.btnMbyll.Size = new System.Drawing.Size(16, 43);
             this.btnMbyll.TabIndex = 23;
@@ -294,7 +306,7 @@
             // 
             this.dgHyrjeNav.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgHyrjeNav.Location = new System.Drawing.Point(4, 57);
-            this.dgHyrjeNav.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgHyrjeNav.Margin = new System.Windows.Forms.Padding(4);
             this.dgHyrjeNav.Name = "dgHyrjeNav";
             this.dgHyrjeNav.Size = new System.Drawing.Size(1049, 212);
             this.dgHyrjeNav.TabIndex = 80;
@@ -335,7 +347,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(1085, 138);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(17, 43);
             this.button1.TabIndex = 2024;
@@ -350,7 +362,7 @@
             this.btnHiqProdukt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHiqProdukt.ForeColor = System.Drawing.Color.White;
             this.btnHiqProdukt.Location = new System.Drawing.Point(1076, 77);
-            this.btnHiqProdukt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnHiqProdukt.Margin = new System.Windows.Forms.Padding(4);
             this.btnHiqProdukt.Name = "btnHiqProdukt";
             this.btnHiqProdukt.Size = new System.Drawing.Size(35, 43);
             this.btnHiqProdukt.TabIndex = 62;
@@ -365,7 +377,7 @@
             this.btnAnulloShkresa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAnulloShkresa.ForeColor = System.Drawing.Color.White;
             this.btnAnulloShkresa.Location = new System.Drawing.Point(1085, 198);
-            this.btnAnulloShkresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAnulloShkresa.Margin = new System.Windows.Forms.Padding(4);
             this.btnAnulloShkresa.Name = "btnAnulloShkresa";
             this.btnAnulloShkresa.Size = new System.Drawing.Size(19, 43);
             this.btnAnulloShkresa.TabIndex = 19;
@@ -384,6 +396,18 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cmbCellCatMov);
+            this.panel2.Controls.Add(this.label26);
+            this.panel2.Controls.Add(this.cmbCellStatus);
+            this.panel2.Controls.Add(this.label25);
+            this.panel2.Controls.Add(this.txtCellQty);
+            this.panel2.Controls.Add(this.label24);
+            this.panel2.Controls.Add(this.cmbZ);
+            this.panel2.Controls.Add(this.label22);
+            this.panel2.Controls.Add(this.cmbY);
+            this.panel2.Controls.Add(this.label21);
+            this.panel2.Controls.Add(this.cmbX);
+            this.panel2.Controls.Add(this.label20);
             this.panel2.Controls.Add(this.dtpLotNr);
             this.panel2.Controls.Add(this.txtSasiCope);
             this.panel2.Controls.Add(this.label23);
@@ -417,11 +441,19 @@
             this.panel2.Controls.Add(this.lblLenda);
             this.panel2.Controls.Add(this.lblDerguesi);
             this.panel2.Controls.Add(this.label9);
-            this.panel2.Location = new System.Drawing.Point(16, 376);
+            this.panel2.Location = new System.Drawing.Point(16, 346);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1057, 142);
+            this.panel2.Size = new System.Drawing.Size(1057, 177);
             this.panel2.TabIndex = 64;
+            // 
+            // dtpLotNr
+            // 
+            this.dtpLotNr.Location = new System.Drawing.Point(383, 56);
+            this.dtpLotNr.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpLotNr.Name = "dtpLotNr";
+            this.dtpLotNr.Size = new System.Drawing.Size(200, 22);
+            this.dtpLotNr.TabIndex = 2049;
             // 
             // txtSasiCope
             // 
@@ -447,11 +479,11 @@
             this.btnHyrje.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHyrje.ForeColor = System.Drawing.Color.White;
             this.btnHyrje.Location = new System.Drawing.Point(874, 57);
-            this.btnHyrje.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnHyrje.Margin = new System.Windows.Forms.Padding(4);
             this.btnHyrje.Name = "btnHyrje";
             this.btnHyrje.Size = new System.Drawing.Size(84, 36);
             this.btnHyrje.TabIndex = 2045;
-            this.btnHyrje.Text = "HYRJE";
+            this.btnHyrje.Text = "VENDOS RAFT";
             this.btnHyrje.UseVisualStyleBackColor = false;
             this.btnHyrje.Click += new System.EventHandler(this.btnHyrje_Click);
             // 
@@ -462,7 +494,7 @@
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHome.ForeColor = System.Drawing.Color.White;
             this.btnHome.Location = new System.Drawing.Point(963, 57);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(4);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(84, 36);
             this.btnHome.TabIndex = 73;
@@ -571,7 +603,7 @@
             // 
             this.chkTrupHyrjeAktiv.AutoSize = true;
             this.chkTrupHyrjeAktiv.Location = new System.Drawing.Point(888, 28);
-            this.chkTrupHyrjeAktiv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkTrupHyrjeAktiv.Margin = new System.Windows.Forms.Padding(4);
             this.chkTrupHyrjeAktiv.Name = "chkTrupHyrjeAktiv";
             this.chkTrupHyrjeAktiv.Size = new System.Drawing.Size(60, 21);
             this.chkTrupHyrjeAktiv.TabIndex = 74;
@@ -652,7 +684,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(807, 112);
+            this.label7.Location = new System.Drawing.Point(797, 112);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 17);
             this.label7.TabIndex = 66;
@@ -722,7 +754,7 @@
             this.btnShtoProdukt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShtoProdukt.ForeColor = System.Drawing.Color.White;
             this.btnShtoProdukt.Location = new System.Drawing.Point(1079, 433);
-            this.btnShtoProdukt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnShtoProdukt.Margin = new System.Windows.Forms.Padding(4);
             this.btnShtoProdukt.Name = "btnShtoProdukt";
             this.btnShtoProdukt.Size = new System.Drawing.Size(23, 44);
             this.btnShtoProdukt.TabIndex = 18;
@@ -734,10 +766,10 @@
             // dgTrupVeprimi
             // 
             this.dgTrupVeprimi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTrupVeprimi.Location = new System.Drawing.Point(12, 524);
-            this.dgTrupVeprimi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgTrupVeprimi.Location = new System.Drawing.Point(12, 542);
+            this.dgTrupVeprimi.Margin = new System.Windows.Forms.Padding(4);
             this.dgTrupVeprimi.Name = "dgTrupVeprimi";
-            this.dgTrupVeprimi.Size = new System.Drawing.Size(1064, 392);
+            this.dgTrupVeprimi.Size = new System.Drawing.Size(1064, 344);
             this.dgTrupVeprimi.TabIndex = 65;
             this.dgTrupVeprimi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTrupVeprimi_CellContentClick);
             // 
@@ -745,16 +777,16 @@
             // 
             this.cmbWarehouse.Enabled = false;
             this.cmbWarehouse.FormattingEnabled = true;
-            this.cmbWarehouse.Location = new System.Drawing.Point(676, 306);
+            this.cmbWarehouse.Location = new System.Drawing.Point(546, 306);
             this.cmbWarehouse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbWarehouse.Name = "cmbWarehouse";
-            this.cmbWarehouse.Size = new System.Drawing.Size(204, 24);
+            this.cmbWarehouse.Size = new System.Drawing.Size(106, 24);
             this.cmbWarehouse.TabIndex = 79;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(597, 310);
+            this.label1.Location = new System.Drawing.Point(462, 310);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 17);
             this.label1.TabIndex = 78;
@@ -764,16 +796,16 @@
             // 
             this.cmbStatus.Enabled = false;
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(400, 306);
+            this.cmbStatus.Location = new System.Drawing.Point(326, 306);
             this.cmbStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(199, 24);
+            this.cmbStatus.Size = new System.Drawing.Size(113, 24);
             this.cmbStatus.TabIndex = 77;
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(323, 310);
+            this.lblStatus.Location = new System.Drawing.Point(262, 310);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(48, 17);
             this.lblStatus.TabIndex = 76;
@@ -786,7 +818,7 @@
             this.cmbCatMov.Location = new System.Drawing.Point(112, 306);
             this.cmbCatMov.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbCatMov.Name = "cmbCatMov";
-            this.cmbCatMov.Size = new System.Drawing.Size(199, 24);
+            this.cmbCatMov.Size = new System.Drawing.Size(125, 24);
             this.cmbCatMov.TabIndex = 75;
             // 
             // lblKategoriLevizje
@@ -805,7 +837,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Location = new System.Drawing.Point(1080, 389);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(21, 43);
             this.btnSave.TabIndex = 72;
@@ -816,36 +848,38 @@
             // 
             // txtShenime
             // 
-            this.txtShenime.Location = new System.Drawing.Point(400, 338);
+            this.txtShenime.Location = new System.Drawing.Point(1085, 217);
             this.txtShenime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtShenime.MaxLength = 5000;
             this.txtShenime.Multiline = true;
             this.txtShenime.Name = "txtShenime";
-            this.txtShenime.Size = new System.Drawing.Size(483, 24);
+            this.txtShenime.Size = new System.Drawing.Size(18, 24);
             this.txtShenime.TabIndex = 71;
+            this.txtShenime.Visible = false;
             // 
             // txtNrLevizje
             // 
             this.txtNrLevizje.Enabled = false;
-            this.txtNrLevizje.Location = new System.Drawing.Point(112, 338);
+            this.txtNrLevizje.Location = new System.Drawing.Point(782, 304);
             this.txtNrLevizje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNrLevizje.Name = "txtNrLevizje";
-            this.txtNrLevizje.Size = new System.Drawing.Size(199, 22);
+            this.txtNrLevizje.Size = new System.Drawing.Size(112, 22);
             this.txtNrLevizje.TabIndex = 69;
             // 
             // lblFabul
             // 
             this.lblFabul.AutoSize = true;
-            this.lblFabul.Location = new System.Drawing.Point(323, 341);
+            this.lblFabul.Location = new System.Drawing.Point(1048, 288);
             this.lblFabul.Name = "lblFabul";
             this.lblFabul.Size = new System.Drawing.Size(63, 17);
             this.lblFabul.TabIndex = 68;
             this.lblFabul.Text = "Shenime";
+            this.lblFabul.Visible = false;
             // 
             // lblNr
             // 
             this.lblNr.AutoSize = true;
-            this.lblNr.Location = new System.Drawing.Point(12, 342);
+            this.lblNr.Location = new System.Drawing.Point(677, 310);
             this.lblNr.Name = "lblNr";
             this.lblNr.Size = new System.Drawing.Size(74, 17);
             this.lblNr.TabIndex = 67;
@@ -854,7 +888,7 @@
             // label19
             // 
             this.label19.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label19.Location = new System.Drawing.Point(16, 365);
+            this.label19.Location = new System.Drawing.Point(16, 335);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(1047, 2);
@@ -869,15 +903,114 @@
             this.label17.TabIndex = 2027;
             this.label17.Text = "Koke Hyrje Mag";
             // 
-            // dtpLotNr
+            // cmbX
             // 
-            this.dtpLotNr.Location = new System.Drawing.Point(383, 56);
-            this.dtpLotNr.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpLotNr.Name = "dtpLotNr";
-            this.dtpLotNr.Size = new System.Drawing.Size(200, 22);
-            this.dtpLotNr.TabIndex = 2049;
+            this.cmbX.FormattingEnabled = true;
+            this.cmbX.Location = new System.Drawing.Point(383, 138);
+            this.cmbX.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbX.Name = "cmbX";
+            this.cmbX.Size = new System.Drawing.Size(47, 24);
+            this.cmbX.TabIndex = 2053;
             // 
-            // Furnizim
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(360, 141);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(17, 17);
+            this.label20.TabIndex = 2052;
+            this.label20.Text = "X";
+            // 
+            // cmbY
+            // 
+            this.cmbY.FormattingEnabled = true;
+            this.cmbY.Location = new System.Drawing.Point(460, 139);
+            this.cmbY.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbY.Name = "cmbY";
+            this.cmbY.Size = new System.Drawing.Size(47, 24);
+            this.cmbY.TabIndex = 2055;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(437, 142);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(17, 17);
+            this.label21.TabIndex = 2054;
+            this.label21.Text = "Y";
+            // 
+            // cmbZ
+            // 
+            this.cmbZ.FormattingEnabled = true;
+            this.cmbZ.Location = new System.Drawing.Point(537, 138);
+            this.cmbZ.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbZ.Name = "cmbZ";
+            this.cmbZ.Size = new System.Drawing.Size(47, 24);
+            this.cmbZ.TabIndex = 2057;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(514, 141);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(17, 17);
+            this.label22.TabIndex = 2056;
+            this.label22.Text = "Z";
+            // 
+            // txtCellQty
+            // 
+            this.txtCellQty.Location = new System.Drawing.Point(664, 138);
+            this.txtCellQty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCellQty.Name = "txtCellQty";
+            this.txtCellQty.Size = new System.Drawing.Size(127, 22);
+            this.txtCellQty.TabIndex = 2058;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(589, 142);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(65, 17);
+            this.label24.TabIndex = 2059;
+            this.label24.Text = "Sasi Raft";
+            // 
+            // cmbCellStatus
+            // 
+            this.cmbCellStatus.FormattingEnabled = true;
+            this.cmbCellStatus.Location = new System.Drawing.Point(871, 136);
+            this.cmbCellStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbCellStatus.Name = "cmbCellStatus";
+            this.cmbCellStatus.Size = new System.Drawing.Size(113, 24);
+            this.cmbCellStatus.TabIndex = 2029;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(797, 141);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(78, 17);
+            this.label25.TabIndex = 2028;
+            this.label25.Text = "Status.Raft";
+            // 
+            // cmbCellCatMov
+            // 
+            this.cmbCellCatMov.FormattingEnabled = true;
+            this.cmbCellCatMov.Location = new System.Drawing.Point(96, 141);
+            this.cmbCellCatMov.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbCellCatMov.Name = "cmbCellCatMov";
+            this.cmbCellCatMov.Size = new System.Drawing.Size(198, 24);
+            this.cmbCellCatMov.TabIndex = 2029;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(24, 146);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(74, 17);
+            this.label26.TabIndex = 2028;
+            this.label26.Text = "Kat. Leviz.";
+            // 
+            // Rafte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -911,7 +1044,7 @@
             this.Controls.Add(this.lblKategoriLevizje);
             this.Controls.Add(this.btnShtoProdukt);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Furnizim";
+            this.Name = "Rafte";
             this.Text = "LevizjeMagazine";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -997,5 +1130,17 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.DateTimePicker dtpLotNr;
+        private System.Windows.Forms.ComboBox cmbCellCatMov;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.ComboBox cmbCellStatus;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox txtCellQty;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.ComboBox cmbZ;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox cmbY;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox cmbX;
+        private System.Windows.Forms.Label label20;
     }
 }

@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProgZyraAvokat;
 using System.Globalization;
+
 namespace AgnaWhms
 {
-    public partial class Furnizim : Form
+    public partial class Rafte : Form
     {
         public Int32 nrProduktePerHyrje = 0;
-        public Furnizim()
+        public Rafte()
         {
             try
             {
@@ -29,11 +30,26 @@ namespace AgnaWhms
             
             //boshatisTrupVeprimi();
         }
+        public void fillComboItems(ref ComboBox myCombo)
+        {
+            string currItem = "";
+            myCombo.Items.Clear();
+            myCombo.Items.Add(string.Empty);
+            for (int i = 1; i <= 999; i++)
+            {
+                if (i.ToString().Length == 1 ) { currItem = "00" + i.ToString(); }
+                if (i.ToString().Length == 2) { currItem = "0" + i.ToString(); }
+                else { currItem = i.ToString(); }
+                myCombo.Items.Add(currItem);
+            }
+        }
         public void levizjeMagazinaInit()
         {
             try
             {
                 fillCombo();
+
+                //fillComboItems(ref cmbX);
 
                 ApplicationLookAndFeel.UseTheme(this, 12);
                 dtpDate.Format = DateTimePickerFormat.Custom;
@@ -63,12 +79,41 @@ namespace AgnaWhms
                "SELECT [MovHeadID],[OrderNr] + '-' + cast([MovHeadTime] as Varchar(20)) as OrderInfo FROM [dbo].[wMovHeads] where MovStatusID = 1 and Aktiv = 1", "OrderInfo", "MovHeadID");
                 cmbPorosiPrind.SelectedIndex = -1;
 
+                Global.fillCombo(ref cmbX, Global.localConn,
+               "SELECT [CellValueId],[CellValue] FROM [dbo].[wCellValues]", "CellValue", "CellValueId");
+                cmbX.SelectedIndex = -1;
+
+                Global.fillCombo(ref cmbY, Global.localConn,
+             "SELECT [CellValueId],[CellValue] FROM [dbo].[wCellValues]", "CellValue", "CellValueId");
+                cmbY.SelectedIndex = -1;
+
+                Global.fillCombo(ref cmbZ, Global.localConn,
+             "SELECT [CellValueId],[CellValue] FROM [dbo].[wCellValues]", "CellValue", "CellValueId");
+                cmbZ.SelectedIndex = -1;
+
+            //    Global.fillCombo(ref cmb, Global.localConn,
+            //"SELECT [CellValueId],[CellValue] FROM [dbo].[wCellValues]", "CellValue", "CellValueId");
+            //    cmbZ.SelectedIndex = -1;
+
+
+                Global.fillCombo(ref cmbPorosiPrind, Global.localConn,
+               "SELECT [MovHeadID],[OrderNr] + '-' + cast([MovHeadTime] as Varchar(20)) as OrderInfo FROM [dbo].[wMovHeads] where MovStatusID = 1 and Aktiv = 1", "OrderInfo", "MovHeadID");
+                cmbPorosiPrind.SelectedIndex = -1;
+
                 Global.fillCombo(ref cmbCatMov, Global.localConn,
                "SELECT [MovCatID],[MovCatCode] + '-' + [MovCatName] as LLojLevizje FROM [wMovCategs]", "LLojLevizje", "MovCatID");
                 cmbCatMov.SelectedValue = 1;
+                Global.fillCombo(ref cmbCellCatMov, Global.localConn,
+               "SELECT [MovCatID],[MovCatCode] + '-' + [MovCatName] as LLojLevizje FROM [wMovCategs]", "LLojLevizje", "MovCatID");
+                cmbCellCatMov.SelectedValue = 1;
+
                 Global.fillCombo(ref cmbStatus, Global.localConn,
                "SELECT [MovStatusID],[MovStatusName] + '-' + MovStatusNotes as Status FROM [dbo].[wMovStatuses]", "Status", "MovStatusID");
                 cmbStatus.SelectedValue = 2;
+                Global.fillCombo(ref cmbCellStatus, Global.localConn,
+               "SELECT [MovStatusID],[MovStatusName] + '-' + MovStatusNotes as Status FROM [dbo].[wMovStatuses]", "Status", "MovStatusID");
+                cmbCellStatus.SelectedValue = 2;
+
                 Global.fillCombo(ref cmbWarehouse, Global.localConn,
                 "SELECT [WarehouseID],[WarehouseCode] + '-' + [WarehouseName] as Magazina FROM [warehouses]", "Magazina", "WarehouseID");
                 cmbWarehouse.SelectedValue = 9;
@@ -209,27 +254,27 @@ namespace AgnaWhms
             try
             {
                 Global.fillGridWithRef(ref dgTrupVeprimi ,Global.localConn,
-                "SELECT wProducts.ProductName as Produkt,wMovStatuses.MovStatusName as Levizje,a.[MovDetID] " +
-                  " ,a.[ProductNav] as KodProd " +
-                  " ,a.[QtyX] as Sasi" +
-                  " ,a.[ProductPrice] as Cmim " +
-                  " ,a.[MovHeadID] " +
-                  " ,a.[ProductID] " +
-                  " ,a.[MovStatusID] " +
-                  " ,a.[LotID] " +
-                  " ,a.[LotNr] " +
-                  " ,a.[BarcodeX] " +
-                  " ,a.[PackX] " +
-                  " ,a.[UnitsPackX] " +
-                  " ,a.[PackNrX] " +
-                  " ,a.[MovDetNotes] " +
-                  " FROM [dbo].[wMovDetails]  as a inner join dbo.wProducts ON a.ProductID = wProducts.ProductID  " +
-                  " inner join dbo.wMovStatuses ON a.MovStatusID = dbo.wMovStatuses.MovStatusID " +
-                  " where a.Aktiv = 1 and MovHeadID = '" + Global.idVeprimi + "'",
+                "SELECT [MovHeadID] " +
+                  " ,[MovCatID] " +
+                  " ,[MovDetID] " +
+                  " ,[ProductID] " +
+                 "  ,[CellID] " +
+                 "  ,[WarehouseID] " +
+                "   ,[CellX] " +
+               "    ,[CellY] " +
+               "    ,[CellZ] " +
+               "    ,[CellW] " +
+               "    ,[CellTS] " +
+               "    ,ProductName,[Qty] " +
+               " ,[MovStatusIDCell] " +
+               "   ,[MovCatICell] " +
+              "     ,[LotNr] " +
+              " FROM [dbo].[order_rafte_full] " +
+                  " where MovHeadID = '" + Global.idVeprimi + "'",
                 "", "Text");
 
-                Global.addButtonToGridWithRef(ref dgTrupVeprimi, "Fshi", 15);
-                Global.addButtonToGridWithRef(ref dgTrupVeprimi, "Edito", 16);
+                //Global.addButtonToGridWithRef(ref dgTrupVeprimi, "Fshi", 15);
+                //Global.addButtonToGridWithRef(ref dgTrupVeprimi, "Edito", 16);
 
                 Color formBackColorAll = ColorTranslator.FromHtml("#424242");
                 Color lblForeColor12 = ColorTranslator.FromHtml("#F2F2F2");
@@ -237,9 +282,10 @@ namespace AgnaWhms
                 dgTrupVeprimi.Columns["MovHeadID"].Visible = false;
                 dgTrupVeprimi.Columns["MovDetID"].Visible = false;
                 dgTrupVeprimi.Columns["ProductID"].Visible = false;
-                dgTrupVeprimi.Columns["MovStatusID"].Visible = false;
-                dgTrupVeprimi.Columns["MovDetNotes"].Visible = false;
-                dgTrupVeprimi.Columns["PackX"].Visible = false;
+                dgTrupVeprimi.Columns["MovStatusIDCell"].Visible = false;
+                dgTrupVeprimi.Columns["MovCatICell"].Visible = false;
+                dgTrupVeprimi.Columns["CellID"].Visible = false;
+                dgTrupVeprimi.Columns["WarehouseID"].Visible = false;
 
                 dgTrupVeprimi.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgTrupVeprimi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -621,6 +667,12 @@ namespace AgnaWhms
             chkTrupHyrjeAktiv.Checked = true;
             dgTrupVeprimi.AllowUserToAddRows = false;
             dgHyrjeNav.AllowUserToAddRows = false;
+            cmbCellCatMov.SelectedIndex = -1;
+            cmbCellStatus.SelectedIndex = -1;
+            txtCellQty.Text = "0";
+            cmbX.SelectedIndex = -1;
+            cmbY.SelectedIndex = -1;
+            cmbZ.SelectedIndex = -1;
             return true;
         }
 
@@ -638,7 +690,7 @@ namespace AgnaWhms
                        "  [OrderDetail_MovStatusName],[UnitsPackX] as UnitsPack, [PackX],BarcodeX as Barcode," +
                        " [MovHeadTime],[MovHeadNr],[AreaCode],[AreaName]  FROM [dbo].[order_for_grid_full] where MovHeadID = " + porosiId,
                        "", "Text");
-
+                        Global.idVeprimi = Convert.ToInt32(porosiId) ;
                         Global.addButtonToGridWithRef(ref dgHyrjeNav, "Zberthe ne Mag", 25);
 
                         dgHyrjeNav.Columns["MovHeadID"].Visible = false;
@@ -680,7 +732,7 @@ namespace AgnaWhms
                 Global.listeFatura = new ListeFatura();
             }
             Global.listeFatura.callGridUpdate("");
-            Global.furnizim.Hide();
+            Global.rafte.Hide();
             Global.listeFatura.Show();
         }
 
@@ -700,7 +752,6 @@ namespace AgnaWhms
                     {
                         int selectedrowindex = dgHyrjeNav.SelectedCells[0].RowIndex;
                         DataGridViewRow selectedRow = dgHyrjeNav.Rows[selectedrowindex];
-                        //Global.idTrupVeprimi = Convert.ToInt32(selectedRow.Cells["MovDetID"].Value.ToString());
                         cmbProdukti.SelectedValue = selectedRow.Cells["ProductID"].Value.ToString();
                         if (selectedRow.Cells["UnitsPack"].Value != null)
                         {
@@ -746,12 +797,48 @@ namespace AgnaWhms
 
         private void btnHyrje_Click(object sender, EventArgs e)
         {
-            bool rregjistroKoke = true; 
-            if (nrProduktePerHyrje == 0)
+
+            string cellId = Global.returnValForQuery("SELECT [CellID] FROM [dbo].[wCells] where CellX = '" + cmbX.Text.ToString() +
+                " ' and [CellY] = '" + cmbY.Text.ToString() + "' and [CellZ] = '" + cmbZ.Text.ToString() + "'", Global.localConn);
+
+            if (cmbX.SelectedIndex != -1 && cmbY.SelectedIndex != -1 && cmbZ.SelectedIndex != -1)
             {
-                rregjistroKoke = rregjistroLevizje("KOKE_VEPRIMI");
+                cellId = Global.returnValForQuery("SELECT [CellID] FROM [dbo].[wCells] where CellX = '" + cmbX.Text.ToString() +
+                " ' and [CellY] = '" + cmbY.Text.ToString() + "' and [CellZ] = '" + cmbZ.Text.ToString() + "'", Global.localConn);
             }
-            if (rregjistroKoke) { shtoProdukte(); } 
+            else
+            {
+                if (cmbX.SelectedIndex == -1) { cmbX.Focus(); MessageBox.Show("Plotesoni X"); }
+                if (cmbZ.SelectedIndex == -1) { cmbZ.Focus(); MessageBox.Show("Plotesoni Z"); }
+                if (cmbY.SelectedIndex == -1) { cmbY.Focus(); MessageBox.Show("Plotesoni Y"); }
+            }
+
+            if (cellId == null || cellId == "" || cellId == "0")
+            {
+                Global.cellWarehouseID = Convert.ToInt32(cmbWarehouse.SelectedValue.ToString());
+                Global.cellX = cmbX.Text;
+                Global.cellY = cmbY.Text;
+                Global.cellZ= cmbZ.Text;
+                Global.cellW = "000";
+                Global.cellNotes = txtShenimeProd.Text;
+                Global.cellDataTime = dtpDate.Text;
+                
+                Global.shto_Cells("");
+            }
+            else
+            {
+                Global.cellId = Convert.ToInt32(cellId) ;
+            }
+            Global.movementCeId = 0;
+            Global.movDetId = Global.idTrupVeprimi;
+            Global.moveCellId = Global.cellId;
+            Global.moveQty = Convert.ToInt32(txtCellQty.Text);
+            Global.movStatusId = Convert.ToInt32(cmbCellStatus.SelectedValue.ToString());
+            Global.movCatId = Convert.ToInt32(cmbCellCatMov.SelectedValue.ToString());
+            Global.shto_MovCells("");
+
+            callGridTrupVeprime();
+            boshatisTrupVeprimi();
         }
 
         private void cmbProdukti_SelectionChangeCommitted(object sender, EventArgs e)
@@ -810,7 +897,7 @@ namespace AgnaWhms
             {
                 int selectedrowindex = dgHyrjeNav.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = dgHyrjeNav.Rows[selectedrowindex];
-                //Global.idTrupVeprimi = Convert.ToInt32(selectedRow.Cells["MovDetID"].Value.ToString());
+                Global.idTrupVeprimi = Convert.ToInt32(selectedRow.Cells["MovDetID"].Value.ToString());
                 cmbProdukti.SelectedValue = selectedRow.Cells["ProductID"].Value.ToString();
                 if (selectedRow.Cells["UnitsPack"].Value != null)
                 {

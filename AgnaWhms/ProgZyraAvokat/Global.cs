@@ -61,6 +61,7 @@ namespace ProgZyraAvokat
         public static Login loginForm;
         public static ListeKallezime listeCeshtje;
         public static LevizjeMagazina levizjeMagazina;
+        public static Rafte rafte;
         public static ListeFatura listeFatura;
         public static NotifyMe notifyMe;
         public static FormeStoku formeStoku;
@@ -85,6 +86,26 @@ namespace ProgZyraAvokat
         public static string hapVeprimi;
         public static System.Windows.Forms.Timer timerGlobal = new System.Windows.Forms.Timer();
         public static int kallezimId;
+
+        #region cellInfo
+        public static int cellId;
+        public static int cellWarehouseID;
+        public static string cellX;
+        public static string cellY;
+        public static string cellZ;
+        public static string cellW;
+        public static string cellNotes;
+        public static String cellDataTime;
+        #endregion
+
+        #region MovsCells
+        public static int movementCeId;
+        public static int movDetId;
+        public static int moveCellId;
+        public static int moveQty;
+        public static int movStatusId;
+        public static int movCatId;
+        #endregion  
 
         public static int idVeprimi;
         public static int idVeprimiProcedurePenale;
@@ -325,7 +346,7 @@ namespace ProgZyraAvokat
                 return false;
             }
         }
-        public static bool shto_KokaMagSakte(string dateVeprimi)
+        public static bool shto_KokaMagSakte(string dateFillimNderto)
         {
             try
             {
@@ -354,6 +375,62 @@ namespace ProgZyraAvokat
             {
                 Log.LogData("Gabim shto_KokaMagSakte ", ex.Message);
                 MessageBox.Show("Gabim shto_KokaMagSakte " + ex.Message);
+                return false;
+            }
+        }
+        public static bool shto_Cells(string dateFillimNderto)
+        {
+            try
+            {
+                Global.hapVeprimi = "CELLS";
+                List<ParameterObject> listParam = new List<ParameterObject>()
+                {
+                    new ParameterObject(){ parameterName = "@CELL_ID", parameterValue = Global.cellId.ToString() },
+                    new ParameterObject(){ parameterName = "@WarehouseID", parameterValue = Global.cellWarehouseID.ToString() },
+                    new ParameterObject(){ parameterName = "@CellX", parameterValue = Global.cellX.ToString() },
+                    new ParameterObject(){ parameterName = "@CellY", parameterValue =  Global.cellY.ToString() },//DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") 
+                    new ParameterObject(){ parameterName = "@CellZ", parameterValue =  Global.cellZ.ToString()},
+                    new ParameterObject(){ parameterName = "@CellW", parameterValue = Global.cellW.ToString()  },
+                    new ParameterObject(){ parameterName = "@CellNotes", parameterValue = Global.cellNotes.ToString()},
+                    new ParameterObject(){ parameterName = "@CellTS", parameterValue = Global.cellDataTime.ToString() },
+                    new ParameterObject(){ parameterName = "@prBID", parameterValue = ""}
+                };
+
+                Global.callSqlCommand(Global.localConn, "sp_Shto_Cell", "SP", "Execute", listParam);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogData("Gabim sp_Shto_Cell ", ex.Message);
+                MessageBox.Show("Gabim sp_Shto_Cell " + ex.Message);
+                return false;
+            }
+        }
+        public static bool shto_MovCells(string dateFillimNderto)
+        {
+            try
+            {
+                Global.hapVeprimi = "MOVCELLS";
+                List<ParameterObject> listParam = new List<ParameterObject>()
+                {
+                    new ParameterObject(){ parameterName = "@MovCeID", parameterValue = Global.movementCeId.ToString() },
+                    new ParameterObject(){ parameterName = "@MovDetID", parameterValue = Global.movDetId.ToString() },
+                    new ParameterObject(){ parameterName = "@CellID", parameterValue = Global.moveCellId.ToString() },
+                    new ParameterObject(){ parameterName = "@Qty", parameterValue =  Global.moveQty.ToString() },//DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") 
+                    new ParameterObject(){ parameterName = "@MovStatusID", parameterValue =  Global.movStatusId.ToString()},
+                    new ParameterObject(){ parameterName = "@MovCatID", parameterValue = Global.movCatId.ToString()  },
+                    new ParameterObject(){ parameterName = "@prBID", parameterValue = ""}
+                };
+
+                Global.callSqlCommand(Global.localConn, "sp_Shto_wMovCells", "SP", "Execute", listParam);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogData("Gabim shto_MovCells ", ex.Message);
+                MessageBox.Show("Gabim shto_MovCells " + ex.Message);
                 return false;
             }
         }
@@ -681,7 +758,8 @@ namespace ProgZyraAvokat
                     {
                         if (parameterList[i].parameterName == "@DATE_VEPRIMI" || parameterList[i].parameterName == "@DATE_RREGJISTRIMI" || parameterList[i].parameterName == "@CESHTJE_STATUS_DATE" ||
                             parameterList[i].parameterName == "@DATE" || parameterList[i].parameterName == "@DATE_CREATED" || parameterList[i].parameterName == "@DATA"
-                            || parameterList[i].parameterName == "@BDST_22" || parameterList[i].parameterName == "@DATE_ALERTI" || parameterList[i].parameterName == "@MovHeadTime")
+                            || parameterList[i].parameterName == "@BDST_22" || parameterList[i].parameterName == "@DATE_ALERTI" 
+                            || parameterList[i].parameterName == "@MovHeadTime" || parameterList[i].parameterName == "@CellTS")
                         {
                             sqlComm.Parameters.Add(parameterList[i].parameterName, SqlDbType.DateTime).Value = Convert.ToDateTime(parameterList[i].parameterValue);// 500;
                         }
@@ -722,7 +800,8 @@ namespace ProgZyraAvokat
                         MessageBox.Show("Vlere kthimi gabim ");
                         return null;
                     }
-                    else if (sqlCmdText == "sp_Shto_wMovHeads" || sqlCmdText == "sp_Shto_wMovDetails" || sqlCmdText == "sp_Shto_Levizje_Nga_Porosi")
+                    else if (sqlCmdText == "sp_Shto_wMovHeads" || sqlCmdText == "sp_Shto_wMovDetails" 
+                        || sqlCmdText == "sp_Shto_Levizje_Nga_Porosi" || sqlCmdText == "sp_Shto_Cell")
                     {
                         if (Global.hapVeprimi.ToUpper() == "LEVIZJE" || Global.hapVeprimi.ToUpper() == "LEVIZJENGAPOROSI")
                         {
@@ -731,6 +810,14 @@ namespace ProgZyraAvokat
                         else if (Global.hapVeprimi == "LEVIZJETRUPI")
                         {
                             Global.idTrupVeprimi= Convert.ToInt32(outputIdParam.Value.ToString());
+                        }
+                        else if (Global.hapVeprimi == "CELLS")
+                        {
+                            Global.cellId = Convert.ToInt32(outputIdParam.Value.ToString());
+                        }
+                        else if (Global.hapVeprimi == "MOVCELLS")
+                        {
+                            Global.movementCeId= Convert.ToInt32(outputIdParam.Value.ToString());
                         }
                     }
                 }

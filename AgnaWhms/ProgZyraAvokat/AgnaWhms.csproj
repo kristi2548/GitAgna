@@ -111,6 +111,12 @@
     <Compile Include="FormeStoku.Designer.cs">
       <DependentUpon>FormeStoku.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rafte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rafte.Designer.cs">
+      <DependentUpon>Rafte.cs</DependentUpon>
+    </Compile>
     <Compile Include="Furnizim.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormeStoku.resx">
       <DependentUpon>FormeStoku.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rafte.resx">
+      <DependentUpon>Rafte.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Furnizim.resx">
       <DependentUpon>Furnizim.cs</DependentUpon>

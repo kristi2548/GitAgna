@@ -34,8 +34,8 @@ namespace AgnaWhms
             callGridB2C("");
             callGridB2C_Total("");
             callGridStockECommerce("");
-            callGridStockECommerce_Total("");
             callGridStockTirana("");
+            callGridStockECommerce_Total_PlusWeb("");
         }
         public bool fillCombo()
         {
@@ -44,9 +44,9 @@ namespace AgnaWhms
                 Global.fillCombo(ref cmbProdukti, Global.localConn,
                "SELECT [ProductNav],[ProductNav] + '-' + [ProductName] AS Produkti FROM [wProducts]", "Produkti", "ProductNav");
                 cmbProdukti.SelectedIndex = -1;
-                Global.fillCombo(ref cmbDepartamenti, Global.localConn,
-               "SELECT [DepartmentID],[DepartmentCode] + '-' + [DepartmentName] as Departamenti FROM [wDepartments]", "Departamenti", "DepartmentID");
-                cmbDepartamenti.SelectedIndex = -1;
+                Global.fillCombo(ref CmbWarehouse, Global.localConn,
+                "SELECT [WarehouseID],[WarehouseCode] + '-' + [WarehouseName] as Magazina FROM [warehouses]", "Magazina", "WarehouseID");
+                CmbWarehouse.SelectedIndex = -1;
                 return true;
             }
             catch (Exception ex)
@@ -170,9 +170,9 @@ namespace AgnaWhms
 
                     if (result != null)
                     {
-                        btnB2B_Pieces.Text = "Stok Cope : " + result.Rows[0][0].ToString();
+                        btnB2B_Pieces.Text =  result.Rows[0][0].ToString();
                         btnB2B_Pieces.Visible = true;
-                        btnB2B_Unit.Text = "Stok Unit : " + result.Rows[0][1].ToString();
+                        btnB2B_Unit.Text =  result.Rows[0][1].ToString();
                         btnB2B_Unit.Visible = true;
                     }
                 }
@@ -288,9 +288,9 @@ namespace AgnaWhms
                     result = Global.returnTableForGrid(Global.localConn, sqlQuery, "Text", "Execute", null, "Text");
                     if (result != null)
                     {
-                        btnB2c_Pieces.Text = "Stok Cope : " + result.Rows[0][0].ToString();
+                        btnB2c_Pieces.Text =  result.Rows[0][0].ToString();
                         btnB2c_Pieces.Visible = true;
-                        btnB2c_Unit.Text = "Stok Unit : " + String.Format("{0:0.##}", result.Rows[0][1].ToString());
+                        btnB2c_Unit.Text =  String.Format("{0:0.##}", result.Rows[0][1].ToString());
                         btnB2c_Unit.Visible = true;
                     }
                 }
@@ -362,11 +362,13 @@ namespace AgnaWhms
                 MessageBox.Show("callGridStockECommerce " + ex.Message);
             }
         }
-        public void callGridStockECommerce_Total(string productNav)
+        public void callGridStockECommerce_Total_PlusWeb(string productNav)
         {
             try
             {
                 DataTable result = new DataTable();
+                int stockTr = 0,LevizjeB2b=0,LevizjeB2c=0,StockECommerce=0;
+                double StokCopeWeb = 0;
                 if (cmbProdukti.SelectedIndex > -1 && cmbProdukti.SelectedValue.ToString() != "System.Data.DataRowView")
                 {
                     productNav = cmbProdukti.SelectedValue.ToString();
@@ -375,30 +377,43 @@ namespace AgnaWhms
                     " QtyX / UnitsPackX as Qty_SalesUnit, [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
                     " [UnitsPackX],[MovDetNotes],[Aktiv],MovHeadNr, [OrderID],[ConsumerID]  " +
                     " FROM [ORDER_WHMS] where ProductNav  = '" + productNav + "' ) as totECommerce ";
-                //    result = Global.fillGridWithRef(ref dgStokuECommerce, Global.localConn,
-                //"select Sum(QtyCope) as QtyCope,Sum(Qty_SalesUnit) as Qty_SalesUnit from ( " + 
-                //" SELECT distinct [MovHeadID],[MovDetID] ,MovHeadTime,[ProductID],[LotID],[MovStatusID],[ProductNav],[ProductName],[QtyX] as QtyCope,[ProductPrice], " +
-                //" QtyX / UnitsPackX as Qty_SalesUnit, [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
-                //" [UnitsPackX],[MovDetNotes],[Aktiv],MovHeadNr, [OrderID],[ConsumerID]  " +
-                //" FROM [ORDER_WHMS] where ProductNav  = '" + productNav + "' ) as totECommerce ",
-                //"", "Text");
 
                     result = Global.returnTableForGrid(Global.localConn, sqlQuery, "Text", "Execute", null, "Text");
 
                     if (result != null)
                     {
-                        btnStockEComm_Pieces.Text = "Stok Cope : " + result.Rows[0][0].ToString();
+                        btnStockEComm_Pieces.Text =  result.Rows[0][0].ToString();
                         btnStockEComm_Pieces.Visible = true;
-                        btnStockEComm_Unit.Text = "Stok Unit : " + result.Rows[0][1].ToString();
+                        btnStockEComm_Unit.Text =  result.Rows[0][1].ToString();
                         btnStockEComm_Unit.Visible = true;
-                        btnStockECommWeb_Pieces.Text = "Stok Cope Web: " + result.Rows[0][0].ToString();
+                        btnStockECommWeb_Pieces.Text = result.Rows[0][0].ToString();
                         btnStockECommWeb_Pieces.Visible = true;
+
                     }
+
+                    if (Global.IsNumeric(btnTrStock_Pieces.Text))
+                    {
+                        stockTr = Convert.ToInt32(btnTrStock_Pieces.Text);
+                    }
+                    if (Global.IsNumeric(btnB2B_Pieces.Text))
+                    {
+                        LevizjeB2b = Convert.ToInt32(btnB2B_Pieces.Text);
+                    }
+                    if (Global.IsNumeric(btnB2c_Pieces.Text))
+                    {
+                        LevizjeB2c = Convert.ToInt32(btnB2c_Pieces.Text);
+                    }
+                    if (Global.IsNumeric(btnStockEComm_Pieces.Text))
+                    {
+                        StockECommerce= Convert.ToInt32(btnStockEComm_Pieces.Text);
+                    }
+                    StokCopeWeb = (stockTr - LevizjeB2b - LevizjeB2c - StockECommerce) * 0.05;
+                    btnStockECommWeb_Pieces.Text = StokCopeWeb.ToString();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("callGridStockECommerce_Total " + ex.Message);
+                MessageBox.Show("callGridStockECommerce_Total_PlusWeb " + ex.Message);
             }
         }
         public void callGridStockTirana(string productNav)
@@ -447,9 +462,9 @@ namespace AgnaWhms
                         dgStokuTirana.Font = new Font("Century Gothic", 10);
                         dgStokuTirana.ReadOnly = true;
 
-                        btnTrStock_Pieces.Text = "Stok Cope : " + result.Rows[0][4].ToString();
+                        btnTrStock_Pieces.Text =  result.Rows[0][4].ToString();
                         btnTrStock_Pieces.Visible = true;
-                        btnTrStock_Unit.Text = "Stok Unit : " + result.Rows[0][7].ToString();
+                        btnTrStock_Unit.Text =  result.Rows[0][7].ToString();
                         btnTrStock_Unit.Visible = true;
                     }
                     

@@ -372,14 +372,14 @@ namespace AgnaWhms
             {
                 DataTable dtTblKallezim = Global.fillGridWithRef(ref dgHyrjeNav, Global.localConn,
                     "SELECT [MovHeadID] " +
-                      " ,[OrderID] " +
-                      " ,[ConsumerID] " +
-                      " ,[MovDetID] " +
-                      " ,[AreaID] " +
-                      " ,[ProductID] " +
-                      " ,[LotID] " +
-                      " ,[MovStatusID] " +
-                      " ,[WarehouseID] " +
+                      " ,[OrderID],[ConsumerID] ,[MovDetID],[AreaID],[ProductID],[LotID],[MovStatusID],[WarehouseID]" +
+                      " " +
+                      "  " +
+                      "  " +
+                      "  " +
+                      "  " +
+                      "  " +
+                      "  " +
                       " ,[UserID] " +
                       " ,[MovCatID] " +
                       " ,[MovCatCode] " +
@@ -397,6 +397,24 @@ namespace AgnaWhms
                       " ,[AreaCode] " +
                       " ,[AreaName] " +
                   " FROM [dbo].[order_for_grid_full] where MovHeadID = " + Global.idVeprimi.ToString(), "", "");
+
+                dgHyrjeNav.Columns["MovHeadID"].Visible = false;
+                dgHyrjeNav.Columns["ConsumerID"].Visible = false;
+                dgHyrjeNav.Columns["MovDetID"].Visible = false;
+                dgHyrjeNav.Columns["AreaID"].Visible = false;
+                dgHyrjeNav.Columns["ProductID"].Visible = false;
+                dgHyrjeNav.Columns["LotID"].Visible = false;
+
+                dgHyrjeNav.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgHyrjeNav.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgHyrjeNav.RowTemplate.Height = 30;
+                //dgHyrjeNav.ForeColor = lblForeColor12;
+                //dgHyrjeNav.BackgroundColor = formBackColorAll;
+                //dgHyrjeNav.AlternatingRowsDefaultCellStyle.BackColor = formBackColorAll;
+                dgHyrjeNav.CellBorderStyle = DataGridViewCellBorderStyle.None;
+                //dgHyrjeNav.RowsDefaultCellStyle.BackColor = formBackColorAll;
+                dgHyrjeNav.Font = new Font("Century Gothic", 10);
+                dgHyrjeNav.ReadOnly = true;
             }
             catch (Exception ex)
             {
@@ -595,33 +613,33 @@ namespace AgnaWhms
 
         private void cmbPorosiPrind_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbPorosiPrind.Text))
-            {
-                string porosiId = cmbPorosiPrind.SelectedValue.ToString();
-                if (porosiId != "" && porosiId != "0" && porosiId != "System.Data.DataRowView")
-                {
-                    DataTable dtblPorosiPrind = Global.returnTableForGrid(Global.localConn,
-                    " SELECT        dbo.wOrders.OrderID, dbo.wOrders.OrderNr, dbo.wAreas.AreaID " +
-                    " FROM            dbo.wOrders INNER JOIN  " +
-                    "      dbo.wConsumers ON dbo.wOrders.ConsumerID = dbo.wConsumers.ConsumerID INNER JOIN " +
-                    "      dbo.wAddresses ON dbo.wConsumers.ConsumerID = dbo.wAddresses.ConsumerID INNER JOIN " +
-                    "      dbo.wAreas ON dbo.wAddresses.AreaID = dbo.wAreas.AreaID where wOrders.OrderID = " + porosiId,
-                    "", "Text", null, "Text");
+            //if (string.IsNullOrEmpty(cmbPorosiPrind.Text))
+            //{
+            //    string porosiId = cmbPorosiPrind.SelectedValue.ToString();
+            //    if (porosiId != "" && porosiId != "0" && porosiId != "System.Data.DataRowView")
+            //    {
+            //        DataTable dtblPorosiPrind = Global.returnTableForGrid(Global.localConn,
+            //        " SELECT        dbo.wOrders.OrderID, dbo.wOrders.OrderNr, dbo.wAreas.AreaID " +
+            //        " FROM            dbo.wOrders INNER JOIN  " +
+            //        "      dbo.wConsumers ON dbo.wOrders.ConsumerID = dbo.wConsumers.ConsumerID INNER JOIN " +
+            //        "      dbo.wAddresses ON dbo.wConsumers.ConsumerID = dbo.wAddresses.ConsumerID INNER JOIN " +
+            //        "      dbo.wAreas ON dbo.wAddresses.AreaID = dbo.wAreas.AreaID where wOrders.OrderID = " + porosiId,
+            //        "", "Text", null, "Text");
 
-                    if (dtblPorosiPrind != null && dtblPorosiPrind.Rows.Count > 0)
-                    {
-                        txtNrPorosie.Text = dtblPorosiPrind.Rows[0][1].ToString();
-                        DateTime d;
-                        if (DateTime.TryParseExact(dtblPorosiPrind.Rows[0][2].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out d))
-                        {
-                            cmbArea.SelectedValue = Convert.ToDateTime(dtblPorosiPrind.Rows[0][2].ToString());// DateTime.Today.AddDays(-1);
-                        }
+            //        if (dtblPorosiPrind != null && dtblPorosiPrind.Rows.Count > 0)
+            //        {
+            //            txtNrPorosie.Text = dtblPorosiPrind.Rows[0][1].ToString();
+            //            DateTime d;
+            //            if (DateTime.TryParseExact(dtblPorosiPrind.Rows[0][2].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out d))
+            //            {
+            //                cmbArea.SelectedValue = Convert.ToDateTime(dtblPorosiPrind.Rows[0][2].ToString());// DateTime.Today.AddDays(-1);
+            //            }
                             
-                    }
-                    fill_GrideHyrjeNav(porosiId);
-                }
-            }
-            else
+            //        }
+            //        fill_GrideHyrjeNav(porosiId);
+            //    }
+            //}
+            //else
             {
                 string porosiId = cmbPorosiPrind.SelectedValue.ToString();
 
@@ -685,7 +703,7 @@ namespace AgnaWhms
             //{
             if (string.IsNullOrEmpty(cmbProdukti.Text))
             {
-                MessageBox.Show("No Item is Selected");
+                //MessageBox.Show("No Item is Selected");
             }
             else
             {
