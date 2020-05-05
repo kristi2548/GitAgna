@@ -192,15 +192,15 @@ namespace AgnaWhms
                 {
                     productNav = cmbProdukti.SelectedValue.ToString();
                     result = Global.fillGridWithRef(ref dgPorosiB2c, Global.localConn,
-                " SELECT OrderDTS,[OrderID] " +
-                "   ,[OrdECID],[ConsumerID],[ConsumerMobNr],[ConsumerName] " +
-                "   ,[ConsumerAddress],[OrderNr],[OrderSubmit],[OrderNetTotal],[OrderShipping] " +
-                "   ,[OrderExtra],[OrderPaidAm],[VAT_Nr],[PaymentInfo],[OrderNotes] " +
-                "   ,[ConsumerEM],[ConsumerTel],[OrderDetID],[ProductNAV],[ProductID],ProductName " +
-                "   ,[OrderQty] as QtyCope,[OrderPrice] as Price,[UnitsPack],OrderQty / UnitsPack as Qty_SalesUnit, [OrdDetNotes],[DepartmentID],[AreaID],[AreaName],[AreaCode] " +
-                "    FROM [online_orders_full] " +
-                "     where ProductNAV  = '" + productNav + "' order by OrderDTS desc ",
-                "", "Text");
+                    " SELECT OrderDTS,[OrderID] " +
+                    "   ,[OrdECID],[ConsumerID],[ConsumerMobNr],[ConsumerName] " +
+                    "   ,[ConsumerAddress],[OrderNr],[OrderSubmit],[OrderNetTotal],[OrderShipping] " +
+                    "   ,[OrderExtra],[OrderPaidAm],[VAT_Nr],[PaymentInfo],[OrderNotes] " +
+                    "   ,[ConsumerEM],[ConsumerTel],[OrderDetID],[ProductNAV],[ProductID],ProductName " +
+                    "   ,[OrderQty] as QtyCope,[OrderPrice] as Price,[UnitsPack],OrderQty / UnitsPack as Qty_SalesUnit, [OrdDetNotes],[DepartmentID],[AreaID],[AreaName],[AreaCode] " +
+                    "    FROM [online_orders_full] " +
+                    "     where ProductNAV  = '" + productNav + "' order by OrderDTS desc ",
+                    "", "Text");
                     if (result != null )
                     {
                         Color formBackColorAll = ColorTranslator.FromHtml("#424242");
@@ -407,7 +407,7 @@ namespace AgnaWhms
                     {
                         StockECommerce= Convert.ToInt32(btnStockEComm_Pieces.Text);
                     }
-                    StokCopeWeb = (stockTr - LevizjeB2b - LevizjeB2c - StockECommerce) * 0.05;
+                    StokCopeWeb = (stockTr ) * 0.05;
                     btnStockECommWeb_Pieces.Text = StokCopeWeb.ToString();
                 }
             }

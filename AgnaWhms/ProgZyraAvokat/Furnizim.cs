@@ -40,7 +40,7 @@ namespace AgnaWhms
                 dtpDate.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
 
                 dtpLotNr.Format = DateTimePickerFormat.Custom;
-                dtpLotNr.CustomFormat = "yy/MM/dd";
+                dtpLotNr.CustomFormat = "yyMMdd";
 
                 dtpAlert.Format = DateTimePickerFormat.Custom;
                 dtpAlert.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
