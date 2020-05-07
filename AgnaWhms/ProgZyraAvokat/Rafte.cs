@@ -833,8 +833,25 @@ namespace AgnaWhms
             Global.movDetId = Global.idTrupVeprimi;
             Global.moveCellId = Global.cellId;
             Global.moveQty = Convert.ToInt32(txtCellQty.Text);
-            Global.movStatusId = Convert.ToInt32(cmbCellStatus.SelectedValue.ToString());
-            Global.movCatId = Convert.ToInt32(cmbCellCatMov.SelectedValue.ToString());
+            if (cmbCellStatus.SelectedIndex > -1 )
+            {
+                Global.movStatusId = Convert.ToInt32(cmbCellStatus.SelectedValue.ToString());
+            }
+            else
+            {
+                MessageBox.Show("Plotesoni status ");
+                cmbCellStatus.Focus();
+            }
+
+            if (cmbCellCatMov.SelectedIndex > -1)
+            {
+                Global.movCatId = Convert.ToInt32(cmbCellCatMov.SelectedValue.ToString());
+            }
+            else
+            {
+                MessageBox.Show("Plotesoni kategori levizje ");
+                cmbCellCatMov.Focus();
+            }
             Global.shto_MovCells("");
 
             callGridTrupVeprime();
