@@ -1101,6 +1101,22 @@ namespace ProgZyraAvokat
                 Log.LogData("fillCombo " , ex.Message);
             }
         }
+        public static void fillComboGrid(ref DataGridViewComboBoxColumn cmbKlienti, string myConnectionString, string selectCommand, string displayMember, string ValueMember)
+        {
+            try
+            {
+                cmbKlienti.DataSource = Global.returnTableForGrid(myConnectionString, selectCommand,
+                    "SP", "Execute", null, "Text");//list1
+                cmbKlienti.DisplayMember = displayMember;// "KLIENTI";
+                cmbKlienti.ValueMember = ValueMember;// "CID";
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("fillGrid Error " + ex.Message);
+                Log.LogData("fillCombo ", ex.Message);
+            }
+        }
         public static DataTable fillGrid(ref DataGridView dgRouta,string myConnectionString, string selectCommand, string klienti, string commandType)
         {
             try
@@ -1243,6 +1259,67 @@ namespace ProgZyraAvokat
                 return false;
             }
         }
+        public static bool addComboToGridWithRef(ref DataGridView dgView, string columnName, Int32 index,string selectQuery,string displayMember, string valueMember,int width)
+        {
+            try
+            {
+                DataGridViewComboBoxColumn myCombo = new DataGridViewComboBoxColumn();
+                //Global.fillComboGrid(ref myCombo, Global.localConn,
+                //"SELECT [WarehouseID],[WarehouseCode] + '-' + [WarehouseName] as Magazina FROM [warehouses]", "Magazina", "WarehouseID");
+                Global.fillComboGrid(ref myCombo, Global.localConn, selectQuery, displayMember, valueMember);
+                myCombo.FlatStyle = FlatStyle.System;
+                myCombo.DefaultCellStyle.BackColor = Color.AliceBlue;
+                myCombo.DefaultCellStyle.ForeColor = Color.Black;
+                myCombo.Name = columnName;
+                myCombo.Tag = columnName;
+                myCombo.Width = width;
+                int columnIndex = index;
+                
+                if (dgView.Columns[columnName] == null)
+                {
+                    dgView.Columns.Insert(columnIndex, myCombo);
+                }
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("addButtonToGridWithRef Error " + ex.Message);
+                return false;
+            }
+        }
+        public static bool addStyleToGrid(ref DataGridView dgView, string dgForeColor,  string dgBackgroundColor, string dgAlternatingRowsDefaultCellStyleBackColor, 
+            string dgRowsDefaultCellStyleBackColor, string dgRowsDefaultCellStyleForeColor)
+        {
+            try
+            {
+
+                dgView.EditMode = DataGridViewEditMode.EditOnEnter;
+                //dgView.ReadOnly = true;
+                dgView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgView.RowTemplate.Height = 30;
+                dgView.ForeColor = ColorTranslator.FromHtml("#4655A5");
+                dgView.BackgroundColor = ColorTranslator.FromHtml("#FFFFFF"); //Color.White;;
+                dgView.AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#FFFFFF"); //Color.White;;
+                dgView.CellBorderStyle = DataGridViewCellBorderStyle.None;
+                dgView.RowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#FFFFFF"); //Color.White;;
+
+                dgView.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#4655A5");// Color.DodgerBlue;
+                dgView.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#FFFFFF"); //Color.White;
+                dgView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+                dgView.EnableHeadersVisualStyles = false;
+
+                dgView.RowHeadersVisible = false;
+                dgView.ClearSelection();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("addButtonToGridWithRef Error " + ex.Message);
+                return false;
+            }
+        }
+
         public static bool IsNumeric(this string text)
         {
             double test;

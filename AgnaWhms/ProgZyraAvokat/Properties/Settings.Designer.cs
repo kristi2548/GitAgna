@@ -22,5 +22,16 @@ namespace AgnaWhms.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KKORCARI\\SQL2008EXPRESS;Initial Catalog=AB2C;User ID=sa;Password=kkor" +
+            "cari.sa")]
+        public string AB2CConnectionString {
+            get {
+                return ((string)(this["AB2CConnectionString"]));
+            }
+        }
     }
 }

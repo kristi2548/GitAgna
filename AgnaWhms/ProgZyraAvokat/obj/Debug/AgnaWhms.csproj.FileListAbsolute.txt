@@ -60,3 +60,4 @@ E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.Furnizim.resources
 D:\githubdardhari\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.Furnizim.resources
 D:\githubdardhari\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.Rafte.resources
 E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.Rafte.resources
+E:\github\GitAgna\AgnaWhms\ProgZyraAvokat\obj\Debug\AgnaWhms.ProdukteInfo.resources
