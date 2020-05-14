@@ -219,7 +219,7 @@ namespace ProgZyraAvokat
                             }
                             break;
                         case "System.Windows.Forms.DataGridView":
-                            ApplyTheme((DataGridView)c, txtSize, true, formBackColorAll, lblForeColor1);
+                            //ApplyTheme((DataGridView)c, txtSize, true, formBackColorAll, lblForeColor1);
                             break;
                     }
                 }

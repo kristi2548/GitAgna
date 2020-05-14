@@ -82,6 +82,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AB2CDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AB2CDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="All Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +115,12 @@
     </Compile>
     <Compile Include="FormeStoku.Designer.cs">
       <DependentUpon>FormeStoku.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProdukteInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProdukteInfo.Designer.cs">
+      <DependentUpon>ProdukteInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Rafte.cs">
       <SubType>Form</SubType>
@@ -231,6 +242,9 @@
     <EmbeddedResource Include="FormeStoku.resx">
       <DependentUpon>FormeStoku.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProdukteInfo.resx">
+      <DependentUpon>ProdukteInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Rafte.resx">
       <DependentUpon>Rafte.cs</DependentUpon>
     </EmbeddedResource>
@@ -286,6 +300,17 @@
     <EmbeddedResource Include="VeprimThirrjeProkurori.resx">
       <DependentUpon>VeprimThirrjeProkurori.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="AB2CDataSet.xsc">
+      <DependentUpon>AB2CDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AB2CDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AB2CDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AB2CDataSet.xss">
+      <DependentUpon>AB2CDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

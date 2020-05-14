@@ -73,6 +73,7 @@ namespace AgnaWhms
             btnRaporte.Font = new Font("Century Gothic", buttonFontSize);
             btnDil.Font = new Font("Century Gothic", buttonFontSize);
             btnShtoFurnizim.Font = new Font("Century Gothic", buttonFontSize);
+            btnVendosRaft.Font = new Font("Century Gothic", buttonFontSize);
 
             btnListeCeshtje.BackColor = ColorTranslator.FromHtml("#4655A5");
             btnListeCeshtje.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
