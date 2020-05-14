@@ -70,7 +70,7 @@ namespace AgnaWhms
             string msg = String.Format("Editing Cell at ({0}, {1})",
                 e.ColumnIndex, e.RowIndex);
             this.Text = msg;
-            currEntityId = this.dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            currEntityId = this.dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
         }
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -168,16 +168,16 @@ namespace AgnaWhms
                 if (e.ColumnIndex == dataGridView1.Columns["add"].Index)
                 {
                     cmbWhsVal = selCombo.SelectedIndex.ToString();
-                    
+                    if (dataGridView1.SelectedCells.Count > 0)
+                    {
+                        int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                        DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+                        currEntityId = (selectedRow.Cells["WarehouseID"].Value.ToString());
+                        //Global.veprimKallezim.fillVeprimById(Global.idVeprimi.ToString());
+                        //Global.callSqlCommand(Global.localConn, "update veprim set aktiv = 0 where kid = '" + Global.idVeprimi + "'", "Text", "Execute", null);
+                    }
                 }
-                if (dataGridView1.SelectedCells.Count > 0)
-                {
-                    int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
-                    DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
-                    currEntityId = (selectedRow.Cells["WarehouseID"].Value.ToString());
-                    //Global.veprimKallezim.fillVeprimById(Global.idVeprimi.ToString());
-                    //Global.callSqlCommand(Global.localConn, "update veprim set aktiv = 0 where kid = '" + Global.idVeprimi + "'", "Text", "Execute", null);
-                }
+               
                 //else if (e.ColumnIndex == dataGridView1.Columns["edit"].Index)
                 //{
                 //    //if (dataGridView1.SelectedCells.Count > 0)
