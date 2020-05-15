@@ -59,8 +59,8 @@ namespace AgnaWhms
         {
             try
             {
-                Global.fillCombo(ref cmbPorosiPrind, Global.localConn,
-               "SELECT [MovHeadID],[OrderNr] + '-' + cast([MovHeadTime] as Varchar(20)) as OrderInfo FROM [dbo].[wMovHeads] where MovStatusID = 1 and Aktiv = 1", "OrderInfo", "MovHeadID");
+                Global.fillCombo(ref cmbPorosiPrind, Global.localConnB2B,
+               "SELECT distinct [DocumentNo],[PostingDate] + '-' + [DocumentNo] as OrderInfo FROM [dbo].[EC_Transfers] ", "OrderInfo", "DocumentNo");
                 cmbPorosiPrind.SelectedIndex = -1;
 
                 Global.fillCombo(ref cmbCatMov, Global.localConn,
@@ -632,37 +632,41 @@ namespace AgnaWhms
                 {
                     try
                     {
-                        DataTable dtblPorosiPrind = Global.fillGridWithRef(ref dgHyrjeNav, Global.localConn,
-                       " SELECT [MovHeadID],[OrderID],[ConsumerID],[MovDetID],[AreaID],[ProductID],[LotID],[MovStatusID],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
+                    string sqlText = "select [PostingDate],[DocumentNo],[Description],[FromLocation] " +
+                   ",[ProductNav],[ProductID],[Quantity],[Unit],[ExpirationDate] from EC_Transfers where DocumentNo = '" + porosiId + "'";
+
+                    string sqlTextOld = " SELECT [MovHeadID],[OrderID],[ConsumerID],[MovDetID],[AreaID],[ProductID],[LotID],[MovStatusID],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
                        " [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[ProductNav],[ProductName],[QtyX],[ProductPrice],[OrderDetail_MovStatusID], " +
                        "  [OrderDetail_MovStatusName],[UnitsPackX] as UnitsPack, [PackX],BarcodeX as Barcode," +
-                       " [MovHeadTime],[MovHeadNr],[AreaCode],[AreaName]  FROM [dbo].[order_for_grid_full] where MovHeadID = " + porosiId,
-                       "", "Text");
+                       " [MovHeadTime],[MovHeadNr],[AreaCode],[AreaName]  FROM [dbo].[order_for_grid_full] where MovHeadID = " + porosiId;
+
+
+                        DataTable dtblPorosiPrind = Global.fillGridWithRef(ref dgHyrjeNav, Global.localConnB2B, sqlText, "", "Text");
 
                         Global.addButtonToGridWithRef(ref dgHyrjeNav, "Zberthe ne Mag", 25);
 
-                        dgHyrjeNav.Columns["MovHeadID"].Visible = false;
-                        dgHyrjeNav.Columns["OrderID"].Visible = false;
-                        dgHyrjeNav.Columns["ConsumerID"].Visible = false;
-                        dgHyrjeNav.Columns["MovDetID"].Visible = false;
+                        //dgHyrjeNav.Columns["MovHeadID"].Visible = false;
+                        //dgHyrjeNav.Columns["OrderID"].Visible = false;
+                        //dgHyrjeNav.Columns["ConsumerID"].Visible = false;
+                        //dgHyrjeNav.Columns["MovDetID"].Visible = false;
 
-                        dgHyrjeNav.Columns["AreaID"].Visible = false;
-                        dgHyrjeNav.Columns["ProductID"].Visible = false;
-                        dgHyrjeNav.Columns["LotID"].Visible = false;
-                        dgHyrjeNav.Columns["MovStatusID"].Visible = false;
-                        dgHyrjeNav.Columns["WarehouseID"].Visible = false;
-                        dgHyrjeNav.Columns["UserID"].Visible = false;
-                        dgHyrjeNav.Columns["MovCatID"].Visible = false;
-                        dgHyrjeNav.Columns["MovCatCode"].Visible = false;
-                        dgHyrjeNav.Columns["RoleID"].Visible = false;
-                        dgHyrjeNav.Columns["WarehouseCode"].Visible = false;
-                        dgHyrjeNav.Columns["OrderDetail_MovStatusID"].Visible = false;
-                        dgHyrjeNav.Columns["OrderDetail_MovStatusName"].Visible = false;
-                        dgHyrjeNav.Columns["RoleID"].Visible = false;
-                        dgHyrjeNav.Columns["MovHeadTime"].Visible = false;
-                        dgHyrjeNav.Columns["MovHeadNr"].Visible = false;
-                        dgHyrjeNav.Columns["AreaCode"].Visible = false;
-                        dgHyrjeNav.Columns["AreaName"].Visible = false;
+                        //dgHyrjeNav.Columns["AreaID"].Visible = false;
+                        //dgHyrjeNav.Columns["ProductID"].Visible = false;
+                        //dgHyrjeNav.Columns["LotID"].Visible = false;
+                        //dgHyrjeNav.Columns["MovStatusID"].Visible = false;
+                        //dgHyrjeNav.Columns["WarehouseID"].Visible = false;
+                        //dgHyrjeNav.Columns["UserID"].Visible = false;
+                        //dgHyrjeNav.Columns["MovCatID"].Visible = false;
+                        //dgHyrjeNav.Columns["MovCatCode"].Visible = false;
+                        //dgHyrjeNav.Columns["RoleID"].Visible = false;
+                        //dgHyrjeNav.Columns["WarehouseCode"].Visible = false;
+                        //dgHyrjeNav.Columns["OrderDetail_MovStatusID"].Visible = false;
+                        //dgHyrjeNav.Columns["OrderDetail_MovStatusName"].Visible = false;
+                        //dgHyrjeNav.Columns["RoleID"].Visible = false;
+                        //dgHyrjeNav.Columns["MovHeadTime"].Visible = false;
+                        //dgHyrjeNav.Columns["MovHeadNr"].Visible = false;
+                        //dgHyrjeNav.Columns["AreaCode"].Visible = false;
+                        //dgHyrjeNav.Columns["AreaName"].Visible = false;
                   
                 }
                 catch (Exception ex)

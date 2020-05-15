@@ -16,7 +16,7 @@ namespace ProgZyraAvokat
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ProdukteInfo());
+            Application.Run(new Login());
         }
     }
 }
