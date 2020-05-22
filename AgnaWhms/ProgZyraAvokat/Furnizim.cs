@@ -61,7 +61,7 @@ namespace AgnaWhms
             {
                 Global.fillCombo(ref cmbPorosiPrind, Global.localConnB2B,
                "SELECT distinct [DocumentNo],[PostingDate] + '-' + [DocumentNo] as OrderInfo FROM [dbo].[EC_Transfers] ", "OrderInfo", "DocumentNo");
-                cmbPorosiPrind.SelectedIndex = -1;
+                //cmbPorosiPrind.SelectedIndex = -1;
 
                 Global.fillCombo(ref cmbCatMov, Global.localConn,
                "SELECT [MovCatID],[MovCatCode] + '-' + [MovCatName] as LLojLevizje FROM [wMovCategs]", "LLojLevizje", "MovCatID");
@@ -635,10 +635,10 @@ namespace AgnaWhms
                     string sqlText = "select [PostingDate],[DocumentNo],[Description],[FromLocation] " +
                    ",[ProductNav],[ProductID],[Quantity],[Unit],[ExpirationDate] from EC_Transfers where DocumentNo = '" + porosiId + "'";
 
-                    string sqlTextOld = " SELECT [MovHeadID],[OrderID],[ConsumerID],[MovDetID],[AreaID],[ProductID],[LotID],[MovStatusID],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
-                       " [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[ProductNav],[ProductName],[QtyX],[ProductPrice],[OrderDetail_MovStatusID], " +
-                       "  [OrderDetail_MovStatusName],[UnitsPackX] as UnitsPack, [PackX],BarcodeX as Barcode," +
-                       " [MovHeadTime],[MovHeadNr],[AreaCode],[AreaName]  FROM [dbo].[order_for_grid_full] where MovHeadID = " + porosiId;
+                    //string sqlTextOld = " SELECT [MovHeadID],[OrderID],[ConsumerID],[MovDetID],[AreaID],[ProductID],[LotID],[MovStatusID],[WarehouseID],[UserID],[MovCatID],[MovCatCode],[MovCatName]," +
+                    //   " [RoleID],[WarehouseName],[WarehouseCode],[MovStatusName],[ProductNav],[ProductName],[QtyX],[ProductPrice],[OrderDetail_MovStatusID], " +
+                    //   "  [OrderDetail_MovStatusName],[UnitsPackX] as UnitsPack, [PackX],BarcodeX as Barcode," +
+                    //   " [MovHeadTime],[MovHeadNr],[AreaCode],[AreaName]  FROM [dbo].[order_for_grid_full] where MovHeadID = " + porosiId;
 
 
                         DataTable dtblPorosiPrind = Global.fillGridWithRef(ref dgHyrjeNav, Global.localConnB2B, sqlText, "", "Text");
