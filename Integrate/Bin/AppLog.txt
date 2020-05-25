@@ -1,0 +1,4 @@
+22/05/2020 12:55:39 PM,Funksioni importMe error, The given value of type String from the data source cannot be converted to type decimal of the specified target column.
+22/05/2020 3:39:55 PM,Funksioni importMe error, The file is not an valid Package file. If the file is encrypted, please supply the password in the constructor.
+22/05/2020 3:46:29 PM,Funksioni importMe error, The file is not an valid Package file. If the file is encrypted, please supply the password in the constructor.
+22/05/2020 3:50:48 PM,Funksioni importMe error, The file is not an valid Package file. If the file is encrypted, please supply the password in the constructor.
