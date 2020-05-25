@@ -7,24 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ApiWithAuthentication.Models
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+
+public partial class AGNAPPCORDERSEntities : DbContext
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    
-    public partial class AGNAPPCORDERSEntities : DbContext
+    public AGNAPPCORDERSEntities()
+        : base("name=AGNAPPCORDERSEntities")
     {
-        public AGNAPPCORDERSEntities()
-            : base("name=AGNAPPCORDERSEntities")
-        {
-        }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
-        public virtual DbSet<A_Qytete> A_Qytete { get; set; }
     }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        throw new UnintentionalCodeFirstException();
+    }
+
+    public virtual DbSet<A_Qytete> A_Qytete { get; set; }
 }

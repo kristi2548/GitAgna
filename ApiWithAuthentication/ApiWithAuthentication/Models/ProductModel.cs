@@ -7,3 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
+public partial class A_Qytete
+{
+    public int QID { get; set; }
+    public Nullable<int> PID { get; set; }
+    public Nullable<int> SID { get; set; }
+    public string QCD { get; set; }
+    public string QNM { get; set; }
+    public byte[] RPSTG { get; set; }
+    public byte[] RPSTP { get; set; }
+}
