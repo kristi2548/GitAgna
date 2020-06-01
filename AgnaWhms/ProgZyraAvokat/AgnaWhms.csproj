@@ -87,22 +87,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AB2CDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="All Info.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="All Info.Designer.cs">
-      <DependentUpon>All Info.cs</DependentUpon>
-    </Compile>
     <Compile Include="ApplicationLookAndFeel.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="ButtonX.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Dashboard_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dashboard_Form.Designer.cs">
-      <DependentUpon>Dashboard_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -165,31 +153,7 @@
       <DependentUpon>NotifyMe.cs</DependentUpon>
     </Compile>
     <Compile Include="RoundMe.cs" />
-    <Compile Include="TrupVeprimeAkteProcedim.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TrupVeprimeAkteProcedim.Designer.cs">
-      <DependentUpon>TrupVeprimeAkteProcedim.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TrupVeprimShkresaProcedim.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TrupVeprimShkresaProcedim.Designer.cs">
-      <DependentUpon>TrupVeprimShkresaProcedim.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VeprimKallezim.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VeprimKallezim.Designer.cs">
-      <DependentUpon>VeprimKallezim.cs</DependentUpon>
-    </Compile>
     <Compile Include="Global.cs" />
-    <Compile Include="ListeKallezime.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListeKallezime.Designer.cs">
-      <DependentUpon>ListeKallezime.cs</DependentUpon>
-    </Compile>
     <Compile Include="Log.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -198,12 +162,6 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="ParameterObject.cs" />
-    <Compile Include="VeprimProcedimPenal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VeprimProcedimPenal.Designer.cs">
-      <DependentUpon>VeprimProcedimPenal.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="roundButton.cs">
@@ -212,30 +170,6 @@
     <Compile Include="roundButton.Designer.cs">
       <DependentUpon>roundButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrupVeprimiShkresa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TrupVeprimiShkresa.Designer.cs">
-      <DependentUpon>TrupVeprimiShkresa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TrupVeprimiAkte.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TrupVeprimiAkte.Designer.cs">
-      <DependentUpon>TrupVeprimiAkte.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VeprimThirrjeProkurori.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VeprimThirrjeProkurori.Designer.cs">
-      <DependentUpon>VeprimThirrjeProkurori.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="All Info.resx">
-      <DependentUpon>All Info.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dashboard_Form.resx">
-      <DependentUpon>Dashboard_Form.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -263,23 +197,8 @@
     <EmbeddedResource Include="notification.resx">
       <DependentUpon>notification.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrupVeprimeAkteProcedim.resx">
-      <DependentUpon>TrupVeprimeAkteProcedim.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TrupVeprimShkresaProcedim.resx">
-      <DependentUpon>TrupVeprimShkresaProcedim.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VeprimKallezim.resx">
-      <DependentUpon>VeprimKallezim.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListeKallezime.resx">
-      <DependentUpon>ListeKallezime.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VeprimProcedimPenal.resx">
-      <DependentUpon>VeprimProcedimPenal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -291,15 +210,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TrupVeprimiShkresa.resx">
-      <DependentUpon>TrupVeprimiShkresa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TrupVeprimiAkte.resx">
-      <DependentUpon>TrupVeprimiAkte.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VeprimThirrjeProkurori.resx">
-      <DependentUpon>VeprimThirrjeProkurori.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="AB2CDataSet.xsc">
       <DependentUpon>AB2CDataSet.xsd</DependentUpon>
     </None>

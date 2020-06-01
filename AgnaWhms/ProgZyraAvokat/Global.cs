@@ -53,29 +53,18 @@ namespace ProgZyraAvokat
 {
     public static class Global
     {
-        public static VeprimKallezim veprimKallezim;
         public static notification myNotification;
-        public static All_Info allInfo;
-        public static VeprimProcedimPenal veprimProcedimPenal;
-        public static VeprimThirrjeProkurori veprimThirrjeProkurori;
         public static Login loginForm;
-        public static ListeKallezime listeCeshtje;
         public static LevizjeMagazina levizjeMagazina;
         public static Rafte rafte;
         public static ListeFatura listeFatura;
         public static NotifyMe notifyMe;
         public static FormeStoku formeStoku;
         public static Furnizim furnizim;
-        public static TrupVeprimiShkresa trupVeprimiShkresa;
         //public static Raporte raporte;
-        public static TrupVeprimiAkte trupVeprimiAkte;
-        public static Dashboard_Form dashboardForm;
 
         public static Int32 nrCeshtjeSipasFilter;
         public static Int32 ceshtjePerFaqe;
-
-        public static TrupVeprimeAkteProcedim trupVeprimAktProcedim;
-        public static TrupVeprimShkresaProcedim trupVeprimShkresaProcedim;
 
         public static int screenWidth;
         public static int screenHeight;

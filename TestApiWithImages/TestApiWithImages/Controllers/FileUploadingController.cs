@@ -131,5 +131,20 @@ namespace TestApiWithImages.Controllers
             result.Content.Headers.ContentLength = stream.Length;
             return result;
         }
+        [Route("api/UploadFile")]
+        [HttpPost]
+        public async Task<IHttpActionResult> UploadFileFinal()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return StatusCode(HttpStatusCode.UnsupportedMediaType);
+            }
+            var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
+
+            //We will use two content part one is used to store the json another is used to store the image binary.
+            var json = await filesReadToProvider.Contents[0].ReadAsStringAsync();
+            var fileBytes = await filesReadToProvider.Contents[0].ReadAsByteArrayAsync();
+            return Ok();
+        }
     }
 }

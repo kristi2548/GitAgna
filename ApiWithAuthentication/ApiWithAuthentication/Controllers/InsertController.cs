@@ -70,7 +70,7 @@ namespace ApiWithAuthentication.Controllers
             db.Configuration.ProxyCreationEnabled = false;
 
             List<A_Qytete> EntitetEksport = new List<A_Qytete>();
-            using (AGNAPPCORDERSEntities myCustomersDb = new Models.AGNAPPCORDERSEntities())
+            using (AGNAPPCORDERSEntities myCustomersDb = new AGNAPPCORDERSEntities())
             {
                 EntitetEksport = myCustomersDb.A_Qytete.OrderBy(a => a.QNM).ToList();
             }

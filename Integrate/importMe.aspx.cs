@@ -15,6 +15,8 @@ public partial class importMe : System.Web.UI.Page
         try
         {
             txtTableName.Text = "GPS_PROTEA_INFO";
+            txtField1Filter.Text = "TARGA";
+            txtField2Filter.Text = "STATUS";
             //ListItem lst = new ListItem("TOTAL", "0");
             //ddlGpsStatus.Items.Insert(ddlGpsStatus.Items.Count - 1, lst);
             //lst = new ListItem("BRENDA ORARIT", "1");
@@ -43,9 +45,25 @@ public partial class importMe : System.Web.UI.Page
                     List<DataRow> listOfRows = new List<DataRow>();
                     listOfRows = dt.AsEnumerable().ToList();
 
-                    System.Data.DataColumn newColumn = new System.Data.DataColumn("Status", typeof(System.String));
-                    newColumn.DefaultValue = ddlGpsStatus.SelectedValue.ToString();
-                    dt.Columns.Add(newColumn);
+                    if (dt.Columns.Contains("Start Date"))
+                    {
+                        dt.Columns["Start Date"].ColumnName = "DATE";
+                    }
+                    if (dt.Columns.Contains("Vehicle"))
+                    {
+                        dt.Columns["Vehicle"].ColumnName = "TARGA";
+                    }
+                    if (dt.Columns.Contains("Distance"))
+                    {
+                        dt.Columns["Distance"].ColumnName = "Total Distance (GPS)";
+                    }
+
+                    if (ddlGpsStatus.SelectedIndex != -1 && ! dt.Columns.Contains("STATUS"))
+                    {
+                        System.Data.DataColumn newColumn = new System.Data.DataColumn("Status", typeof(System.String));
+                        newColumn.DefaultValue = ddlGpsStatus.SelectedValue.ToString();
+                        dt.Columns.Add(newColumn);
+                    }
 
                     var table = txtTableName.Text;// "artikujPerberes";
                     nrRowsImported = dt.Rows.Count.ToString();
@@ -69,14 +87,19 @@ public partial class importMe : System.Web.UI.Page
                         }
                         bulkCopy.WriteToServer(dt);
                     }
+                    callSqlText(txtKerkoGride.Text, "UPDATE GPS_PROTEA_INFO SET TARGA_SPLIT = ltrim(substring(targa,0,case when (DATALENGTH(targa)-DATALENGTH(REPLACE(targa,'-','')))/DATALENGTH('-') in (2,3) then 10 else " +
+                   " (case when charindex('-', targa) = 0 then charindex(' ', targa) else charindex('-', targa) end) " +
+                   " end ))  WHERE TARGA_SPLIT IS NULL OR TARGA_SPLIT = '' ", "");
+                    error.Text = "Importi i " + nrRowsImported + "  rreshtave perfundoi me sukses : " + System.DateTime.Now.ToString();
                 }
                 else
                 {
                     MessageBox("Formati i file duhet te jete xlsx");
                 }
             }
+           
+            //callSqlText(txtKerkoGride.Text, "UPDATE GPS_PROTEA_INFO SET TARGA_SPLIT = ltrim(TARGA_SPLIT)  WHERE TARGA_SPLIT IS NULL OR TARGA_SPLIT = '' ", "");
             bindGride("");
-            error.Text = "Importi i " + nrRowsImported + "  rreshtave perfundoi me sukses : " + System.DateTime.Now.ToString() ;
         }
         catch (Exception ex)
         {
@@ -114,6 +137,9 @@ public partial class importMe : System.Web.UI.Page
             " upper(" + txtField2Filter.Text + ") like ('%" + txtKerkoGride.Text + "%')" +
             " )";
         }
+
+        dgImportedData.AllowPaging = true;
+        dgImportedData.PageSize = 100;
 
         dgImportedData.DataSource = ktheDataTable_BySqlTextType(txtKerkoGride.Text, "select * from " + txtTableName.Text + where +
          " order by Id desc" , txtField1Filter.Text);
@@ -230,6 +256,35 @@ public partial class importMe : System.Web.UI.Page
         catch (Exception ex)
         {
             lblError.Text = "ktheDataTable error " + ex.Message;
+            return null;
+        }
+    }
+    public string callSqlText(string txtKerko, string sqlText, string sqlType)
+    {
+        try
+        {
+            txtKerko = txtKerko.ToUpper();
+            string configvalue1 =
+            System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            var tb = new DataTable();
+            SqlConnection sqlConn = new SqlConnection(configvalue1);
+            sqlConn.Open();
+            SqlCommand sqlComm = new SqlCommand(sqlText, sqlConn);
+            sqlComm.CommandType = System.Data.CommandType.Text;
+            //sqlComm.ExecuteReader();
+            sqlComm.ExecuteNonQuery();
+
+            //using (SqlDataReader dr = sqlComm.ExecuteNonQuery())
+            //{
+            //    tb.Load(dr);
+            //}
+            //sqlConn.Close();
+            return "OK";
+        }
+        catch (Exception ex)
+        {
+            MessageBox("callSqlText error " + ex.Message);
+            lblError.Text = "callSqlText error " + ex.Message;
             return null;
         }
     }

@@ -318,7 +318,6 @@ namespace AgnaWhms
                         int selectedrowindex = dgListeVeprime.SelectedCells[0].RowIndex;
                         DataGridViewRow selectedRow = dgListeVeprime.Rows[selectedrowindex];
                         Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["Kid"].Value.ToString());
-                        ceshtje_ERe(false);
                     }
                 }
                 else if (e.ColumnIndex == dgListeVeprime.Columns["Lexo"].Index)
@@ -328,7 +327,6 @@ namespace AgnaWhms
                         int selectedrowindex = dgListeVeprime.SelectedCells[0].RowIndex;
                         DataGridViewRow selectedRow = dgListeVeprime.Rows[selectedrowindex];
                         Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["Kid"].Value.ToString());
-                        showAllInfo();
                     }
                 }
             }
@@ -430,41 +428,6 @@ namespace AgnaWhms
         {
             menyKryesoreShowHideEvent();
         }
-        private void btnCeshtjeERe_Click(object sender, EventArgs e)
-        {
-            ceshtje_ERe(true);
-        }
-        private void ceshtje_ERe(bool eRe)
-        {
-            if (Global.veprimKallezim == null)
-            {
-                Global.veprimKallezim = new ProgZyraAvokat.VeprimKallezim();
-            }
-
-            if (Global.listeCeshtje != null) { Global.listeCeshtje.Hide(); }
-
-            if (eRe)
-            {
-                Global.idVeprimi = 0;
-                Global.idVeprimiProcedurePenale = 0;
-                Global.veprimKallezim.fushaValidate();
-            }
-            else
-            {
-                Global.veprimKallezim.fillVeprimById(Global.idVeprimi.ToString());
-            }
-            Global.veprimKallezim.Show();
-        }
-        private void showAllInfo()
-        {
-            if (Global.allInfo == null)
-            {
-                Global.allInfo = new All_Info();
-            }
-            Global.allInfo.fillVeprimById(Global.idVeprimi.ToString());
-            if (Global.listeCeshtje != null) { Global.listeCeshtje.Hide(); }
-            Global.allInfo.Show();
-        }
 
         private void txtKlientiKerko_TextChanged(object sender, EventArgs e)
         {
@@ -475,14 +438,7 @@ namespace AgnaWhms
         {
             try
             {
-                //if (dgListeVeprime.SelectedCells.Count > 0)
-                //{
-                //    ceshtje_ERe();
-                //    int selectedrowindex = dgListeVeprime.SelectedCells[0].RowIndex;
-                //    DataGridViewRow selectedRow = dgListeVeprime.Rows[selectedrowindex];
-                //    Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["Kid"].Value.ToString());
-                //    Global.veprimKallezim.fillVeprimById(Global.idVeprimi.ToString());
-                //}
+               
             }
             catch (Exception ex)
             {
@@ -558,20 +514,6 @@ namespace AgnaWhms
             }
         }
 
-        private void btnRaporte_Click(object sender, EventArgs e)
-        {
-            Global.kallezimePageNr = 1;
-
-            Global.idVeprimi = 0;
-            Global.idVeprimiProcedurePenale = 0;
-            if (Global.dashboardForm == null)
-            {
-                Global.dashboardForm = new ProgZyraAvokat.Dashboard_Form();
-            }
-            if (Global.listeCeshtje != null) { Global.listeCeshtje.Hide(); }
-            //Global.raporte.fushaValidate();
-            Global.dashboardForm.Show();
-        }
 
         private void btnDil_Click(object sender, EventArgs e)
         {
@@ -625,17 +567,7 @@ namespace AgnaWhms
             {
                 if (e.ColumnIndex == dgListeVeprime.Columns["Fshi"].Index)
                 {
-                    //if (dgListeVeprime.SelectedCells.Count > 0)
-                    //{
-                    //    int selectedrowindex = dgListeVeprime.SelectedCells[0].RowIndex;
-                    //    DataGridViewRow selectedRow = dgListeVeprime.Rows[selectedrowindex];
-                    //    Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["Kid"].Value.ToString());
-                    //    //Global.veprimKallezim.fillVeprimById(Global.idVeprimi.ToString());
-                    //    Global.callSqlCommand(Global.localConn, "update veprim set aktiv = 0 where kid = '" + Global.idVeprimi + "'", "Text", "Execute", null);
-                    //}
-                    //MessageBox.Show("Ceshtja u fshi", "Fshi Ceshtje");
-                    //callGridUpdate(txtCeshtjeKerko.Text);
-                    //callGridAlert("");
+                  
                 }
                 else if (e.ColumnIndex == dgListeVeprime.Columns["Edit"].Index)
                 {
@@ -656,13 +588,7 @@ namespace AgnaWhms
                 }
                 else if (e.ColumnIndex == dgListeVeprime.Columns["Lexo"].Index)
                 {
-                    //if (dgListeVeprime.SelectedCells.Count > 0)
-                    //{
-                    //    int selectedrowindex = dgListeVeprime.SelectedCells[0].RowIndex;
-                    //    DataGridViewRow selectedRow = dgListeVeprime.Rows[selectedrowindex];
-                    //    Global.idVeprimi = Convert.ToInt32(selectedRow.Cells["Kid"].Value.ToString());
-                    //    showAllInfo();
-                    //}
+                   
                 }
             }
             catch (Exception ex)

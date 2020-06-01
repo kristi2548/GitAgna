@@ -303,76 +303,6 @@ namespace AgnaWhms
                 MessageBox.Show("callGridTrupVeprime " + ex.Message);
             }
         }
-        private void btnShkresa_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Global.idTrupVeprimi = 0;
-                if (Global.idVeprimi == 0)
-                {
-                    MessageBox.Show("Rregjistroni fillimisht kallezimin ,pastaj mund te shtoni Shkresa!");
-                }
-                else
-                {
-                    if (Global.trupVeprimiShkresa == null)
-                    {
-                        Global.trupVeprimiShkresa = new TrupVeprimiShkresa();
-                    }
-                    else
-                    {
-                        Global.trupVeprimiShkresa.Close();
-                        Global.trupVeprimiShkresa = new TrupVeprimiShkresa();
-                    }
-
-                    Global.levizjeMagazina.Hide();
-                    if (Global.listeCeshtje != null)
-                    {
-                        Global.listeCeshtje.Hide();
-                    }
-                    Global.trupVeprimiShkresa.Show();
-                    Global.trupVeprimiShkresa.Visible = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Faza 1 " + ex.Message);
-                Log.LogData("rregjistrimKallezim_Click", ex.Message);
-            }
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (Global.listeCeshtje == null)
-            {
-                Global.listeCeshtje = new ListeKallezime();
-            }
-            Global.levizjeMagazina.Hide();
-            Global.listeCeshtje.callGridUpdate("");
-            Global.listeCeshtje.Show();
-        }
-        private void btnProcedura_Click(object sender, EventArgs e)
-        {
-            Global.idTrupVeprimi = 0;
-            if (Global.idVeprimi == 0)
-            {
-                MessageBox.Show("Rregjistroni fillimisht kallezimin ,pastaj mund te shtoni Akte Proceduriale !");
-            }
-            else
-            {
-                if (Global.trupVeprimiAkte == null)
-                {
-                    Global.trupVeprimiAkte = new TrupVeprimiAkte();
-                }
-                Global.levizjeMagazina.Hide();
-                if (Global.listeCeshtje != null)
-                {
-                    Global.listeCeshtje.Hide();
-                }
-                Global.trupVeprimiAkte.fillControls();
-                Global.trupVeprimiAkte.Show();
-                Global.trupVeprimiAkte.Visible = true;
-            }
-
-        }
         #endregion
         public void boshatis()
         {
@@ -496,39 +426,6 @@ namespace AgnaWhms
             catch (Exception ex)
             {
                 MessageBox.Show("Err fillVeprimById " + ex.Message);
-            }
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Global.idTrupVeprimi = 0;
-                if (Global.idVeprimi == 0)
-                {
-                    MessageBox.Show("Rregjistroni fillimisht kallezimin ,pastaj mund te shtoni Procedim Penal !");
-                }
-                else
-                {
-                    //Global.idVeprimi = 0;
-                    if (Global.veprimProcedimPenal == null)
-                    {
-                        Global.veprimProcedimPenal = new VeprimProcedimPenal();
-                    }
-
-                    Global.levizjeMagazina.Hide();
-                    if (Global.listeCeshtje != null)
-                    {
-                        Global.listeCeshtje.Hide();
-                    }
-                    Global.veprimProcedimPenal.fillProcedimPenal_ByKallezimId(Global.idVeprimi.ToString());
-                    Global.veprimProcedimPenal.Show();
-                    Global.veprimProcedimPenal.Visible = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Faza 1 " + ex.Message);
-                Log.LogData("rregjistrimKallezim_Click", ex.Message);
             }
         }
 
